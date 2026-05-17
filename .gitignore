@@ -1,0 +1,20 @@
+# Compiled GDExtension output
+game/bin/*.dll
+game/bin/*.dylib
+game/bin/*.so
+game/bin/*.framework
+ 
+# godot-cpp build artifacts
+godot-cpp/bin/
+*.os
+*.a
+ 
+# Godot editor generated files
+game/.godot/
+**/*.uid
+ 
+# macOS
+.DS_Store
+ 
+# SCons cache
+.sconsign.dblite
