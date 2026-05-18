@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://b6rmt4dg7qcgs"]
+
+[ext_resource type="Texture2D" uid="uid://dexldhkroslel" path="res://assets/ui/Intro/start.png" id="1_7vrkn"]
+[ext_resource type="Texture2D" uid="uid://7lqee2x74ear" path="res://assets/ui/Opening Screen.png" id="2_fu7sn"]
+
+[node name="Control" type="Control" unique_id=166279017]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="OpeningScreen" type="Sprite2D" parent="." unique_id=1678189005]
+visibility_layer = 2
+z_index = -1
+position = Vector2(575.99994, 324)
+scale = Vector2(0.59999996, 0.6)
+texture = ExtResource("2_fu7sn")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=164932866]
+layout_mode = 0
+offset_left = 225.0
+offset_top = 326.0
+offset_right = 425.0
+offset_bottom = 411.0
+
+[node name="TextureButton" type="TextureButton" parent="MarginContainer" unique_id=1938425822]
+layout_mode = 2
+texture_normal = ExtResource("1_7vrkn")
