@@ -1,4 +1,4 @@
-configuration]
+[configuration]
 entry_symbol = "albularyo_library_init"
 compatibility_minimum = "4.1"
  
