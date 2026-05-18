@@ -1,0 +1,165 @@
+[gd_scene format=3 uid="uid://blnbcvbpejc15"]
+
+[ext_resource type="Texture2D" uid="uid://bw6kilrc7jm1k" path="res://Main Screen.png" id="1_w0p2i"]
+[ext_resource type="Texture2D" uid="uid://dyp52dntr1dr4" path="res://assets/ui/Main with instructions/width_191.png" id="2_4sv2p"]
+[ext_resource type="Texture2D" uid="uid://cdnea6io2pb43" path="res://assets/ui/main screen dialogue/t.png" id="2_7a4el"]
+[ext_resource type="FontFile" uid="uid://b3w8qw1vuyjm1" path="res://assets/fonts/FontsFree-Net-Art-nuvo.ttf" id="3_7a4el"]
+[ext_resource type="Texture2D" uid="uid://dm22iehvy7g21" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="5_sjiej"]
+[ext_resource type="Texture2D" uid="uid://bpkmn322tc4c1" path="res://assets/ui/Main with instructions/width_1600.png" id="6_62wn8"]
+[ext_resource type="Texture2D" uid="uid://c5djdgq6xfv07" path="res://assets/ui/Main with instructions/s.png" id="7_sj757"]
+[ext_resource type="Texture2D" uid="uid://b4mv5tddxuv0n" path="res://assets/ui/Main with instructions/width_505.png" id="8_ups6l"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4sv2p"]
+texture = ExtResource("5_sjiej")
+region_rect = Rect2(837, 164, 22, 24)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sj757"]
+texture = ExtResource("5_sjiej")
+region_rect = Rect2(869, 166, 22, 22)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0osx7"]
+texture = ExtResource("5_sjiej")
+region_rect = Rect2(837, 132, 22, 24)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_62wn8"]
+texture = ExtResource("5_sjiej")
+region_rect = Rect2(869, 134, 22, 22)
+
+[node name="Control" type="Control" unique_id=1356609430]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=730408955]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer" unique_id=656764298]
+layout_mode = 2
+texture = ExtResource("1_w0p2i")
+
+[node name="Time" type="MarginContainer" parent="MarginContainer/NinePatchRect" unique_id=882900053]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -237.0
+offset_top = 20.0
+offset_right = -13.0
+offset_bottom = 243.0
+grow_horizontal = 0
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/NinePatchRect/Time" unique_id=1554588542]
+layout_mode = 2
+texture = ExtResource("2_4sv2p")
+
+[node name="Money" type="HBoxContainer" parent="MarginContainer/NinePatchRect" unique_id=1479652844]
+layout_mode = 0
+offset_left = 85.1
+offset_top = 59.3
+offset_right = 539.1
+offset_bottom = 259.3
+scale = Vector2(0.4, 0.4)
+tooltip_text = "Money"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/NinePatchRect/Money" unique_id=1309783932]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+texture = ExtResource("2_7a4el")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="MarginContainer/NinePatchRect/Money" unique_id=1954677653]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.627451, 0.41568628, 0.37254903, 1)
+theme_override_fonts/font = ExtResource("3_7a4el")
+theme_override_font_sizes/font_size = 150
+text = "200"
+
+[node name="Price Slider" type="VBoxContainer" parent="MarginContainer/NinePatchRect" unique_id=1848052035]
+z_index = 1
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -218.0
+offset_bottom = -66.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Slider" type="HBoxContainer" parent="MarginContainer/NinePatchRect/Price Slider" unique_id=776603822]
+z_index = 1
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="Decrease" type="Button" parent="MarginContainer/NinePatchRect/Price Slider/Slider" unique_id=1621570624]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_4sv2p")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_sj757")
+theme_override_styles/hover = SubResource("StyleBoxTexture_sj757")
+
+[node name="Label" type="Label" parent="MarginContainer/NinePatchRect/Price Slider/Slider" unique_id=1164929174]
+z_index = 1
+layout_mode = 2
+theme_override_colors/font_color = Color(0.38431373, 0.24313726, 0.24313726, 1)
+theme_override_fonts/font = ExtResource("3_7a4el")
+theme_override_font_sizes/font_size = 70
+text = "INT"
+
+[node name="Increase" type="Button" parent="MarginContainer/NinePatchRect/Price Slider/Slider" unique_id=582681066]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_0osx7")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_62wn8")
+theme_override_styles/hover = SubResource("StyleBoxTexture_62wn8")
+
+[node name="Demand" type="HBoxContainer" parent="MarginContainer/NinePatchRect/Price Slider" unique_id=815688083]
+z_index = 1
+layout_mode = 2
+theme_override_constants/separation = 52
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/NinePatchRect/Price Slider/Demand" unique_id=276842856]
+z_index = 1
+layout_mode = 2
+theme_override_colors/font_color = Color(0.38431373, 0.24313726, 0.24313726, 1)
+theme_override_fonts/font = ExtResource("3_7a4el")
+theme_override_font_sizes/font_size = 38
+text = "SELL CHANCE"
+
+[node name="Label2" type="Label" parent="MarginContainer/NinePatchRect/Price Slider/Demand" unique_id=783570616]
+z_index = 1
+layout_mode = 2
+theme_override_colors/font_color = Color(0.38431373, 0.24313726, 0.24313726, 1)
+theme_override_fonts/font = ExtResource("3_7a4el")
+theme_override_font_sizes/font_size = 38
+text = "INT% PER SECOND"
+
+[node name="Table" type="Sprite2D" parent="MarginContainer/NinePatchRect" unique_id=2028949776]
+z_index = 1
+position = Vector2(944.99713, 1150.75)
+scale = Vector2(0.53783256, 0.5487478)
+texture = ExtResource("6_62wn8")
+
+[node name="Table Top" type="Sprite2D" parent="MarginContainer/NinePatchRect" unique_id=1788891936]
+z_index = 1
+position = Vector2(950.49713, 948.25)
+scale = Vector2(1.1171052, 1.0934066)
+texture = ExtResource("7_sj757")
+
+[node name="Width505" type="Sprite2D" parent="MarginContainer/NinePatchRect" unique_id=1012529635]
+z_index = 1
+position = Vector2(666, 733)
+scale = Vector2(0.5253712, 0.44066834)
+texture = ExtResource("8_ups6l")

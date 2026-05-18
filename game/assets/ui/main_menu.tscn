@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://wxcg5y4gpb6g"]
+[gd_scene format=3 uid="uid://b6rmt4dg7qcgs"]
 
 [ext_resource type="Texture2D" uid="uid://cgojjx8fa48vu" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/UI Big Play Button.png" id="2_7vrkn"]
 [ext_resource type="Texture2D" uid="uid://7lqee2x74ear" path="res://assets/ui/Opening Screen.png" id="2_fu7sn"]
@@ -44,7 +44,7 @@ theme_override_constants/separation = 11
 [node name="Start" type="Button" parent="MarginContainer2/NinePatchRect/VBoxContainer" unique_id=1565870523]
 custom_minimum_size = Vector2(50, 100)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.627451, 0.41568628, 0.37254903, 1)
+theme_override_colors/font_color = Color(0.6269185, 0.4171387, 0.3713367, 1)
 theme_override_fonts/font = ExtResource("2_jix8l")
 theme_override_font_sizes/font_size = 55
 theme_override_styles/normal = SubResource("StyleBoxTexture_fu7sn")
