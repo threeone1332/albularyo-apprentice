@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bp6v6tf10q82s"]
+
+[ext_resource type="Texture2D" uid="uid://b1ohehb15kao3" path="res://assets/ui/LOADING SCREEN.png" id="1_0fbet"]
+
+[node name="Control" type="Control" unique_id=1831793363]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=2132202591]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="LoadingScreen" type="Sprite2D" parent="MarginContainer" unique_id=539669152]
+position = Vector2(578.5, 323.75003)
+scale = Vector2(0.5973958, 0.600463)
+texture = ExtResource("1_0fbet")
