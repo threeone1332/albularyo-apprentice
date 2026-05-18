@@ -1,9 +1,9 @@
 [configuration]
 entry_symbol = "albularyo_library_init"
 compatibility_minimum = "4.1"
- 
+
 [libraries]
-macos.debug.arm64 = "res://bin/libalbularyo.macos.debug.arm64.dylib"
-macos.release.arm64 = "res://bin/libalbularyo.macos.release.arm64.dylib"
-windows.debug.x86_64 = "res://bin/libalbularyo.windows.debug.x86_64.dll"
-windows.release.x86_64 = "res://bin/libalbularyo.windows.release.x86_64.dll"
+macos.debug.arm64 = "res://bin/libalbularyo.macos.template_debug.arm64.dylib"
+macos.release.arm64 = "res://bin/libalbularyo.macos.template_release.arm64.dylib"
+windows.debug.x86_64 = "res://bin/libalbularyo.windows.template_debug.x86_64.dll"
+windows.release.x86_64 = "res://bin/libalbularyo.windows.template_release.x86_64.dll"

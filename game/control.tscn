@@ -16,6 +16,6 @@ offset_right = 1152.0
 offset_bottom = 648.0
 
 [node name="LoadingScreen" type="Sprite2D" parent="MarginContainer" unique_id=539669152]
-position = Vector2(578.5, 323.75003)
-scale = Vector2(0.5973958, 0.600463)
+position = Vector2(576, 323.75003)
+scale = Vector2(0.59999996, 0.600463)
 texture = ExtResource("1_0fbet")
