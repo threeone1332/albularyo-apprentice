@@ -165,11 +165,13 @@ offset_bottom = 986.36035
 theme_override_styles/normal = SubResource("StyleBoxTexture_ups6l")
 
 [node name="Mixing" type="Button" parent="MarginContainer/NinePatchRect" unique_id=300440248]
+z_index = 3
 layout_mode = 0
-offset_left = 1090.0
-offset_top = 626.0
-offset_right = 1405.0
-offset_bottom = 841.0
+offset_left = 1418.0
+offset_top = 722.0
+offset_right = 1733.0
+offset_bottom = 937.0
+scale = Vector2(-1, 1)
 theme_override_styles/normal = SubResource("StyleBoxTexture_7sxnj")
 
 [node name="Table" type="Sprite2D" parent="MarginContainer/NinePatchRect" unique_id=2028949776]
