@@ -14,6 +14,11 @@
 [ext_resource type="Texture2D" uid="uid://0ic0fm4dtiii" path="res://assets/ui/Main with instructions/width_754.png" id="9_7sxnj"]
 [ext_resource type="Texture2D" uid="uid://baxyfwd03vltq" path="res://assets/ui/width_800.png" id="9_cxp7d"]
 [ext_resource type="Texture2D" uid="uid://cct04ev6i8ubw" path="res://assets/ui/width_150.png" id="11_7sxnj"]
+[ext_resource type="Texture2D" uid="uid://b0k6o3anq4iwo" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Setting menu.png" id="12_cxp7d"]
+[ext_resource type="FontFile" uid="uid://clux6cekpic0m" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="13_3qsiq"]
+[ext_resource type="Texture2D" uid="uid://cgojjx8fa48vu" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/UI Big Play Button.png" id="14_7087c"]
+[ext_resource type="Texture2D" uid="uid://s818x6sucqov" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/emojis-free/emoji style ui/Inventory_Blocks_Spritesheet.png" id="15_do8p6"]
+[ext_resource type="Texture2D" uid="uid://c55w8nukxidm" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/emojis-free/Emoji_Spritesheet_Free.png" id="16_sqqhh"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4sv2p"]
 texture = ExtResource("5_sjiej")
@@ -43,6 +48,14 @@ region_rect = Rect2(0, 0, 754.40295, 495.79218)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cxp7d"]
 texture = ExtResource("11_7sxnj")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_do8p6"]
+texture = ExtResource("14_7087c")
+region_rect = Rect2(3, 2, 90, 27)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sqqhh"]
+texture = ExtResource("14_7087c")
+region_rect = Rect2(99, 4, 90, 25)
 
 [node name="Control" type="Control" unique_id=1356609430]
 layout_mode = 3
@@ -197,6 +210,107 @@ scale = Vector2(-1, 1)
 theme_override_styles/normal = SubResource("StyleBoxTexture_7sxnj")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_cxp7d")
 theme_override_styles/hover = SubResource("StyleBoxTexture_cxp7d")
+
+[node name="Feature" type="MarginContainer" parent="MarginContainer/NinePatchRect" unique_id=244627103]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/NinePatchRect/Feature" unique_id=1645104842]
+custom_minimum_size = Vector2(425, 425)
+layout_mode = 2
+tooltip_text = "Feature your potions here. You may change it whenever you want, just keep in mind that every potion has a different demand depanding on the time."
+mouse_filter = 1
+texture = ExtResource("12_cxp7d")
+region_rect = Rect2(139, 12, 106, 122)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/NinePatchRect/Feature/NinePatchRect" unique_id=1753311471]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -185.0
+offset_top = -185.0
+offset_right = 185.0
+offset_bottom = 185.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="MarginContainer/NinePatchRect/Feature/NinePatchRect/MarginContainer" unique_id=1531100035]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.38431373, 0.24313726, 0.24313726, 1)
+theme_override_fonts/font = ExtResource("13_3qsiq")
+theme_override_font_sizes/font_size = 67
+text = "Featured"
+horizontal_alignment = 1
+
+[node name="Change" type="Button" parent="MarginContainer/NinePatchRect/Feature/NinePatchRect/MarginContainer" unique_id=1126343566]
+custom_minimum_size = Vector2(160, 65)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.627451, 0.41568628, 0.37254903, 1)
+theme_override_fonts/font = ExtResource("13_3qsiq")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxTexture_do8p6")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_sqqhh")
+theme_override_styles/hover = SubResource("StyleBoxTexture_sqqhh")
+text = "CHANGE"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/NinePatchRect/Feature/NinePatchRect/MarginContainer" unique_id=851369606]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/NinePatchRect/Feature/NinePatchRect/MarginContainer/MarginContainer" unique_id=14281914]
+custom_minimum_size = Vector2(215, 215)
+layout_mode = 2
+tooltip_text = "Feature your potions here. You may change it whenever you want, just keep in mind that every potion has a different demand depanding on the time."
+mouse_filter = 1
+texture = ExtResource("15_do8p6")
+region_rect = Rect2(9, 57, 30, 32)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/NinePatchRect/Feature/NinePatchRect/MarginContainer/MarginContainer/NinePatchRect" unique_id=15797349]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_top = 33
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/NinePatchRect/Feature/NinePatchRect/MarginContainer/MarginContainer/NinePatchRect/MarginContainer" unique_id=1561780492]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+tooltip_text = "Feature your potions here. You may change it whenever you want, just keep in mind that every potion has a different demand depanding on the time."
+mouse_filter = 1
+texture = ExtResource("16_sqqhh")
+region_rect = Rect2(98, 385, 28, 29)
 
 [node name="Table" type="Sprite2D" parent="MarginContainer/NinePatchRect" unique_id=2028949776]
 z_index = 1

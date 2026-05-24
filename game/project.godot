@@ -21,6 +21,7 @@ window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
+mouse_cursor/custom_image="uid://dhqlc7fgi1q4r"
 
 [physics]
 
