@@ -191,7 +191,7 @@ text = "INT% PER SECOND"
 [node name="Tech Tree" type="Button" parent="MarginContainer/NinePatchRect" unique_id=1762685494]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 0
-offset_left = 167.0
+offset_left = 125.0
 offset_top = 583.0
 offset_right = 586.0
 offset_bottom = 986.0
@@ -218,8 +218,8 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -40.0
+offset_left = -475.0
+offset_top = -475.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_constants/margin_left = 10
@@ -228,8 +228,10 @@ theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 40
 
 [node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/NinePatchRect/Feature" unique_id=1645104842]
-custom_minimum_size = Vector2(425, 425)
+custom_minimum_size = Vector2(400, 400)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 tooltip_text = "Feature your potions here. You may change it whenever you want, just keep in mind that every potion has a different demand depanding on the time."
 mouse_filter = 1
 texture = ExtResource("12_cxp7d")
@@ -242,10 +244,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -185.0
-offset_top = -185.0
-offset_right = 185.0
-offset_bottom = 185.0
+offset_left = -175.0
+offset_top = -175.0
+offset_right = 175.0
+offset_bottom = 175.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -256,7 +258,7 @@ size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.38431373, 0.24313726, 0.24313726, 1)
 theme_override_fonts/font = ExtResource("13_3qsiq")
 theme_override_font_sizes/font_size = 67
-text = "Featured"
+text = "FEATURED"
 horizontal_alignment = 1
 
 [node name="Change" type="Button" parent="MarginContainer/NinePatchRect/Feature/NinePatchRect/MarginContainer" unique_id=1126343566]
@@ -278,7 +280,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/NinePatchRect/Feature/NinePatchRect/MarginContainer/MarginContainer" unique_id=14281914]
-custom_minimum_size = Vector2(215, 215)
+custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 tooltip_text = "Feature your potions here. You may change it whenever you want, just keep in mind that every potion has a different demand depanding on the time."
 mouse_filter = 1
