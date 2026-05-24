@@ -73,11 +73,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ItemList" type="ItemList" parent="MarginContainer" unique_id=1043554102]
-layout_mode = 2
-item_count = 1
-item_0/text = "Never ending mdnight sun"
-
 [node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer" unique_id=656764298]
 layout_mode = 2
 texture = ExtResource("1_w0p2i")
@@ -131,7 +126,7 @@ theme_override_fonts/font = ExtResource("3_7a4el")
 theme_override_font_sizes/font_size = 150
 text = "INT"
 
-[node name="Price Slider" type="VBoxContainer" parent="MarginContainer/NinePatchRect" unique_id=1848052035]
+[node name="Price" type="VBoxContainer" parent="MarginContainer/NinePatchRect" unique_id=1848052035]
 z_index = 1
 layout_mode = 1
 anchors_preset = 12
@@ -143,21 +138,21 @@ offset_bottom = -66.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Slider" type="HBoxContainer" parent="MarginContainer/NinePatchRect/Price Slider" unique_id=776603822]
+[node name="Slider" type="HBoxContainer" parent="MarginContainer/NinePatchRect/Price" unique_id=776603822]
 z_index = 1
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 theme_override_constants/separation = 14
 alignment = 1
 
-[node name="Decrease" type="Button" parent="MarginContainer/NinePatchRect/Price Slider/Slider" unique_id=1621570624]
+[node name="Decrease" type="Button" parent="MarginContainer/NinePatchRect/Price/Slider" unique_id=1621570624]
 custom_minimum_size = Vector2(100, 90)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxTexture_4sv2p")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_sj757")
 theme_override_styles/hover = SubResource("StyleBoxTexture_sj757")
 
-[node name="Label" type="Label" parent="MarginContainer/NinePatchRect/Price Slider/Slider" unique_id=1164929174]
+[node name="Label" type="Label" parent="MarginContainer/NinePatchRect/Price/Slider" unique_id=1164929174]
 z_index = 1
 layout_mode = 2
 theme_override_colors/font_color = Color(0.38431373, 0.24313726, 0.24313726, 1)
@@ -165,20 +160,20 @@ theme_override_fonts/font = ExtResource("3_7a4el")
 theme_override_font_sizes/font_size = 70
 text = "INT"
 
-[node name="Increase" type="Button" parent="MarginContainer/NinePatchRect/Price Slider/Slider" unique_id=582681066]
+[node name="Increase" type="Button" parent="MarginContainer/NinePatchRect/Price/Slider" unique_id=582681066]
 custom_minimum_size = Vector2(100, 90)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxTexture_0osx7")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_62wn8")
 theme_override_styles/hover = SubResource("StyleBoxTexture_62wn8")
 
-[node name="Demand" type="HBoxContainer" parent="MarginContainer/NinePatchRect/Price Slider" unique_id=815688083]
+[node name="Demand" type="HBoxContainer" parent="MarginContainer/NinePatchRect/Price" unique_id=815688083]
 z_index = 1
 layout_mode = 2
 theme_override_constants/separation = 52
 alignment = 1
 
-[node name="Label" type="Label" parent="MarginContainer/NinePatchRect/Price Slider/Demand" unique_id=276842856]
+[node name="Label" type="Label" parent="MarginContainer/NinePatchRect/Price/Demand" unique_id=276842856]
 z_index = 1
 layout_mode = 2
 theme_override_colors/font_color = Color(0.38431373, 0.24313726, 0.24313726, 1)
@@ -186,7 +181,7 @@ theme_override_fonts/font = ExtResource("3_7a4el")
 theme_override_font_sizes/font_size = 38
 text = "SELL CHANCE"
 
-[node name="Label2" type="Label" parent="MarginContainer/NinePatchRect/Price Slider/Demand" unique_id=783570616]
+[node name="Label2" type="Label" parent="MarginContainer/NinePatchRect/Price/Demand" unique_id=783570616]
 z_index = 1
 layout_mode = 2
 theme_override_colors/font_color = Color(0.38431373, 0.24313726, 0.24313726, 1)
