@@ -2,13 +2,13 @@
 #include <cstdlib>
 #include <algorithm>
 using namespace godot;
- 
+
 GameState::GameState() :
     gold(50), current_phase(Phase::SUN), price_slider_value(1.0f),
     adventurers_unlocked(false), game_phase(1), cat_companion(false),
     bat_companion(false), murder_of_crows(false), awaken_anito(false),
     hire_adventurers(false) {}
- 
+
 void GameState::_bind_methods() {
     ClassDB::bind_method(D_METHOD("set_gold","amount"), &GameState::set_gold);
     ClassDB::bind_method(D_METHOD("get_gold"), &GameState::get_gold);
@@ -34,11 +34,11 @@ void GameState::_bind_methods() {
     ClassDB::bind_method(D_METHOD("check_win_condition"),
         &GameState::check_win_condition);
 }
- 
+
 void GameState::set_gold(int amount) { gold = amount; }
 int GameState::get_gold() const { return gold; }
 void GameState::add_gold(int amount) { gold += amount; }
- 
+
 void GameState::advance_phase() {
     switch (current_phase) {
         case Phase::SUN:   current_phase = Phase::NOON;  break;
@@ -47,7 +47,7 @@ void GameState::advance_phase() {
     }
     check_phase_progression();
 }
- 
+
 String GameState::get_current_phase() const {
     switch (current_phase) {
         case Phase::SUN:   return "sun";
@@ -56,24 +56,24 @@ String GameState::get_current_phase() const {
     }
     return "sun";
 }
- 
+
 int GameState::get_game_phase() const { return game_phase; }
 void GameState::set_price(float p) { price_slider_value = p; }
 float GameState::get_price() const { return price_slider_value; }
- 
+
 float GameState::get_demand_modifier() const {
     float base = 1.0f;
     if (awaken_anito) base *= 1.3f;
     if (current_phase == Phase::NIGHT && murder_of_crows) base *= 1.4f;
     return base;
 }
- 
+
 float GameState::calculate_sell_chance(float demand, float price) {
     float modifier = get_demand_modifier();
     float chance = (demand * modifier) / price;
     return std::clamp(chance, 0.0f, 1.0f);
 }
- 
+
 bool GameState::attempt_sale() {
     float demand = get_demand_modifier();
     float chance = calculate_sell_chance(demand, price_slider_value);
@@ -84,7 +84,7 @@ bool GameState::attempt_sale() {
     }
     return false;
 }
- 
+
 void GameState::apply_tech_unlock(String unlock_name) {
     if      (unlock_name == "cat_companion")    cat_companion = true;
     else if (unlock_name == "bat_companion")    bat_companion = true;
@@ -92,7 +92,7 @@ void GameState::apply_tech_unlock(String unlock_name) {
     else if (unlock_name == "awaken_anito")     awaken_anito = true;
     else if (unlock_name == "hire_adventurers") hire_adventurers = true;
 }
- 
+
 bool GameState::is_unlocked(String unlock_name) const {
     if (unlock_name == "cat_companion")    return cat_companion;
     if (unlock_name == "bat_companion")    return bat_companion;
@@ -101,15 +101,15 @@ bool GameState::is_unlocked(String unlock_name) const {
     if (unlock_name == "hire_adventurers") return hire_adventurers;
     return false;
 }
- 
+
 bool GameState::get_adventurers_unlocked() const { return adventurers_unlocked; }
 void GameState::unlock_adventurers() { adventurers_unlocked = true; }
- 
+
 void GameState::check_phase_progression() {
     if      (game_phase == 1 && gold >= 100)               game_phase = 2;
     else if (game_phase == 2 && gold >= 200)               game_phase = 3;
     else if (game_phase == 3 && adventurers_unlocked)      game_phase = 4;
     else if (game_phase == 4 && is_unlocked("awaken_anito")) game_phase = 5;
 }
- 
+
 bool GameState::check_win_condition() const { return gold >= 5000; }

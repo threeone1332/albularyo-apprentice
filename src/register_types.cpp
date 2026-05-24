@@ -2,21 +2,23 @@
 #include "GameState.h"
 #include "Potion.h"
 #include "Ingredient.h"
+#include "loading_screen.h"
 #include <gdextension_interface.h>
 #include <godot_cpp/core/defs.hpp>
 #include <godot_cpp/godot.hpp>
- 
+
 using namespace godot;
- 
+
 void initialize_albularyo_module(ModuleInitializationLevel p_level) {
     if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) return;
     ClassDB::register_class<GameState>();
     ClassDB::register_class<Potion>();
     ClassDB::register_class<Ingredient>();
+    ClassDB::register_class<LoadingScreen>();
 }
- 
+
 void uninitialize_albularyo_module(ModuleInitializationLevel p_level) {}
- 
+
 extern "C" {
 GDExtensionBool GDE_EXPORT albularyo_library_init(
     GDExtensionInterfaceGetProcAddress p_get_proc_address,
