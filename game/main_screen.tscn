@@ -73,6 +73,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="ItemList" type="ItemList" parent="MarginContainer" unique_id=1043554102]
+layout_mode = 2
+item_count = 1
+item_0/text = "Never ending mdnight sun"
+
 [node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer" unique_id=656764298]
 layout_mode = 2
 texture = ExtResource("1_w0p2i")
@@ -87,6 +92,7 @@ offset_top = 20.0
 offset_right = -46.0
 offset_bottom = 219.0
 grow_horizontal = 0
+tooltip_text = "Time passes automatically from three phases: Morning, Noon, and Night. Each phase has a different demand for each potion."
 
 [node name="Morning" type="TextureRect" parent="MarginContainer/NinePatchRect/Time" unique_id=1554588542]
 layout_mode = 2
@@ -123,7 +129,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.627451, 0.41568628, 0.37254903, 1)
 theme_override_fonts/font = ExtResource("3_7a4el")
 theme_override_font_sizes/font_size = 150
-text = "200"
+text = "INT"
 
 [node name="Price Slider" type="VBoxContainer" parent="MarginContainer/NinePatchRect" unique_id=1848052035]
 z_index = 1
@@ -145,7 +151,7 @@ theme_override_constants/separation = 14
 alignment = 1
 
 [node name="Decrease" type="Button" parent="MarginContainer/NinePatchRect/Price Slider/Slider" unique_id=1621570624]
-custom_minimum_size = Vector2(80, 80)
+custom_minimum_size = Vector2(100, 90)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxTexture_4sv2p")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_sj757")
@@ -160,7 +166,7 @@ theme_override_font_sizes/font_size = 70
 text = "INT"
 
 [node name="Increase" type="Button" parent="MarginContainer/NinePatchRect/Price Slider/Slider" unique_id=582681066]
-custom_minimum_size = Vector2(80, 80)
+custom_minimum_size = Vector2(100, 90)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxTexture_0osx7")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_62wn8")
@@ -232,7 +238,6 @@ custom_minimum_size = Vector2(400, 400)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-tooltip_text = "Feature your potions here. You may change it whenever you want, just keep in mind that every potion has a different demand depanding on the time."
 mouse_filter = 1
 texture = ExtResource("12_cxp7d")
 region_rect = Rect2(139, 12, 106, 122)
@@ -257,7 +262,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.38431373, 0.24313726, 0.24313726, 1)
 theme_override_fonts/font = ExtResource("13_3qsiq")
-theme_override_font_sizes/font_size = 67
+theme_override_font_sizes/font_size = 54
 text = "FEATURED"
 horizontal_alignment = 1
 
@@ -266,6 +271,8 @@ custom_minimum_size = Vector2(160, 65)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
+tooltip_text = "Chooses what potion to sell. You may change it whenever you want, simply keep in mind that every potion has a different demand depending on the time."
+mouse_filter = 1
 theme_override_colors/font_color = Color(0.627451, 0.41568628, 0.37254903, 1)
 theme_override_fonts/font = ExtResource("13_3qsiq")
 theme_override_font_sizes/font_size = 40
@@ -279,40 +286,49 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/NinePatchRect/Feature/NinePatchRect/MarginContainer/MarginContainer" unique_id=14281914]
+[node name="potionandname" type="VBoxContainer" parent="MarginContainer/NinePatchRect/Feature/NinePatchRect/MarginContainer/MarginContainer" unique_id=454160360]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/NinePatchRect/Feature/NinePatchRect/MarginContainer/MarginContainer/potionandname" unique_id=14281914]
+custom_minimum_size = Vector2(170, 170)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 tooltip_text = "Feature your potions here. You may change it whenever you want, just keep in mind that every potion has a different demand depanding on the time."
 mouse_filter = 1
 texture = ExtResource("15_do8p6")
-region_rect = Rect2(9, 57, 30, 32)
+region_rect = Rect2(99, 98, 42, 44)
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/NinePatchRect/Feature/NinePatchRect/MarginContainer/MarginContainer/NinePatchRect" unique_id=15797349]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/NinePatchRect/Feature/NinePatchRect/MarginContainer/MarginContainer/potionandname/NinePatchRect" unique_id=1089741367]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -100.0
-offset_right = 100.0
-offset_bottom = 100.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/margin_top = 33
+theme_override_constants/margin_bottom = 6
 
-[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/NinePatchRect/Feature/NinePatchRect/MarginContainer/MarginContainer/NinePatchRect/MarginContainer" unique_id=1561780492]
+[node name="picofpotion" type="NinePatchRect" parent="MarginContainer/NinePatchRect/Feature/NinePatchRect/MarginContainer/MarginContainer/potionandname/NinePatchRect/MarginContainer" unique_id=1561780492]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 0
+size_flags_vertical = 4
 tooltip_text = "Feature your potions here. You may change it whenever you want, just keep in mind that every potion has a different demand depanding on the time."
 mouse_filter = 1
 texture = ExtResource("16_sqqhh")
 region_rect = Rect2(98, 385, 28, 29)
+
+[node name="nameofpotion" type="Label" parent="MarginContainer/NinePatchRect/Feature/NinePatchRect/MarginContainer/MarginContainer/potionandname" unique_id=559263491]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.38431373, 0.24313726, 0.24313726, 1)
+theme_override_fonts/font = ExtResource("13_3qsiq")
+theme_override_font_sizes/font_size = 27
+text = "NAME"
+horizontal_alignment = 1
 
 [node name="Table" type="Sprite2D" parent="MarginContainer/NinePatchRect" unique_id=2028949776]
 z_index = 1
