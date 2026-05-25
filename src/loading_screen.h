@@ -27,6 +27,6 @@ private:
     bool is_switching = false;
 };
 
-}
+} // namespace godot
 
-#endif
+#endif // LOADING_SCREEN_H

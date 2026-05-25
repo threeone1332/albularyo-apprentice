@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://dip2626yvlq6i"]
+[gd_scene format=3 uid="uid://ds1l00sbuxk5t"]
 
-[ext_resource type="Texture2D" uid="uid://tkmnr5p7l42n" path="res://assets/ui/Loading Screen/LOADING SCREEN.png" id="1_hprjd"]
+[ext_resource type="Texture2D" uid="uid://tkmnr5p7l42n" path="res://assets/ui/loading screen/LOADING SCREEN.png" id="1_mggpi"]
 [ext_resource type="FontFile" uid="uid://clux6cekpic0m" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="2_htrc2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mggpi"]
@@ -9,8 +9,7 @@ bg_color = Color(0.34117648, 0.41960785, 0.16078432, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_htrc2"]
 bg_color = Color(0.8352941, 0.8627451, 0.43137255, 1)
 
-[node name="LoadingScreen" type="Control" unique_id=194457204]
-layout_mode = 3
+[node name="LoadingScreen" type="LoadingScreen" unique_id=1521186612]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -24,7 +23,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_hprjd")
+texture = ExtResource("1_mggpi")
 
 [node name="LoadingBar" type="ProgressBar" parent="." unique_id=1609216582]
 layout_mode = 1
