@@ -1,0 +1,158 @@
+[gd_scene format=3 uid="uid://dbjcf5il6gkko"]
+
+[ext_resource type="Texture2D" uid="uid://bac6c0cdfdo6y" path="res://assets/ui/Mixing screen/width_150 (10).png" id="1_pi8fv"]
+[ext_resource type="Texture2D" uid="uid://b04gwro6twcmo" path="res://assets/ui/Mixing screen/t.png" id="2_2ligq"]
+[ext_resource type="Texture2D" uid="uid://d1whbpu0jam4t" path="res://assets/ui/Mixing screen/width_150 (9).png" id="2_6ahbv"]
+[ext_resource type="FontFile" uid="uid://ddb8js7ulxcwq" path="res://assets/fonts/Martires Extra Bold.otf" id="5_3x80t"]
+[ext_resource type="FontFile" uid="uid://kioijc5gmbl1" path="res://assets/fonts/Maragsâ-Display.otf" id="5_uapx3"]
+[ext_resource type="Texture2D" uid="uid://dmkwjwmr18j0w" path="res://assets/ui/Mixing screen/width_49.png" id="6_3x80t"]
+[ext_resource type="FontFile" uid="uid://b3w8qw1vuyjm1" path="res://assets/fonts/FontsFree-Net-Art-nuvo.ttf" id="7_kb0d4"]
+
+[node name="PotionRow" type="HBoxContainer" unique_id=745704402]
+offset_right = 315.0
+offset_bottom = 177.0
+
+[node name="PotionVisuals" type="VBoxContainer" parent="." unique_id=1539434021]
+layout_mode = 2
+theme_override_constants/separation = -6
+
+[node name="PotionIcon" type="TextureRect" parent="PotionVisuals" unique_id=324514942]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+texture = ExtResource("1_pi8fv")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="FrameBackground" type="TextureRect" parent="PotionVisuals/PotionIcon" unique_id=1784592856]
+custom_minimum_size = Vector2(105, 105)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 19.0
+offset_top = 20.0
+offset_right = -26.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_6ahbv")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PotionSprite" type="TextureRect" parent="PotionVisuals/PotionIcon" unique_id=750077736]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 14.000001
+offset_top = 14.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.98, 0.98)
+texture = ExtResource("2_2ligq")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StockCount" type="Label" parent="PotionVisuals/PotionIcon" unique_id=35355919]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -59.0
+offset_top = -55.0
+offset_right = -25.0
+offset_bottom = -22.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.38431373, 0.24313726, 0.24313726, 1)
+theme_override_fonts/font = ExtResource("7_kb0d4")
+theme_override_font_sizes/font_size = 30
+text = "2X"
+
+[node name="PotionName" type="Label" parent="PotionVisuals" unique_id=2130170995]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.38431373, 0.24313726, 0.24313726, 1)
+theme_override_fonts/font = ExtResource("5_3x80t")
+theme_override_font_sizes/font_size = 26
+text = "LUNAS NG SIGLA"
+horizontal_alignment = 1
+
+[node name="ShopControls" type="Control" parent="." unique_id=1979506398]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ShopControls" unique_id=2059923579]
+layout_mode = 0
+offset_right = 161.0
+offset_bottom = 34.0
+theme_override_constants/margin_top = 17
+
+[node name="RecipeRequirements" type="Label" parent="ShopControls/MarginContainer" unique_id=148155339]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.38431373, 0.24313726, 0.24313726, 1)
+theme_override_fonts/font = ExtResource("5_uapx3")
+text = "BULAKLAK NG SIGLA   x2"
+
+[node name="QuantityControls" type="HBoxContainer" parent="ShopControls" unique_id=548991651]
+layout_mode = 0
+offset_top = 76.0
+offset_right = 161.0
+offset_bottom = 126.0
+theme_override_constants/separation = 13
+
+[node name="MinusButton" type="TextureButton" parent="ShopControls/QuantityControls" unique_id=1606131428]
+custom_minimum_size = Vector2(49, 49)
+layout_mode = 2
+texture_normal = ExtResource("6_3x80t")
+
+[node name="MinusLabel" type="Label" parent="ShopControls/QuantityControls/MinusButton" unique_id=247445417]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -13.5
+offset_top = -40.0
+offset_right = 11.5
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.38431373, 0.24313726, 0.24313726, 1)
+theme_override_fonts/font = ExtResource("7_kb0d4")
+theme_override_font_sizes/font_size = 75
+text = "-"
+
+[node name="CraftCounter" type="Label" parent="ShopControls/QuantityControls" unique_id=1342995281]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.38431373, 0.24313726, 0.24313726, 1)
+theme_override_fonts/font = ExtResource("7_kb0d4")
+theme_override_font_sizes/font_size = 35
+text = "1X"
+
+[node name="PlusButton" type="TextureButton" parent="ShopControls/QuantityControls" unique_id=1150192669]
+custom_minimum_size = Vector2(49, 49)
+layout_mode = 2
+texture_normal = ExtResource("6_3x80t")
+
+[node name="PlusLabel" type="Label" parent="ShopControls/QuantityControls/PlusButton" unique_id=1498395536]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.5
+offset_top = -39.0
+offset_right = 14.5
+offset_bottom = 43.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.38431373, 0.24313726, 0.24313726, 1)
+theme_override_fonts/font = ExtResource("7_kb0d4")
+theme_override_font_sizes/font_size = 75
+text = "+"

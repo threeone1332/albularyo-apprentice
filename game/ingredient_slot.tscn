@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://clbmbugatfdm0"]
+
+[ext_resource type="Texture2D" uid="uid://ctbh8lhp30wjv" path="res://assets/ui/Mixing screen/width_150 (1).png" id="1_62m6j"]
+[ext_resource type="Texture2D" uid="uid://d1whbpu0jam4t" path="res://assets/ui/Mixing screen/width_150 (9).png" id="2_4rdbf"]
+[ext_resource type="Texture2D" uid="uid://723pqvo6ys1p" path="res://assets/ui/Mixing screen/width_150 (5).png" id="3_4rdbf"]
+[ext_resource type="FontFile" uid="uid://b3w8qw1vuyjm1" path="res://assets/fonts/FontsFree-Net-Art-nuvo.ttf" id="3_ykotn"]
+[ext_resource type="FontFile" uid="uid://ddb8js7ulxcwq" path="res://assets/fonts/Martires Extra Bold.otf" id="4_ykotn"]
+
+[node name="IngredientRow" type="HBoxContainer" unique_id=1908138195]
+custom_minimum_size = Vector2(0, 177)
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 55
+
+[node name="ItemVisuals" type="VBoxContainer" parent="." unique_id=1949067627]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="IngredientIcon" type="TextureRect" parent="ItemVisuals" unique_id=259545381]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+texture = ExtResource("1_62m6j")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="FrameBackground" type="TextureRect" parent="ItemVisuals/IngredientIcon" unique_id=734702245]
+custom_minimum_size = Vector2(105, 105)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 19.0
+offset_top = 20.0
+offset_right = -26.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_4rdbf")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IngredientSprite" type="TextureRect" parent="ItemVisuals/IngredientIcon" unique_id=1516227618]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 10.0
+offset_right = -25.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("3_4rdbf")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IngredientName" type="Label" parent="ItemVisuals" unique_id=988577649]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.38431373, 0.24313726, 0.24313726, 1)
+theme_override_fonts/font = ExtResource("4_ykotn")
+theme_override_font_sizes/font_size = 22
+text = "BULAKLAK NG SIGLA"
+horizontal_alignment = 1
+
+[node name="InventoryCount" type="Label" parent="." unique_id=566067148]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.38431373, 0.24313726, 0.24313726, 1)
+theme_override_fonts/font = ExtResource("3_ykotn")
+theme_override_font_sizes/font_size = 85
+text = "1x"
+horizontal_alignment = 1
+vertical_alignment = 1

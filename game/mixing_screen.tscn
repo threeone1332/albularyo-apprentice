@@ -1,0 +1,345 @@
+[gd_scene format=3 uid="uid://dyvex5oma41t8"]
+
+[ext_resource type="Texture2D" uid="uid://cv1mde0o6wcw" path="res://assets/ui/Mixing screen/width_2400.png" id="1_65i4y"]
+[ext_resource type="Texture2D" uid="uid://dgqv7gb1631vy" path="res://assets/ui/Mixing screen/width_1000.png" id="2_01hhd"]
+[ext_resource type="PackedScene" uid="uid://dbjcf5il6gkko" path="res://potion_row.tscn" id="3_01hhd"]
+[ext_resource type="FontFile" uid="uid://bbg3opv6btx5t" path="res://assets/fonts/Martires Demi Bold.otf" id="3_dp8sl"]
+[ext_resource type="PackedScene" uid="uid://clbmbugatfdm0" path="res://ingredient_slot.tscn" id="4_x2ra6"]
+[ext_resource type="Texture2D" uid="uid://c4ovculm6uosb" path="res://assets/ui/Mixing screen/width_150 (16).png" id="5_an481"]
+[ext_resource type="Texture2D" uid="uid://7t7h0jmsw52k" path="res://assets/ui/Mixing screen/width_150 (8).png" id="5_kynvl"]
+[ext_resource type="Texture2D" uid="uid://j7lo1a3ktamn" path="res://assets/ui/Mixing screen/width_92.png" id="6_rhges"]
+[ext_resource type="Texture2D" uid="uid://cub1g5en5gycs" path="res://assets/ui/Mixing screen/t (4).png" id="6_xbuny"]
+[ext_resource type="Texture2D" uid="uid://jidiro1cn67g" path="res://assets/ui/Mixing screen/width_150 (11).png" id="7_jc6vc"]
+[ext_resource type="Texture2D" uid="uid://pm78ly6hlnrd" path="res://assets/ui/Mixing screen/width_125.png" id="7_ld62g"]
+[ext_resource type="Texture2D" uid="uid://crbdug44tt7ul" path="res://assets/ui/Mixing screen/t (1).png" id="8_j6i2a"]
+[ext_resource type="Texture2D" uid="uid://dwnj7m3rxkeli" path="res://assets/ui/Mixing screen/width_150 (3).png" id="8_kuy3j"]
+[ext_resource type="Texture2D" uid="uid://qy1ckqqqv4j5" path="res://assets/ui/Mixing screen/width_150 (14).png" id="9_2k0l0"]
+[ext_resource type="Texture2D" uid="uid://bfcterhtrvml2" path="res://assets/ui/Mixing screen/width_150 (7).png" id="9_225xe"]
+[ext_resource type="Texture2D" uid="uid://csculvjt0ub2x" path="res://assets/ui/Mixing screen/width_150 (2).png" id="10_7mmsa"]
+[ext_resource type="Texture2D" uid="uid://d1sgoadqimppj" path="res://assets/ui/Mixing screen/width_150 (15).png" id="10_32tha"]
+[ext_resource type="Texture2D" uid="uid://b3iu6bbx6tfe5" path="res://assets/ui/Mixing screen/width_150 (6).png" id="11_co14c"]
+[ext_resource type="Texture2D" uid="uid://4fshha6qtbuv" path="res://assets/ui/Mixing screen/width_150 (12).png" id="11_mub11"]
+[ext_resource type="Texture2D" uid="uid://lgpr2avww874" path="res://assets/ui/Mixing screen/t (2).png" id="12_5wcj2"]
+[ext_resource type="Texture2D" uid="uid://c8hvvajn0ixd7" path="res://assets/ui/Mixing screen/width_150 (13).png" id="13_wb16t"]
+[ext_resource type="Texture2D" uid="uid://k42ry8m21pjp" path="res://assets/ui/Mixing screen/t (3).png" id="14_uk6m4"]
+[ext_resource type="Texture2D" uid="uid://d0bsttp4txbu6" path="res://assets/ui/Mixing screen/width_150 (17).png" id="15_830r7"]
+[ext_resource type="Texture2D" uid="uid://bekrp6wk1jrw8" path="res://assets/ui/Mixing screen/t (5).png" id="16_x2ra6"]
+
+[node name="MixingScreen" type="Control" unique_id=880172069]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TableBackground" type="TextureRect" parent="." unique_id=113386363]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_65i4y")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="BookBackground" type="TextureRect" parent="." unique_id=683398204]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_01hhd")
+stretch_mode = 5
+
+[node name="LeftPage" type="Control" parent="." unique_id=580248304]
+layout_mode = 1
+anchor_left = 0.134
+anchor_top = 0.10700001
+anchor_right = 0.485
+anchor_bottom = 0.82100004
+offset_left = 14.720001
+offset_top = 0.4399948
+offset_right = 15.799988
+offset_bottom = 0.3199463
+
+[node name="LeftPageContent" type="VBoxContainer" parent="LeftPage" unique_id=1613636275]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -19.59
+offset_top = -45.425
+offset_right = -19.590027
+offset_bottom = 8.575012
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.035, 1.035)
+
+[node name="PageTitle" type="Label" parent="LeftPage/LeftPageContent" unique_id=1602182410]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.38431373, 0.24313726, 0.24313726, 1)
+theme_override_fonts/font = ExtResource("3_dp8sl")
+theme_override_font_sizes/font_size = 72
+text = "MGA SANGKAP  "
+horizontal_alignment = 1
+
+[node name="IngredientsList" type="GridContainer" parent="LeftPage/LeftPageContent" unique_id=1263793408]
+layout_mode = 2
+theme_override_constants/h_separation = 64
+theme_override_constants/v_separation = 5
+columns = 2
+
+[node name="IngredientRow" parent="LeftPage/LeftPageContent/IngredientsList" unique_id=1908138195 instance=ExtResource("4_x2ra6")]
+layout_mode = 2
+
+[node name="IngredientRow2" parent="LeftPage/LeftPageContent/IngredientsList" unique_id=1132706785 instance=ExtResource("4_x2ra6")]
+layout_mode = 2
+
+[node name="IngredientSprite" parent="LeftPage/LeftPageContent/IngredientsList/IngredientRow2/ItemVisuals/IngredientIcon" parent_id_path=PackedInt32Array(1132706785, 259545381) index="1" unique_id=1516227618]
+offset_left = 7.8985596
+offset_right = -22.10144
+texture = ExtResource("5_kynvl")
+
+[node name="IngredientName" parent="LeftPage/LeftPageContent/IngredientsList/IngredientRow2/ItemVisuals" parent_id_path=PackedInt32Array(1132706785, 1949067627) index="1" unique_id=988577649]
+text = "HIBLA NG DIWA	"
+
+[node name="IngredientRow3" parent="LeftPage/LeftPageContent/IngredientsList" unique_id=1471157394 instance=ExtResource("4_x2ra6")]
+layout_mode = 2
+
+[node name="IngredientSprite" parent="LeftPage/LeftPageContent/IngredientsList/IngredientRow3/ItemVisuals/IngredientIcon" parent_id_path=PackedInt32Array(1471157394, 259545381) index="1" unique_id=1516227618]
+offset_left = 7.8985596
+offset_right = -22.10144
+texture = ExtResource("6_rhges")
+
+[node name="IngredientName" parent="LeftPage/LeftPageContent/IngredientsList/IngredientRow3/ItemVisuals" parent_id_path=PackedInt32Array(1471157394, 1949067627) index="1" unique_id=988577649]
+theme_override_font_sizes/font_size = 19
+text = "BULAKLAK NG HIMBING"
+
+[node name="IngredientRow4" parent="LeftPage/LeftPageContent/IngredientsList" unique_id=915991159 instance=ExtResource("4_x2ra6")]
+layout_mode = 2
+
+[node name="IngredientSprite" parent="LeftPage/LeftPageContent/IngredientsList/IngredientRow4/ItemVisuals/IngredientIcon" parent_id_path=PackedInt32Array(915991159, 259545381) index="1" unique_id=1516227618]
+offset_left = 2.5990295
+offset_top = -3.3622818
+offset_right = -27.40097
+offset_bottom = -33.362274
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("7_ld62g")
+
+[node name="IngredientName" parent="LeftPage/LeftPageContent/IngredientsList/IngredientRow4/ItemVisuals" parent_id_path=PackedInt32Array(915991159, 1949067627) index="1" unique_id=988577649]
+theme_override_font_sizes/font_size = 19
+text = "BUTIL NG ARAW"
+
+[node name="IngredientRow5" parent="LeftPage/LeftPageContent/IngredientsList" unique_id=324051859 instance=ExtResource("4_x2ra6")]
+layout_mode = 2
+
+[node name="IngredientSprite" parent="LeftPage/LeftPageContent/IngredientsList/IngredientRow5/ItemVisuals/IngredientIcon" parent_id_path=PackedInt32Array(324051859, 259545381) index="1" unique_id=1516227618]
+offset_left = 6.4637604
+offset_top = 7.26577
+offset_right = -23.53624
+offset_bottom = -22.734222
+texture = ExtResource("8_kuy3j")
+
+[node name="IngredientName" parent="LeftPage/LeftPageContent/IngredientsList/IngredientRow5/ItemVisuals" parent_id_path=PackedInt32Array(324051859, 1949067627) index="1" unique_id=988577649]
+theme_override_font_sizes/font_size = 20
+text = "KABUTE"
+
+[node name="IngredientRow6" parent="LeftPage/LeftPageContent/IngredientsList" unique_id=1169973966 instance=ExtResource("4_x2ra6")]
+layout_mode = 2
+
+[node name="IngredientSprite" parent="LeftPage/LeftPageContent/IngredientsList/IngredientRow6/ItemVisuals/IngredientIcon" parent_id_path=PackedInt32Array(1169973966, 259545381) index="1" unique_id=1516227618]
+offset_left = 14.19323
+offset_top = 13.468599
+offset_right = -15.806763
+offset_bottom = -16.531387
+scale = Vector2(1, 1)
+texture = ExtResource("9_225xe")
+
+[node name="IngredientName" parent="LeftPage/LeftPageContent/IngredientsList/IngredientRow6/ItemVisuals" parent_id_path=PackedInt32Array(1169973966, 1949067627) index="1" unique_id=988577649]
+theme_override_font_sizes/font_size = 20
+text = "PUSO NG DILIM"
+
+[node name="IngredientRow7" parent="LeftPage/LeftPageContent/IngredientsList" unique_id=623025936 instance=ExtResource("4_x2ra6")]
+layout_mode = 2
+
+[node name="IngredientSprite" parent="LeftPage/LeftPageContent/IngredientsList/IngredientRow7/ItemVisuals/IngredientIcon" parent_id_path=PackedInt32Array(623025936, 259545381) index="1" unique_id=1516227618]
+offset_left = 14.19323
+offset_top = 17.333344
+offset_right = -15.806763
+offset_bottom = -12.666641
+scale = Vector2(1, 1)
+texture = ExtResource("10_7mmsa")
+
+[node name="IngredientName" parent="LeftPage/LeftPageContent/IngredientsList/IngredientRow7/ItemVisuals" parent_id_path=PackedInt32Array(623025936, 1949067627) index="1" unique_id=988577649]
+theme_override_font_sizes/font_size = 20
+text = "PARUPARO"
+
+[node name="IngredientRow8" parent="LeftPage/LeftPageContent/IngredientsList" unique_id=2144832737 instance=ExtResource("4_x2ra6")]
+layout_mode = 2
+
+[node name="IngredientSprite" parent="LeftPage/LeftPageContent/IngredientsList/IngredientRow8/ItemVisuals/IngredientIcon" parent_id_path=PackedInt32Array(2144832737, 259545381) index="1" unique_id=1516227618]
+offset_left = 14.19323
+offset_top = 17.333344
+offset_right = -15.806763
+offset_bottom = -12.666641
+scale = Vector2(1, 1)
+texture = ExtResource("11_co14c")
+
+[node name="IngredientName" parent="LeftPage/LeftPageContent/IngredientsList/IngredientRow8/ItemVisuals" parent_id_path=PackedInt32Array(2144832737, 1949067627) index="1" unique_id=988577649]
+theme_override_font_sizes/font_size = 20
+text = "BIYAK NG TALA"
+
+[node name="RightPage" type="Control" parent="." unique_id=1808646274]
+layout_mode = 1
+anchor_left = 0.521
+anchor_top = 0.10700001
+anchor_right = 0.87200004
+anchor_bottom = 0.82100004
+offset_left = -0.32006836
+offset_top = 0.4399948
+offset_right = 0.7598877
+offset_bottom = 0.3199463
+
+[node name="RightPageContent" type="VBoxContainer" parent="RightPage" unique_id=337925777]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -41.425
+offset_bottom = 4.575012
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.035, 1.035)
+
+[node name="PageTitle" type="Label" parent="RightPage/RightPageContent" unique_id=1091760588]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.38431373, 0.24313726, 0.24313726, 1)
+theme_override_fonts/font = ExtResource("3_dp8sl")
+theme_override_font_sizes/font_size = 72
+text = "MGA TIMPLA"
+horizontal_alignment = 1
+
+[node name="PotionList" type="GridContainer" parent="RightPage/RightPageContent" unique_id=930207848]
+layout_mode = 2
+theme_override_constants/h_separation = 184
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="PotionRow" parent="RightPage/RightPageContent/PotionList" unique_id=974148722 instance=ExtResource("3_01hhd")]
+layout_mode = 2
+
+[node name="PotionRow2" parent="RightPage/RightPageContent/PotionList" unique_id=1978968077 instance=ExtResource("3_01hhd")]
+layout_mode = 2
+
+[node name="PotionIcon" parent="RightPage/RightPageContent/PotionList/PotionRow2/PotionVisuals" parent_id_path=PackedInt32Array(1978968077, 1539434021) index="0" unique_id=324514942]
+texture = ExtResource("5_an481")
+
+[node name="PotionSprite" parent="RightPage/RightPageContent/PotionList/PotionRow2/PotionVisuals/PotionIcon" index="1" unique_id=750077736]
+texture = ExtResource("6_xbuny")
+
+[node name="PotionName" parent="RightPage/RightPageContent/PotionList/PotionRow2/PotionVisuals" parent_id_path=PackedInt32Array(1978968077, 1539434021) index="1" unique_id=2130170995]
+text = "LUNAS NG LIHIM"
+
+[node name="RecipeRequirements" parent="RightPage/RightPageContent/PotionList/PotionRow2/ShopControls/MarginContainer" parent_id_path=PackedInt32Array(1978968077, 2059923579) index="0" unique_id=148155339]
+text = "KABUTE   x2
+PUSO NG DILIM   x1"
+
+[node name="PotionRow3" parent="RightPage/RightPageContent/PotionList" unique_id=1788565258 instance=ExtResource("3_01hhd")]
+layout_mode = 2
+
+[node name="PotionIcon" parent="RightPage/RightPageContent/PotionList/PotionRow3/PotionVisuals" parent_id_path=PackedInt32Array(1788565258, 1539434021) index="0" unique_id=324514942]
+texture = ExtResource("7_jc6vc")
+
+[node name="PotionSprite" parent="RightPage/RightPageContent/PotionList/PotionRow3/PotionVisuals/PotionIcon" index="1" unique_id=750077736]
+texture = ExtResource("8_j6i2a")
+
+[node name="PotionName" parent="RightPage/RightPageContent/PotionList/PotionRow3/PotionVisuals" parent_id_path=PackedInt32Array(1788565258, 1539434021) index="1" unique_id=2130170995]
+text = "LUNAS NG LINAW"
+
+[node name="RecipeRequirements" parent="RightPage/RightPageContent/PotionList/PotionRow3/ShopControls/MarginContainer" parent_id_path=PackedInt32Array(1788565258, 2059923579) index="0" unique_id=148155339]
+text = "PARU-PARO   x2
+BIYAK NG TALA   x1"
+
+[node name="PotionRow4" parent="RightPage/RightPageContent/PotionList" unique_id=969046908 instance=ExtResource("3_01hhd")]
+layout_mode = 2
+
+[node name="PotionIcon" parent="RightPage/RightPageContent/PotionList/PotionRow4/PotionVisuals" parent_id_path=PackedInt32Array(969046908, 1539434021) index="0" unique_id=324514942]
+texture = ExtResource("9_2k0l0")
+
+[node name="PotionSprite" parent="RightPage/RightPageContent/PotionList/PotionRow4/PotionVisuals/PotionIcon" index="1" unique_id=750077736]
+texture = ExtResource("10_32tha")
+
+[node name="PotionName" parent="RightPage/RightPageContent/PotionList/PotionRow4/PotionVisuals" parent_id_path=PackedInt32Array(969046908, 1539434021) index="1" unique_id=2130170995]
+theme_override_font_sizes/font_size = 24
+text = "LUNAS NG HIMBING"
+
+[node name="RecipeRequirements" parent="RightPage/RightPageContent/PotionList/PotionRow4/ShopControls/MarginContainer" parent_id_path=PackedInt32Array(969046908, 2059923579) index="0" unique_id=148155339]
+text = "BULAKLAK NG HIMBING   x2
+KABUTE   x1"
+
+[node name="PotionRow5" parent="RightPage/RightPageContent/PotionList" unique_id=607002450 instance=ExtResource("3_01hhd")]
+layout_mode = 2
+
+[node name="PotionIcon" parent="RightPage/RightPageContent/PotionList/PotionRow5/PotionVisuals" parent_id_path=PackedInt32Array(607002450, 1539434021) index="0" unique_id=324514942]
+texture = ExtResource("11_mub11")
+
+[node name="PotionSprite" parent="RightPage/RightPageContent/PotionList/PotionRow5/PotionVisuals/PotionIcon" index="1" unique_id=750077736]
+texture = ExtResource("12_5wcj2")
+
+[node name="PotionName" parent="RightPage/RightPageContent/PotionList/PotionRow5/PotionVisuals" parent_id_path=PackedInt32Array(607002450, 1539434021) index="1" unique_id=2130170995]
+theme_override_font_sizes/font_size = 24
+text = "TINCTURA NG BILIS"
+
+[node name="RecipeRequirements" parent="RightPage/RightPageContent/PotionList/PotionRow5/ShopControls/MarginContainer" parent_id_path=PackedInt32Array(607002450, 2059923579) index="0" unique_id=148155339]
+text = "BULAKLAK NG SIGLA   x2
+BUTIL NG ARAW   x1"
+
+[node name="PotionRow6" parent="RightPage/RightPageContent/PotionList" unique_id=1282763968 instance=ExtResource("3_01hhd")]
+layout_mode = 2
+
+[node name="PotionIcon" parent="RightPage/RightPageContent/PotionList/PotionRow6/PotionVisuals" parent_id_path=PackedInt32Array(1282763968, 1539434021) index="0" unique_id=324514942]
+texture = ExtResource("13_wb16t")
+
+[node name="PotionSprite" parent="RightPage/RightPageContent/PotionList/PotionRow6/PotionVisuals/PotionIcon" index="1" unique_id=750077736]
+texture = ExtResource("14_uk6m4")
+
+[node name="PotionName" parent="RightPage/RightPageContent/PotionList/PotionRow6/PotionVisuals" parent_id_path=PackedInt32Array(1282763968, 1539434021) index="1" unique_id=2130170995]
+text = "LASON"
+
+[node name="RecipeRequirements" parent="RightPage/RightPageContent/PotionList/PotionRow6/ShopControls/MarginContainer" parent_id_path=PackedInt32Array(1282763968, 2059923579) index="0" unique_id=148155339]
+text = "BULAKLAK NG SIGLA   x2
+BUTIL NG ARAW   x1"
+
+[node name="PotionRow7" parent="RightPage/RightPageContent/PotionList" unique_id=1225478262 instance=ExtResource("3_01hhd")]
+layout_mode = 2
+
+[node name="PotionIcon" parent="RightPage/RightPageContent/PotionList/PotionRow7/PotionVisuals" parent_id_path=PackedInt32Array(1225478262, 1539434021) index="0" unique_id=324514942]
+texture = ExtResource("15_830r7")
+
+[node name="PotionSprite" parent="RightPage/RightPageContent/PotionList/PotionRow7/PotionVisuals/PotionIcon" index="1" unique_id=750077736]
+texture = ExtResource("16_x2ra6")
+
+[node name="PotionName" parent="RightPage/RightPageContent/PotionList/PotionRow7/PotionVisuals" parent_id_path=PackedInt32Array(1225478262, 1539434021) index="1" unique_id=2130170995]
+text = "LUNAS NG DIWA"
+
+[node name="RecipeRequirements" parent="RightPage/RightPageContent/PotionList/PotionRow7/ShopControls/MarginContainer" parent_id_path=PackedInt32Array(1225478262, 2059923579) index="0" unique_id=148155339]
+text = "BULAKLAK NG SIGLA   x1
+HIBLA NG DIWA   x2"
+
+[editable path="LeftPage/LeftPageContent/IngredientsList/IngredientRow"]
+[editable path="LeftPage/LeftPageContent/IngredientsList/IngredientRow2"]
+[editable path="LeftPage/LeftPageContent/IngredientsList/IngredientRow3"]
+[editable path="LeftPage/LeftPageContent/IngredientsList/IngredientRow4"]
+[editable path="LeftPage/LeftPageContent/IngredientsList/IngredientRow5"]
+[editable path="LeftPage/LeftPageContent/IngredientsList/IngredientRow6"]
+[editable path="LeftPage/LeftPageContent/IngredientsList/IngredientRow7"]
+[editable path="LeftPage/LeftPageContent/IngredientsList/IngredientRow8"]
+[editable path="RightPage/RightPageContent/PotionList/PotionRow2"]
+[editable path="RightPage/RightPageContent/PotionList/PotionRow3"]
+[editable path="RightPage/RightPageContent/PotionList/PotionRow4"]
+[editable path="RightPage/RightPageContent/PotionList/PotionRow5"]
+[editable path="RightPage/RightPageContent/PotionList/PotionRow6"]
+[editable path="RightPage/RightPageContent/PotionList/PotionRow7"]
