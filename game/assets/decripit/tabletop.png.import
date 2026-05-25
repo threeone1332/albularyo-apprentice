@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4mv5tddxuv0n"
-path="res://.godot/imported/plant.png-f408cdb25cf38c780a74b5774cb3eb7a.ctex"
+uid="uid://betmp5lwxwymf"
+path="res://.godot/imported/tabletop.png-5f77d77373bbbdcd3d93553b80efdc21.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/Main Screen/plant.png"
-dest_files=["res://.godot/imported/plant.png-f408cdb25cf38c780a74b5774cb3eb7a.ctex"]
+source_file="res://assets/decripit/tabletop.png"
+dest_files=["res://.godot/imported/tabletop.png-5f77d77373bbbdcd3d93553b80efdc21.ctex"]
 
 [params]
 
