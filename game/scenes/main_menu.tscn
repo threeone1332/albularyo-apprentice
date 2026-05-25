@@ -67,7 +67,7 @@ theme_override_font_sizes/font_size = 55
 theme_override_styles/normal = SubResource("StyleBoxTexture_fu7sn")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_jix8l")
 theme_override_styles/hover = SubResource("StyleBoxTexture_jix8l")
-text = "NEW GAME"
+text = "SETTINGS"
 
 [node name="Exit" type="Button" parent="MarginContainer2/NinePatchRect/VBoxContainer" unique_id=1749523108]
 custom_minimum_size = Vector2(50, 100)
