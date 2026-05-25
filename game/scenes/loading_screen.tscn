@@ -48,13 +48,15 @@ show_percentage = false
 
 [node name="PercentLabel" type="Label" parent="." unique_id=13621848]
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 460.3
-offset_top = 405.77502
-offset_right = 801.3
-offset_bottom = 463.77502
+anchors_preset = -1
+anchor_left = 0.24000001
+anchor_top = 0.87600005
+anchor_right = 0.41700003
+anchor_bottom = 0.929
+offset_left = -0.5000305
+offset_top = -0.3050537
+offset_right = 0.6599121
+offset_bottom = 0.4550171
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("2_htrc2")
