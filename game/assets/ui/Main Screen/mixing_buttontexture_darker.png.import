@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjkcy8r3xmwr1"
-path="res://.godot/imported/loading bar background.png-8a00e4963c5e36eec5012b00465a9852.ctex"
+uid="uid://cct04ev6i8ubw"
+path="res://.godot/imported/mixing_buttontexture_darker.png-06088c9778464accc70b5792f7d06566.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/loading screen/loading bar background.png"
-dest_files=["res://.godot/imported/loading bar background.png-8a00e4963c5e36eec5012b00465a9852.ctex"]
+source_file="res://assets/ui/Main Screen/mixing_buttontexture_darker.png"
+dest_files=["res://.godot/imported/mixing_buttontexture_darker.png-06088c9778464accc70b5792f7d06566.ctex"]
 
 [params]
 

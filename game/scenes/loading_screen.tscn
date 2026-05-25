@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://dip2626yvlq6i"]
+
+[ext_resource type="Texture2D" uid="uid://tkmnr5p7l42n" path="res://assets/ui/Loading Screen/LOADING SCREEN.png" id="1_hprjd"]
+[ext_resource type="FontFile" uid="uid://clux6cekpic0m" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="2_htrc2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mggpi"]
+bg_color = Color(0.34117648, 0.41960785, 0.16078432, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_htrc2"]
+bg_color = Color(0.8352941, 0.8627451, 0.43137255, 1)
+
+[node name="LoadingScreen" type="Control" unique_id=194457204]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=528093465]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_hprjd")
+
+[node name="LoadingBar" type="ProgressBar" parent="." unique_id=1609216582]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -500.0
+offset_top = -80.0
+offset_right = 500.0
+offset_bottom = -30.000244
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.34117648, 0.41960785, 0.16078432, 1)
+theme_override_fonts/font = ExtResource("2_htrc2")
+theme_override_font_sizes/font_size = 26
+theme_override_styles/background = SubResource("StyleBoxFlat_mggpi")
+theme_override_styles/fill = SubResource("StyleBoxFlat_htrc2")
+value = 100.0
+show_percentage = false
+
+[node name="PercentLabel" type="Label" parent="." unique_id=13621848]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 460.3
+offset_top = 405.77502
+offset_right = 801.3
+offset_bottom = 463.77502
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_htrc2")
+theme_override_font_sizes/font_size = 43
+text = "Loading... 0 / 100"

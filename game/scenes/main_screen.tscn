@@ -1,0 +1,369 @@
+[gd_scene format=3 uid="uid://bec5mps3luj7r"]
+
+[ext_resource type="Texture2D" uid="uid://bw6kilrc7jm1k" path="res://assets/ui/Main Screen/main_screen_background.png" id="1_c7dat"]
+[ext_resource type="Texture2D" uid="uid://dyp52dntr1dr4" path="res://assets/ui/Main Screen/morning_icon.png" id="2_c7dat"]
+[ext_resource type="Texture2D" uid="uid://ry3ei4osqvmb" path="res://assets/ui/Main Screen/noon_icon.png" id="3_3qgpa"]
+[ext_resource type="FontFile" uid="uid://b3w8qw1vuyjm1" path="res://assets/fonts/FontsFree-Net-Art-nuvo.ttf" id="3_7a4el"]
+[ext_resource type="Texture2D" uid="uid://bpawle5i4j1so" path="res://assets/ui/Main Screen/night_icon.png" id="4_3qgpa"]
+[ext_resource type="Texture2D" uid="uid://cdnea6io2pb43" path="res://assets/ui/Main Screen/money_icon.png" id="5_ihpp7"]
+[ext_resource type="Texture2D" uid="uid://dm22iehvy7g21" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="5_sjiej"]
+[ext_resource type="Texture2D" uid="uid://45r7lj80g6c6" path="res://assets/ui/Main Screen/techtree_buttontexture.png" id="8_ihpp7"]
+[ext_resource type="Texture2D" uid="uid://baxyfwd03vltq" path="res://assets/ui/Main Screen/techtree_buttontexture_darker.png" id="9_6lq5t"]
+[ext_resource type="Texture2D" uid="uid://bkq8plccjiiqe" path="res://assets/ui/Main Screen/mixing_buttontexture.png" id="10_c7dat"]
+[ext_resource type="Texture2D" uid="uid://cct04ev6i8ubw" path="res://assets/ui/Main Screen/mixing_buttontexture_darker.png" id="11_21wo0"]
+[ext_resource type="Texture2D" uid="uid://b0k6o3anq4iwo" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Setting menu.png" id="12_cxp7d"]
+[ext_resource type="FontFile" uid="uid://clux6cekpic0m" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="13_3qsiq"]
+[ext_resource type="Texture2D" uid="uid://cgojjx8fa48vu" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/UI Big Play Button.png" id="14_7087c"]
+[ext_resource type="Texture2D" uid="uid://s818x6sucqov" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/emojis-free/emoji style ui/Inventory_Blocks_Spritesheet.png" id="15_do8p6"]
+[ext_resource type="Texture2D" uid="uid://c55w8nukxidm" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/emojis-free/Emoji_Spritesheet_Free.png" id="16_sqqhh"]
+[ext_resource type="Texture2D" uid="uid://n7m7x52t4ui6" path="res://assets/ui/Main Screen/table.png" id="17_6lq5t"]
+[ext_resource type="Texture2D" uid="uid://betmp5lwxwymf" path="res://assets/ui/Main Screen/tabletop.png" id="18_21wo0"]
+[ext_resource type="Texture2D" uid="uid://b4mv5tddxuv0n" path="res://assets/ui/Main Screen/plant.png" id="19_rvdwh"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4sv2p"]
+texture = ExtResource("5_sjiej")
+region_rect = Rect2(837, 164, 22, 24)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sj757"]
+texture = ExtResource("5_sjiej")
+region_rect = Rect2(869, 166, 22, 22)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0osx7"]
+texture = ExtResource("5_sjiej")
+region_rect = Rect2(837, 132, 22, 24)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_62wn8"]
+texture = ExtResource("5_sjiej")
+region_rect = Rect2(869, 134, 22, 22)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_do8p6"]
+texture = ExtResource("14_7087c")
+region_rect = Rect2(3, 2, 90, 27)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sqqhh"]
+texture = ExtResource("14_7087c")
+region_rect = Rect2(99, 4, 90, 25)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c7dat"]
+texture = ExtResource("8_ihpp7")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3qgpa"]
+texture = ExtResource("9_6lq5t")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ihpp7"]
+texture = ExtResource("10_c7dat")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6lq5t"]
+texture = ExtResource("11_21wo0")
+
+[node name="Control" type="Control" unique_id=1356609430]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=730408955]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer" unique_id=656764298]
+layout_mode = 2
+texture = ExtResource("1_c7dat")
+
+[node name="Time" type="MarginContainer" parent="MarginContainer/NinePatchRect" unique_id=882900053]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -237.0
+offset_top = 20.0
+offset_right = -46.0
+offset_bottom = 219.0
+grow_horizontal = 0
+tooltip_text = "Time passes automatically from three phases: Morning, Noon, and Night. Each phase has a different demand for each potion."
+
+[node name="Morning" type="TextureRect" parent="MarginContainer/NinePatchRect/Time" unique_id=1554588542]
+layout_mode = 2
+texture = ExtResource("2_c7dat")
+
+[node name="Noon" type="TextureRect" parent="MarginContainer/NinePatchRect/Time" unique_id=47630179]
+visible = false
+layout_mode = 2
+texture = ExtResource("3_3qgpa")
+
+[node name="Night" type="TextureRect" parent="MarginContainer/NinePatchRect/Time" unique_id=309986119]
+visible = false
+layout_mode = 2
+texture = ExtResource("4_3qgpa")
+
+[node name="Money" type="HBoxContainer" parent="MarginContainer/NinePatchRect" unique_id=1479652844]
+layout_mode = 0
+offset_left = 85.1
+offset_top = 59.3
+offset_right = 539.1
+offset_bottom = 259.3
+scale = Vector2(0.4, 0.4)
+tooltip_text = "Money"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/NinePatchRect/Money" unique_id=1309783932]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+texture = ExtResource("5_ihpp7")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="MarginContainer/NinePatchRect/Money" unique_id=1954677653]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.627451, 0.41568628, 0.37254903, 1)
+theme_override_fonts/font = ExtResource("3_7a4el")
+theme_override_font_sizes/font_size = 150
+text = "INT"
+
+[node name="Price" type="VBoxContainer" parent="MarginContainer/NinePatchRect" unique_id=1848052035]
+z_index = 1
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -218.0
+offset_bottom = -66.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Slider" type="HBoxContainer" parent="MarginContainer/NinePatchRect/Price" unique_id=776603822]
+z_index = 1
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="Decrease" type="Button" parent="MarginContainer/NinePatchRect/Price/Slider" unique_id=1621570624]
+custom_minimum_size = Vector2(100, 90)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_4sv2p")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_sj757")
+theme_override_styles/hover = SubResource("StyleBoxTexture_sj757")
+
+[node name="Label" type="Label" parent="MarginContainer/NinePatchRect/Price/Slider" unique_id=1164929174]
+z_index = 1
+layout_mode = 2
+theme_override_colors/font_color = Color(0.38431373, 0.24313726, 0.24313726, 1)
+theme_override_fonts/font = ExtResource("3_7a4el")
+theme_override_font_sizes/font_size = 70
+text = "INT"
+
+[node name="Increase" type="Button" parent="MarginContainer/NinePatchRect/Price/Slider" unique_id=582681066]
+custom_minimum_size = Vector2(100, 90)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_0osx7")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_62wn8")
+theme_override_styles/hover = SubResource("StyleBoxTexture_62wn8")
+
+[node name="Demand" type="HBoxContainer" parent="MarginContainer/NinePatchRect/Price" unique_id=815688083]
+z_index = 1
+layout_mode = 2
+theme_override_constants/separation = 52
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/NinePatchRect/Price/Demand" unique_id=276842856]
+z_index = 1
+layout_mode = 2
+theme_override_colors/font_color = Color(0.38431373, 0.24313726, 0.24313726, 1)
+theme_override_fonts/font = ExtResource("3_7a4el")
+theme_override_font_sizes/font_size = 38
+text = "SELL CHANCE"
+
+[node name="Label2" type="Label" parent="MarginContainer/NinePatchRect/Price/Demand" unique_id=783570616]
+z_index = 1
+layout_mode = 2
+theme_override_colors/font_color = Color(0.38431373, 0.24313726, 0.24313726, 1)
+theme_override_fonts/font = ExtResource("3_7a4el")
+theme_override_font_sizes/font_size = 38
+text = "INT% PER SECOND"
+
+[node name="Feature" type="MarginContainer" parent="MarginContainer/NinePatchRect" unique_id=244627103]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -475.0
+offset_top = -475.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/NinePatchRect/Feature" unique_id=1645104842]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 1
+texture = ExtResource("12_cxp7d")
+region_rect = Rect2(139, 12, 106, 122)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/NinePatchRect/Feature/NinePatchRect" unique_id=1753311471]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -175.0
+offset_right = 175.0
+offset_bottom = 175.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="MarginContainer/NinePatchRect/Feature/NinePatchRect/MarginContainer" unique_id=1531100035]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.38431373, 0.24313726, 0.24313726, 1)
+theme_override_fonts/font = ExtResource("13_3qsiq")
+theme_override_font_sizes/font_size = 54
+text = "FEATURED"
+horizontal_alignment = 1
+
+[node name="Change" type="Button" parent="MarginContainer/NinePatchRect/Feature/NinePatchRect/MarginContainer" unique_id=1126343566]
+custom_minimum_size = Vector2(160, 65)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+tooltip_text = "Chooses what potion to sell. You may change it whenever you want, simply keep in mind that every potion has a different demand depending on the time."
+mouse_filter = 1
+theme_override_colors/font_color = Color(0.38431373, 0.24313726, 0.24313726, 1)
+theme_override_colors/font_pressed_color = Color(0.627451, 0.41568628, 0.37254903, 1)
+theme_override_colors/font_hover_color = Color(0.627451, 0.41568628, 0.37254903, 1)
+theme_override_fonts/font = ExtResource("13_3qsiq")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxTexture_do8p6")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_sqqhh")
+theme_override_styles/hover = SubResource("StyleBoxTexture_sqqhh")
+text = "CHANGE"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/NinePatchRect/Feature/NinePatchRect/MarginContainer" unique_id=851369606]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="potionandname" type="VBoxContainer" parent="MarginContainer/NinePatchRect/Feature/NinePatchRect/MarginContainer/MarginContainer" unique_id=454160360]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/NinePatchRect/Feature/NinePatchRect/MarginContainer/MarginContainer/potionandname" unique_id=14281914]
+custom_minimum_size = Vector2(170, 170)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Feature your potions here. You may change it whenever you want, just keep in mind that every potion has a different demand depanding on the time."
+mouse_filter = 1
+texture = ExtResource("15_do8p6")
+region_rect = Rect2(99, 98, 42, 44)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/NinePatchRect/Feature/NinePatchRect/MarginContainer/MarginContainer/potionandname/NinePatchRect" unique_id=1089741367]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_bottom = 6
+
+[node name="picofpotion" type="NinePatchRect" parent="MarginContainer/NinePatchRect/Feature/NinePatchRect/MarginContainer/MarginContainer/potionandname/NinePatchRect/MarginContainer" unique_id=1561780492]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Feature your potions here. You may change it whenever you want, just keep in mind that every potion has a different demand depanding on the time."
+mouse_filter = 1
+texture = ExtResource("16_sqqhh")
+region_rect = Rect2(98, 385, 28, 29)
+
+[node name="nameofpotion" type="Label" parent="MarginContainer/NinePatchRect/Feature/NinePatchRect/MarginContainer/MarginContainer/potionandname" unique_id=559263491]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.38431373, 0.24313726, 0.24313726, 1)
+theme_override_fonts/font = ExtResource("13_3qsiq")
+theme_override_font_sizes/font_size = 27
+text = "NAME"
+horizontal_alignment = 1
+
+[node name="Misc" type="MarginContainer" parent="MarginContainer/NinePatchRect" unique_id=1345216436]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Table" type="Sprite2D" parent="MarginContainer/NinePatchRect/Misc" unique_id=2028949776]
+z_index = 1
+position = Vector2(0, 70)
+scale = Vector2(0.53783256, 0.5487478)
+texture = ExtResource("17_6lq5t")
+
+[node name="Table Top" type="Sprite2D" parent="MarginContainer/NinePatchRect/Misc" unique_id=1788891936]
+z_index = 1
+position = Vector2(0, -130)
+scale = Vector2(1.1171052, 1.0934066)
+texture = ExtResource("18_21wo0")
+
+[node name="Plant" type="Sprite2D" parent="MarginContainer/NinePatchRect/Misc" unique_id=1012529635]
+z_index = 1
+position = Vector2(-284.49707, -318)
+scale = Vector2(0.5253712, 0.44066834)
+texture = ExtResource("19_rvdwh")
+
+[node name="SwitchScene" type="MarginContainer" parent="MarginContainer/NinePatchRect" unique_id=2024458661]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.028
+anchor_top = 0.54200006
+anchor_right = 0.29700002
+anchor_bottom = 0.92800003
+offset_left = -53.760002
+offset_top = -585.36005
+offset_right = -570.24005
+offset_bottom = -1002.24005
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Tech Tree" type="Button" parent="MarginContainer/NinePatchRect" unique_id=1762685494]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 0
+offset_left = 85.0
+offset_top = 652.0
+offset_right = 546.0
+offset_bottom = 989.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_c7dat")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_3qgpa")
+theme_override_styles/hover = SubResource("StyleBoxTexture_3qgpa")
+
+[node name="Mixing" type="Button" parent="MarginContainer/NinePatchRect" unique_id=300440248]
+z_index = 3
+layout_mode = 0
+offset_left = 1431.0
+offset_top = 727.0
+offset_right = 1746.0
+offset_bottom = 942.0
+scale = Vector2(-1, 1)
+theme_override_styles/normal = SubResource("StyleBoxTexture_ihpp7")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_6lq5t")
+theme_override_styles/hover = SubResource("StyleBoxTexture_6lq5t")

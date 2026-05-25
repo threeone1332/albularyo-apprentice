@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjkcy8r3xmwr1"
-path="res://.godot/imported/loading bar background.png-8a00e4963c5e36eec5012b00465a9852.ctex"
+uid="uid://bneoiduvnp2n5"
+path="res://.godot/imported/uri_ifs___M_6d50b4be-4207-4414-9d8c-55a4d6ac51a5.jpeg-c1da5f5df4f8be8928116d4c2dcf9d4f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/loading screen/loading bar background.png"
-dest_files=["res://.godot/imported/loading bar background.png-8a00e4963c5e36eec5012b00465a9852.ctex"]
+source_file="res://assets/Intro/uri_ifs___M_6d50b4be-4207-4414-9d8c-55a4d6ac51a5.jpeg"
+dest_files=["res://.godot/imported/uri_ifs___M_6d50b4be-4207-4414-9d8c-55a4d6ac51a5.jpeg-c1da5f5df4f8be8928116d4c2dcf9d4f.ctex"]
 
 [params]
 
