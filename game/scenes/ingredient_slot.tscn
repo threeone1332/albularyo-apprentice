@@ -10,7 +10,7 @@
 custom_minimum_size = Vector2(0, 177)
 offset_right = 40.0
 offset_bottom = 40.0
-theme_override_constants/separation = 55
+theme_override_constants/separation = 40
 
 [node name="ItemVisuals" type="VBoxContainer" parent="." unique_id=1949067627]
 custom_minimum_size = Vector2(150, 0)
@@ -65,11 +65,12 @@ text = "BULAKLAK NG SIGLA"
 horizontal_alignment = 1
 
 [node name="InventoryCount" type="Label" parent="." unique_id=566067148]
+custom_minimum_size = Vector2(92, 0)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 6
 theme_override_colors/font_color = Color(0.38431373, 0.24313726, 0.24313726, 1)
 theme_override_fonts/font = ExtResource("3_ykotn")
 theme_override_font_sizes/font_size = 85
-text = "1x"
+text = "0x"
 horizontal_alignment = 1
 vertical_alignment = 1
