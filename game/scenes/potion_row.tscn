@@ -5,8 +5,11 @@
 [ext_resource type="Texture2D" uid="uid://d1whbpu0jam4t" path="res://assets/ui/Mixing screen/width_150 (9).png" id="2_6ahbv"]
 [ext_resource type="FontFile" uid="uid://ddb8js7ulxcwq" path="res://assets/fonts/Martires Extra Bold.otf" id="5_3x80t"]
 [ext_resource type="FontFile" uid="uid://kioijc5gmbl1" path="res://assets/fonts/Maragsâ-Display.otf" id="5_uapx3"]
-[ext_resource type="Texture2D" uid="uid://dmkwjwmr18j0w" path="res://assets/ui/Mixing screen/width_49.png" id="6_3x80t"]
+[ext_resource type="Texture2D" uid="uid://dgkj21mumw2lk" path="res://assets/ui/Mixing screen/decrease_button.png" id="7_6q83n"]
 [ext_resource type="FontFile" uid="uid://b3w8qw1vuyjm1" path="res://assets/fonts/FontsFree-Net-Art-nuvo.ttf" id="7_kb0d4"]
+[ext_resource type="Texture2D" uid="uid://byvvvlgc5x54u" path="res://assets/ui/Mixing screen/Pressed State/decrease_button_pressed.png" id="8_6vipl"]
+[ext_resource type="Texture2D" uid="uid://lv17fbxn1uio" path="res://assets/ui/Mixing screen/increase_button.png" id="9_h8xur"]
+[ext_resource type="Texture2D" uid="uid://damb355jkni7m" path="res://assets/ui/Mixing screen/Pressed State/increase_button_pressed.png" id="10_6vipl"]
 
 [node name="PotionRow" type="HBoxContainer" unique_id=745704402]
 offset_right = 315.0
@@ -107,25 +110,8 @@ theme_override_constants/separation = 13
 [node name="MinusButton" type="TextureButton" parent="ShopControls/QuantityControls" unique_id=1606131428]
 custom_minimum_size = Vector2(49, 49)
 layout_mode = 2
-texture_normal = ExtResource("6_3x80t")
-
-[node name="MinusLabel" type="Label" parent="ShopControls/QuantityControls/MinusButton" unique_id=247445417]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -13.5
-offset_top = -40.0
-offset_right = 11.5
-offset_bottom = 42.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.38431373, 0.24313726, 0.24313726, 1)
-theme_override_fonts/font = ExtResource("7_kb0d4")
-theme_override_font_sizes/font_size = 75
-text = "-"
+texture_normal = ExtResource("7_6q83n")
+texture_pressed = ExtResource("8_6vipl")
 
 [node name="CraftCounter" type="Label" parent="ShopControls/QuantityControls" unique_id=1342995281]
 layout_mode = 2
@@ -137,22 +123,5 @@ text = "1X"
 [node name="PlusButton" type="TextureButton" parent="ShopControls/QuantityControls" unique_id=1150192669]
 custom_minimum_size = Vector2(49, 49)
 layout_mode = 2
-texture_normal = ExtResource("6_3x80t")
-
-[node name="PlusLabel" type="Label" parent="ShopControls/QuantityControls/PlusButton" unique_id=1498395536]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -15.5
-offset_top = -39.0
-offset_right = 14.5
-offset_bottom = 43.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.38431373, 0.24313726, 0.24313726, 1)
-theme_override_fonts/font = ExtResource("7_kb0d4")
-theme_override_font_sizes/font_size = 75
-text = "+"
+texture_normal = ExtResource("9_h8xur")
+texture_pressed = ExtResource("10_6vipl")
