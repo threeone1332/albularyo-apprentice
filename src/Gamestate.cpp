@@ -1,13 +1,30 @@
 #include "GameState.h"
 #include <cstdlib>
 #include <algorithm>
+
 using namespace godot;
 
 GameState::GameState() :
-    gold(50), current_phase(Phase::SUN), price_slider_value(1.0f),
-    adventurers_unlocked(false), game_phase(1), cat_companion(false),
-    bat_companion(false), murder_of_crows(false), awaken_anito(false),
-    hire_adventurers(false) {}
+    gold(50),
+    current_phase(Phase::SUN),
+    price_slider_value(10),
+    adventurers_unlocked(false),
+    game_phase(1),
+    cat_companion(false),
+    bat_companion(false),
+    murder_of_crows(false),
+    awaken_anito(false),
+    hire_adventurers(false),
+    featured_potion_id(0)
+{
+    potion_demands[0] = {"LUNAS NG SIGLA", 70, 45, 55};
+    potion_demands[1] = {"LUNAS NG LIHIM", 30, 40, 75};
+    potion_demands[2] = {"LUNAS NG LINAW", 60, 70, 35};
+    potion_demands[3] = {"LUNAS NG HIMBING", 25, 30, 85};
+    potion_demands[4] = {"TINCTURA NG BILIS", 80, 65, 30};
+    potion_demands[5] = {"LASON", 20, 35, 65};
+    potion_demands[6] = {"LUNAS NG DIWA", 50, 55, 60};
+}
 
 void GameState::_bind_methods() {
     ClassDB::bind_method(D_METHOD("set_gold","amount"), &GameState::set_gold);
@@ -18,6 +35,10 @@ void GameState::_bind_methods() {
     ClassDB::bind_method(D_METHOD("get_game_phase"), &GameState::get_game_phase);
     ClassDB::bind_method(D_METHOD("set_price","p"), &GameState::set_price);
     ClassDB::bind_method(D_METHOD("get_price"), &GameState::get_price);
+    ClassDB::bind_method(D_METHOD("get_sell_chance_percent"), &GameState::get_sell_chance_percent);
+    ClassDB::bind_method(D_METHOD("set_featured_potion_id", "id"), &GameState::set_featured_potion_id);
+    ClassDB::bind_method(D_METHOD("get_featured_potion_id"), &GameState::get_featured_potion_id);
+    ClassDB::bind_method(D_METHOD("get_featured_potion_name"), &GameState::get_featured_potion_name);
     ClassDB::bind_method(D_METHOD("calculate_sell_chance","demand","price"),
         &GameState::calculate_sell_chance);
     ClassDB::bind_method(D_METHOD("attempt_sale"), &GameState::attempt_sale);
@@ -75,7 +96,7 @@ float GameState::calculate_sell_chance(float demand, float price) {
 }
 
 bool GameState::attempt_sale() {
-    float demand = get_demand_modifier();
+    float demand = get_current_potion_demand();
     float chance = calculate_sell_chance(demand, price_slider_value);
     float roll = static_cast<float>(rand()) / RAND_MAX;
     if (roll < chance) {
@@ -113,3 +134,40 @@ void GameState::check_phase_progression() {
 }
 
 bool GameState::check_win_condition() const { return gold >= 5000; }
+
+int GameState::get_current_potion_demand() const {
+    const PotionDemand& potion = potion_demands[featured_potion_id];
+
+    switch (current_phase) {
+        case Phase::SUN: return potion.morning_demand;
+        case Phase::NOON: return potion.noon_demand;
+        case Phase::NIGHT: return potion.night_demand;
+    }
+
+    return potion.morning_demand;
+}
+
+int GameState::get_sell_chance_percent() const {
+    float demand = get_current_potion_demand();
+    float modifier = get_demand_modifier();
+    float chance = (demand * modifier) / price_slider_value;
+
+    if (chance < 1) return 1;
+    if (chance > 95) return 95;
+
+    return static_cast<int>(chance);
+}
+
+void GameState::set_featured_potion_id(int id) {
+    if (id >= 0 && id < 7) {
+        featured_potion_id = id;
+    }
+}
+
+int GameState::get_featured_potion_id() const {
+    return featured_potion_id;
+}
+
+String GameState::get_featured_potion_name() const {
+    return potion_demands[featured_potion_id].name;
+}
