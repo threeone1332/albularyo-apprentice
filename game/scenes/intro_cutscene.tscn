@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ccv780w1dgvjx"]
 
-[ext_resource type="Script" uid="uid://b54oc2vggrrif" path="res://scripts/intro_cutscene.gd" id="1_juow0"]
+[ext_resource type="Script" uid="uid://bf80mw4molpwr" path="res://scripts/intro_cutscene.gd" id="1_juow0"]
 [ext_resource type="FontFile" uid="uid://b3w8qw1vuyjm1" path="res://assets/fonts/FontsFree-Net-Art-nuvo.ttf" id="1_vuduy"]
 
 [sub_resource type="Animation" id="Animation_juow0"]

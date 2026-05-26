@@ -22,7 +22,8 @@ func _ready():
 
 func show_current_line():
 	if current_line >= lines.size():
-		get_tree().change_scene_to_file("res://scenes/main_screen.tscn")
+		# Route to the Albularyo loading sequence
+		get_tree().change_scene_to_file("res://scenes/game_loading_screen.tscn")
 		return
 	label.text = lines[current_line]
 	animation_player.play("fade_in_out")

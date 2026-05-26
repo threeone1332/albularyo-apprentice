@@ -10,14 +10,16 @@ func _ready() -> void:
 func _on_start_button_pressed():
 	if FileAccess.file_exists(SAVE_PATH):
 		load_game()
-		get_tree().change_scene_to_file("res://scenes/main_screen.tscn")
+		# CHANGED: Route existing save loads through your loading screen first!
+		get_tree().change_scene_to_file("res://scenes/game_loading_screen.tscn")
 	else:
+		# Fresh game goes to the story introduction first
 		get_tree().change_scene_to_file("res://scenes/intro_cutscene.tscn")
 
 func _on_settings_pressed():
 	panel.visible = true
 
-func load_game():
+func load_game(): 
 	var file = FileAccess.open(SAVE_PATH, FileAccess.READ)
 	if file == null:
 		return
@@ -28,7 +30,6 @@ func load_game():
 
 func _process(_delta: float) -> void:
 	pass
-
 
 func _on_exit_settings_pressed() -> void:
 	panel.visible = false

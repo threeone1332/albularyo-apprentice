@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://dxfthbty0cr0u"]
+
+[ext_resource type="Texture2D" uid="uid://tkmnr5p7l42n" path="res://assets/ui/loading screen/LOADING SCREEN.png" id="1_bewip"]
+[ext_resource type="FontFile" uid="uid://clux6cekpic0m" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="2_4cmoq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tmcx7"]
+bg_color = Color(0.34117648, 0.41960785, 0.16078432, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w8ity"]
+bg_color = Color(0.8352941, 0.8627451, 0.43137255, 1)
+
+[node name="GameLoadingScreen" type="GameLoadingScreen" unique_id=1634536807]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_horizontal_guides_ = [980.0]
+
+[node name="Background" type="TextureRect" parent="." unique_id=900608524]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_bewip")
+
+[node name="TextLines" type="Label" parent="." unique_id=340455824]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 266.0
+offset_top = -150.0
+offset_right = 266.0
+offset_bottom = -73.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_4cmoq")
+theme_override_font_sizes/font_size = 30
+text = "Hinahanda na ang mga sangkap..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1742602783]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -500.0
+offset_top = -80.0
+offset_right = 500.0
+offset_bottom = -30.000244
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.34117648, 0.41960785, 0.16078432, 1)
+theme_override_fonts/font = ExtResource("2_4cmoq")
+theme_override_font_sizes/font_size = 26
+theme_override_styles/background = SubResource("StyleBoxFlat_tmcx7")
+theme_override_styles/fill = SubResource("StyleBoxFlat_w8ity")
+value = 100.0
+show_percentage = false
+
+[node name="StatusLabel" type="Label" parent="." unique_id=1336506378]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.24000001
+anchor_top = 0.87600005
+anchor_right = 0.41700003
+anchor_bottom = 0.929
+offset_left = -0.5000305
+offset_top = -0.3050537
+offset_right = 0.6599121
+offset_bottom = 0.4550171
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_4cmoq")
+theme_override_font_sizes/font_size = 43
+text = "Loading... 0 / 100"
