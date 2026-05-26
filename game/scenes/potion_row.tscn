@@ -114,11 +114,15 @@ texture_normal = ExtResource("7_6q83n")
 texture_pressed = ExtResource("8_6vipl")
 
 [node name="CraftCounter" type="Label" parent="ShopControls/QuantityControls" unique_id=1342995281]
+custom_minimum_size = Vector2(42, 0)
 layout_mode = 2
+size_flags_horizontal = 6
 theme_override_colors/font_color = Color(0.38431373, 0.24313726, 0.24313726, 1)
 theme_override_fonts/font = ExtResource("7_kb0d4")
 theme_override_font_sizes/font_size = 35
-text = "1X"
+text = "0X"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="PlusButton" type="TextureButton" parent="ShopControls/QuantityControls" unique_id=1150192669]
 custom_minimum_size = Vector2(49, 49)
