@@ -17,13 +17,13 @@ GameState::GameState() :
     hire_adventurers(false),
     featured_potion_id(0)
 {
-    potion_demands[0] = {"LUNAS NG SIGLA", 70, 45, 55};
-    potion_demands[1] = {"LUNAS NG LIHIM", 30, 40, 75};
-    potion_demands[2] = {"LUNAS NG LINAW", 60, 70, 35};
-    potion_demands[3] = {"LUNAS NG HIMBING", 25, 30, 85};
-    potion_demands[4] = {"TINCTURA NG BILIS", 80, 65, 30};
-    potion_demands[5] = {"LASON", 20, 35, 65};
-    potion_demands[6] = {"LUNAS NG DIWA", 50, 55, 60};
+    potion_demands[0] = {"LUNAS NG SIGLA", 90, 35, 20};
+    potion_demands[1] = {"LUNAS NG LIHIM", 20, 45, 90};
+    potion_demands[2] = {"LUNAS NG LINAW", 65, 90, 25};
+    potion_demands[3] = {"LUNAS NG HIMBING", 10, 30, 95};
+    potion_demands[4] = {"TINCTURA NG BILIS", 95, 70, 20};
+    potion_demands[5] = {"LASON", 15, 35, 85};
+    potion_demands[6] = {"LUNAS NG DIWA", 45, 55, 80};
 }
 
 void GameState::_bind_methods() {
@@ -91,8 +91,8 @@ float GameState::get_demand_modifier() const {
 
 float GameState::calculate_sell_chance(float demand, float price) {
     float modifier = get_demand_modifier();
-    float chance = (demand * modifier) / price;
-    return std::clamp(chance, 0.0f, 1.0f);
+    float chance = (demand * modifier) / (price * 150.0f);
+    return std::clamp(chance, 0.0f, 0.95f);
 }
 
 bool GameState::attempt_sale() {
@@ -150,8 +150,7 @@ int GameState::get_current_potion_demand() const {
 int GameState::get_sell_chance_percent() const {
     float demand = get_current_potion_demand();
     float modifier = get_demand_modifier();
-    float chance = (demand * modifier) / price_slider_value;
-
+    float chance = (demand * modifier) / (price_slider_value * 1.5f);
     if (chance < 1) return 1;
     if (chance > 95) return 95;
 
