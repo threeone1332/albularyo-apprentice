@@ -24,6 +24,10 @@ window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 mouse_cursor/custom_image="uid://dhqlc7fgi1q4r"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/copy_all_errors/plugin.cfg")
+
 [gui]
 
 timers/tooltip_delay_sec=0.1

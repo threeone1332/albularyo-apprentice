@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cjbnjt4newjg8"]
 
-[ext_resource type="Script" uid="uid://82hfkboo0ewm" path="res://scenes/main_menu.gd" id="1_wu84c"]
+[ext_resource type="Script" uid="uid://82hfkboo0ewm" path="res://scripts/main_menu.gd" id="1_wu84c"]
 [ext_resource type="Texture2D" uid="uid://cgojjx8fa48vu" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/UI Big Play Button.png" id="2_7vrkn"]
 [ext_resource type="Texture2D" uid="uid://7lqee2x74ear" path="res://assets/ui/Main Menu/opening_screen.png" id="2_fu7sn"]
 [ext_resource type="FontFile" uid="uid://clux6cekpic0m" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="2_jix8l"]
@@ -88,7 +88,7 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_jix8l")
 theme_override_styles/hover = SubResource("StyleBoxTexture_jix8l")
 text = "START"
 
-[node name="New Game" type="Button" parent="MarginContainer2/NinePatchRect/MainButtons" unique_id=2016645536]
+[node name="Setting" type="Button" parent="MarginContainer2/NinePatchRect/MainButtons" unique_id=2016645536]
 custom_minimum_size = Vector2(50, 100)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.6269185, 0.4171387, 0.3713367, 1)
@@ -99,7 +99,7 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_jix8l")
 theme_override_styles/hover = SubResource("StyleBoxTexture_jix8l")
 text = "SETTINGS"
 
-[node name="Exit" type="Button" parent="MarginContainer2/NinePatchRect/MainButtons" unique_id=1749523108]
+[node name="Quit" type="Button" parent="MarginContainer2/NinePatchRect/MainButtons" unique_id=1749523108]
 custom_minimum_size = Vector2(50, 100)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.6269185, 0.4171387, 0.3713367, 1)
@@ -108,7 +108,7 @@ theme_override_font_sizes/font_size = 55
 theme_override_styles/normal = SubResource("StyleBoxTexture_fu7sn")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_jix8l")
 theme_override_styles/hover = SubResource("StyleBoxTexture_jix8l")
-text = "EXIT"
+text = "QUIT"
 
 [node name="Panel" type="Panel" parent="." unique_id=600317187]
 layout_mode = 1
@@ -173,7 +173,7 @@ metadata/_edit_use_anchors_ = true
 [node name="HScrollBar" type="HScrollBar" parent="Panel/MarginContainer/NinePatchRect/Control/VBoxContainer/Volume" unique_id=1552539258]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="Panel/MarginContainer/NinePatchRect" unique_id=1911476124]
+[node name="exit_settings" type="Button" parent="Panel/MarginContainer/NinePatchRect" unique_id=1911476124]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 1
 anchors_preset = -1
@@ -203,3 +203,8 @@ texture = ExtResource("7_oa1go")
 region_rect = Rect2(11, 8, 58, 16)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1458655345]
+
+[connection signal="pressed" from="MarginContainer2/NinePatchRect/MainButtons/Start" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MarginContainer2/NinePatchRect/MainButtons/Setting" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="MarginContainer2/NinePatchRect/MainButtons/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/NinePatchRect/exit_settings" to="." method="_on_exit_settings_pressed"]
