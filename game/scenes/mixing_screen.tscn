@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dgqv7gb1631vy" path="res://assets/ui/Mixing screen/width_1000.png" id="2_01hhd"]
 [ext_resource type="PackedScene" uid="uid://dbjcf5il6gkko" path="res://scenes/potion_row.tscn" id="3_01hhd"]
 [ext_resource type="FontFile" uid="uid://bbg3opv6btx5t" path="res://assets/fonts/Martires Demi Bold.otf" id="3_dp8sl"]
-[ext_resource type="PackedScene" uid="uid://rm6wc6jgl283" path="res://scenes/ingredient_slot.tscn" id="4_x2ra6"]
+[ext_resource type="PackedScene" uid="uid://clbmbugatfdm0" path="res://scenes/ingredient_slot.tscn" id="4_x2ra6"]
 [ext_resource type="Texture2D" uid="uid://c4ovculm6uosb" path="res://assets/ui/Mixing screen/width_150 (16).png" id="5_an481"]
 [ext_resource type="Texture2D" uid="uid://7t7h0jmsw52k" path="res://assets/ui/Mixing screen/width_150 (8).png" id="5_kynvl"]
 [ext_resource type="Texture2D" uid="uid://j7lo1a3ktamn" path="res://assets/ui/Mixing screen/width_92.png" id="6_rhges"]
