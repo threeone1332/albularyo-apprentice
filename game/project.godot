@@ -24,8 +24,7 @@ GlobalGameState="*uid://bp8r8busn7f4x"
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/mode=3
-window/stretch/mode="viewport"
-window/stretch/aspect="expand"
+window/stretch/mode="canvas_items"
 mouse_cursor/custom_image="uid://dhqlc7fgi1q4r"
 
 [editor_plugins]
