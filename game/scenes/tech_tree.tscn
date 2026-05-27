@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://1quq2gd3ngqt"]
+
+[ext_resource type="Texture2D" uid="uid://bd2xj8nya3clt" path="res://assets/ui/Tech tree/TECH TREE-2.png" id="1_nnlgh"]
+[ext_resource type="Texture2D" uid="uid://bs0l1xp2v1w53" path="res://assets/ui/Tech tree/crow.png" id="2_qqldu"]
+[ext_resource type="Texture2D" uid="uid://bnjwugsydc8mc" path="res://assets/ui/Tech tree/cat.png" id="3_7ts6d"]
+[ext_resource type="Texture2D" uid="uid://draa421gghrlj" path="res://assets/ui/Tech tree/sparkle.png" id="4_yojnh"]
+[ext_resource type="Texture2D" uid="uid://1m22pidsoghu" path="res://assets/ui/Tech tree/bat.png" id="5_md45c"]
+[ext_resource type="Texture2D" uid="uid://b5wu0w71kh83o" path="res://assets/ui/Tech tree/bag.png" id="6_q184u"]
+[ext_resource type="Texture2D" uid="uid://dn8ojvmdbwn4n" path="res://assets/ui/Tech tree/exit.png" id="7_5kh1x"]
+
+[node name="TechTree" type="Control" unique_id=1150049526]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1636362881]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_nnlgh")
+
+[node name="crow" type="TextureButton" parent="." unique_id=1662257833]
+layout_mode = 0
+offset_left = 694.0
+offset_top = 84.0
+offset_right = 1296.0
+offset_bottom = 384.0
+texture_normal = ExtResource("2_qqldu")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="cat" type="TextureButton" parent="." unique_id=1664675027]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 254.0
+offset_right = 553.0
+offset_bottom = 506.0
+texture_normal = ExtResource("3_7ts6d")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="sparkle" type="TextureButton" parent="." unique_id=597930799]
+layout_mode = 0
+offset_left = 1196.0
+offset_top = 550.0
+offset_right = 1769.0
+offset_bottom = 829.0
+texture_normal = ExtResource("4_yojnh")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="bat" type="TextureButton" parent="." unique_id=901106160]
+layout_mode = 0
+offset_left = 534.0
+offset_top = 526.0
+offset_right = 1044.0
+offset_bottom = 979.0
+texture_normal = ExtResource("5_md45c")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="bag" type="TextureButton" parent="." unique_id=1916718491]
+layout_mode = 0
+offset_left = 78.0
+offset_top = 780.0
+offset_right = 440.0
+offset_bottom = 979.0
+texture_normal = ExtResource("6_q184u")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="exit" type="TextureButton" parent="." unique_id=522631381]
+layout_mode = 0
+offset_left = 1786.0
+offset_top = 27.0
+offset_right = 1883.0
+offset_bottom = 129.0
+texture_normal = ExtResource("7_5kh1x")
+ignore_texture_size = true
+stretch_mode = 0
