@@ -6,6 +6,7 @@
 #include "mixing_screen.h"
 #include "game_loading_screen.h"
 #include "main_menu.h"
+#include "tech_tree.h"
 #include <gdextension_interface.h>
 #include <godot_cpp/core/defs.hpp>
 #include <godot_cpp/godot.hpp>
@@ -21,6 +22,7 @@ void initialize_albularyo_module(ModuleInitializationLevel p_level) {
     ClassDB::register_class<MixingScreen>();
     ClassDB::register_class<GameLoadingScreen>();
     ClassDB::register_class<MainMenu>();
+    ClassDB::register_class<TechTree>();
 }
 
 void uninitialize_albularyo_module(ModuleInitializationLevel p_level) {}
