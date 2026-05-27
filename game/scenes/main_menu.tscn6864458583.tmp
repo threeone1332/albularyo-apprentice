@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://cjbnjt4newjg8"]
 
+[ext_resource type="Script" uid="uid://yxw0q4sckdw" path="res://scripts/main_menu.gd" id="1_wu84c"]
 [ext_resource type="Texture2D" uid="uid://cgojjx8fa48vu" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/UI Big Play Button.png" id="2_7vrkn"]
 [ext_resource type="Texture2D" uid="uid://7lqee2x74ear" path="res://assets/ui/Main Menu/opening_screen.png" id="2_fu7sn"]
 [ext_resource type="FontFile" uid="uid://clux6cekpic0m" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="2_jix8l"]
@@ -17,14 +18,6 @@ region_rect = Rect2(3, 2, 90, 27)
 texture = ExtResource("2_7vrkn")
 region_rect = Rect2(99, 4, 90, 25)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jk1qb"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5dd4i"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lgwnu"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_flqon"]
-
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_oa1go"]
 texture = ExtResource("6_rtw2f")
 region_rect = Rect2(839, 5, 18, 20)
@@ -33,12 +26,14 @@ region_rect = Rect2(839, 5, 18, 20)
 texture = ExtResource("8_tbmy8")
 region_rect = Rect2(838.9809, 5.007865, 18.01178, 20.002514)
 
-[node name="Main Menu" type="MainMenu" unique_id=379119680]
+[node name="Main Menu" type="Control" unique_id=166279017]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_wu84c")
 
 [node name="MarginContainer2" type="MarginContainer" parent="." unique_id=804483979]
 layout_mode = 1
@@ -106,18 +101,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
-
-[node name="ClickOutsideDetector" type="Button" parent="Panel" unique_id=2021660345]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_jk1qb")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_5dd4i")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_lgwnu")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_flqon")
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=1076067785]
 layout_mode = 1
@@ -187,6 +170,7 @@ text = "Music  Volume"
 [node name="MusicSlider" type="HSlider" parent="Panel/SliderPaddingContainer/VBoxContainer/MusicRow" unique_id=199062454]
 layout_mode = 2
 size_flags_horizontal = 3
+exp_edit = true
 
 [node name="SFXRow" type="VBoxContainer" parent="Panel/SliderPaddingContainer/VBoxContainer" unique_id=1806227642]
 layout_mode = 2
@@ -202,6 +186,7 @@ text = "SFX  Volume"
 [node name="SFXSlider" type="HSlider" parent="Panel/SliderPaddingContainer/VBoxContainer/SFXRow" unique_id=202300902]
 layout_mode = 2
 size_flags_horizontal = 3
+exp_edit = true
 
 [node name="settings_text" type="NinePatchRect" parent="Panel" unique_id=1894562116]
 layout_mode = 0
