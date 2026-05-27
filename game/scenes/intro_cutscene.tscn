@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://ccv780w1dgvjx"]
 
-[ext_resource type="Script" uid="uid://bf80mw4molpwr" path="res://scripts/intro_cutscene.gd" id="1_juow0"]
 [ext_resource type="FontFile" uid="uid://b3w8qw1vuyjm1" path="res://assets/fonts/FontsFree-Net-Art-nuvo.ttf" id="1_vuduy"]
 
 [sub_resource type="Animation" id="Animation_juow0"]
@@ -40,8 +39,7 @@ _data = {
 &"fade_in_out": SubResource("Animation_3438a")
 }
 
-[node name="Intro Cutscene" type="Node2D" unique_id=48231942]
-script = ExtResource("1_juow0")
+[node name="Intro Cutscene" type="IntroCutscene" unique_id=1022013474]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1333449201]
 
