@@ -32,6 +32,9 @@ private:
     float get_demand_modifier() const;
     int get_current_potion_demand() const;
 
+    int player_inventory[8];
+    int player_potions[7];
+
 protected:
     static void _bind_methods();
  
@@ -54,10 +57,11 @@ public:
     float get_price() const;
 
         //demand
-    float calculate_sell_chance(float demand, float price);
+    float calculate_sell_chance(float demand, float price) const;
     int get_sell_chance_percent() const;
     bool attempt_sale();
-
+    bool has_featured_stock() const;
+    
         //featured
     void set_featured_potion_id(int id);
     int get_featured_potion_id() const;
@@ -72,4 +76,14 @@ public:
         //ending
     void check_phase_progression();
     bool check_win_condition() const;
+
+        //inventory
+    int get_ingredient_count(int id) const;
+    void set_ingredient_count(int id, int amount);
+    void add_ingredient(int id, int amount);
+    int get_potion_count(int id) const;
+    void set_potion_count(int id, int amount);
+    void add_potion(int id, int amount);
+    void start_new_day();
+    void gather_phase_resources();
 };

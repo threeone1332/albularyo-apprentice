@@ -5,6 +5,7 @@
 #include <godot_cpp/classes/texture_button.hpp>
 #include <godot_cpp/classes/label.hpp>
 #include <godot_cpp/templates/vector.hpp>
+#include "GameState.h"
 
 namespace godot {
 
@@ -26,6 +27,7 @@ private:
     int player_inventory[8];      // Ingredients 0-7
     int player_potions[7];        // Potions 0-6
     int planned_craft_counts[7];  // Counter tracking values for [-] [1x] [+]
+    GameState* game_state;
 
     Vector<PotionRecipe> recipes;
 
@@ -52,6 +54,7 @@ public:
     void _on_close_pressed();
     void _on_quantity_changed(int potion_idx, int delta);
     void _on_brew_pressed();
+    void _on_feature_potion_pressed(int potion_idx);
 };
 
 }

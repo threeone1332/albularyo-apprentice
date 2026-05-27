@@ -1,13 +1,12 @@
 extends Control
 
-const PHASE_DURATION := 30.0
+const PHASE_DURATION := 15.0
 const SELL_INTERVAL := 1.0
 
-@onready var game_state = $GameState
+@onready var game_state = get_node("/root/GlobalGameState")
 
 @onready var money_label: Label = $MarginContainer/NinePatchRect/MoneyArea/Money/Label
 @onready var gain_label: Label = $MarginContainer/NinePatchRect/MoneyArea/GainLabel
-
 @onready var sale_feedback: Label = $SaleFeedback
 
 @onready var morning_icon: TextureRect = $MarginContainer/NinePatchRect/Time/Morning
@@ -25,10 +24,22 @@ const SELL_INTERVAL := 1.0
 @onready var tech_tree_button: Button = $"MarginContainer/NinePatchRect/Tech_tree_margin/Tech Tree"
 @onready var mixing_button: Button = $MarginContainer/NinePatchRect/Mixing_margin/Mixing
 
+@onready var potion_icon: NinePatchRect = $MarginContainer/NinePatchRect/Feature/NinePatchRect/MarginContainer/MarginContainer/potionandname/NinePatchRect/MarginContainer/picofpotion
+
 var phase_timer := 0.0
 var sell_timer := 0.0
 var feedback_id := 0
 var gain_id := 0
+
+var potion_icon_regions := [
+	Rect2(20, 20, 200, 200), # Lunas ng Sigla
+	Rect2(260, 20, 200, 195),    # Lunas ng Lihim
+	Rect2(500, 20, 200, 195),    # Lunas ng Linaw
+	Rect2(740, 20, 150, 146),    # Lunas ng Himbing
+	Rect2(930, 20, 200, 200),    # Tinctura ng Bilis
+	Rect2(1170, 20, 200, 200),    # Lason
+	Rect2(1410, 20, 200, 200)     # Lunas ng Diwa
+]
 
 func _ready() -> void:
 	sale_feedback.visible = false
@@ -50,7 +61,16 @@ func _process(delta: float) -> void:
 
 	if sell_timer >= SELL_INTERVAL:
 		sell_timer = 0.0
+		_attempt_sale_tick()
 
+	if phase_timer >= PHASE_DURATION:
+		phase_timer = 0.0
+		_advance_phase_tick()
+
+func _attempt_sale_tick() -> void:
+	if not game_state.has_featured_stock():
+		_show_sale_feedback("NO POTION", false)
+	else:
 		var sold: bool = game_state.attempt_sale()
 
 		if sold:
@@ -60,13 +80,22 @@ func _process(delta: float) -> void:
 		else:
 			_show_sale_feedback("NO SALE", false)
 
-		_update_ui()
+	_update_ui()
 
-	if phase_timer >= PHASE_DURATION:
-		phase_timer = 0.0
-		game_state.advance_phase()
-		_update_ui()
-		_update_time_icons()
+func _advance_phase_tick() -> void:
+	var old_gold := int(game_state.get_gold())
+
+	game_state.advance_phase()
+
+	var new_gold := int(game_state.get_gold())
+	var difference := new_gold - old_gold
+
+	if difference < 0:
+		_show_sale_feedback("ADVENTURERS PAID", false)
+		_show_gold_loss(abs(difference))
+
+	_update_ui()
+	_update_time_icons()
 
 func _on_decrease_pressed() -> void:
 	game_state.set_price(game_state.get_price() - 1)
@@ -81,6 +110,8 @@ func _update_ui() -> void:
 	price_label.text = str(int(game_state.get_price()))
 	sell_chance_label.text = str(game_state.get_sell_chance_percent()) + "% PER SECOND"
 	potion_name_label.text = game_state.get_featured_potion_name()
+	var potion_id: int = game_state.get_featured_potion_id()
+	potion_icon.region_rect = potion_icon_regions[potion_id]
 
 func _update_time_icons() -> void:
 	var phase: String = game_state.get_current_phase()
@@ -126,7 +157,7 @@ func _show_gold_gain(amount: int) -> void:
 	gain_label.add_theme_color_override("font_color", Color.html("#D39B38"))
 	gain_label.modulate.a = 1.0
 	gain_label.scale = Vector2(1.15, 1.15)
-	
+
 	var start_pos := gain_label.position
 	var end_pos := start_pos + Vector2(18, -35)
 
@@ -136,6 +167,33 @@ func _show_gold_gain(amount: int) -> void:
 	tween.tween_property(gain_label, "position", end_pos, 1.0)
 	tween.tween_property(gain_label, "modulate:a", 0.0, 1.0)
 	tween.tween_property(gain_label, "scale", Vector2(1.35, 1.35), 0.25)
+
+	await tween.finished
+
+	if current_id == gain_id:
+		gain_label.text = ""
+		gain_label.position = start_pos
+		gain_label.modulate.a = 1.0
+		gain_label.scale = Vector2.ONE
+
+func _show_gold_loss(amount: int) -> void:
+	gain_id += 1
+	var current_id := gain_id
+
+	gain_label.text = "-" + str(amount)
+	gain_label.add_theme_color_override("font_color", Color.html("#8A5A52"))
+	gain_label.modulate.a = 1.0
+	gain_label.scale = Vector2(1.5, 1.5)
+
+	var start_pos := gain_label.position
+	var end_pos := start_pos + Vector2(18, -35)
+
+	var tween := create_tween()
+	tween.tween_interval(0.15)
+	tween.set_parallel(true)
+	tween.tween_property(gain_label, "position", end_pos, 1.0)
+	tween.tween_property(gain_label, "modulate:a", 0.0, 1.0)
+	tween.tween_property(gain_label, "scale", Vector2(2.0, 2.0), 0.22)
 
 	await tween.finished
 

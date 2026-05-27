@@ -77,6 +77,18 @@ theme_override_fonts/font = ExtResource("7_kb0d4")
 theme_override_font_sizes/font_size = 30
 text = "2X"
 
+[node name="FeatureButton" type="TextureButton" parent="PotionVisuals/PotionIcon" unique_id=1279129922]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+
 [node name="PotionName" type="Label" parent="PotionVisuals" unique_id=2130170995]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.38431373, 0.24313726, 0.24313726, 1)

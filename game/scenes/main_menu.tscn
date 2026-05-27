@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cjbnjt4newjg8"]
 
-[ext_resource type="Script" uid="uid://yxw0q4sckdw" path="res://scripts/main_menu.gd" id="1_wu84c"]
+[ext_resource type="Script" uid="uid://82hfkboo0ewm" path="res://scripts/main_menu.gd" id="1_wu84c"]
 [ext_resource type="Texture2D" uid="uid://cgojjx8fa48vu" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/UI Big Play Button.png" id="2_7vrkn"]
 [ext_resource type="Texture2D" uid="uid://7lqee2x74ear" path="res://assets/ui/Main Menu/opening_screen.png" id="2_fu7sn"]
 [ext_resource type="FontFile" uid="uid://clux6cekpic0m" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="2_jix8l"]
