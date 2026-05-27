@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://bec5mps3luj7r"]
 
 [ext_resource type="Texture2D" uid="uid://bw6kilrc7jm1k" path="res://assets/ui/Main Screen/main_screen_background.png" id="1_c7dat"]
-[ext_resource type="Script" uid="uid://deduh7v5oa67j" path="res://scripts/main_screen.gd" id="1_rjk0d"]
 [ext_resource type="Texture2D" uid="uid://dyp52dntr1dr4" path="res://assets/ui/Main Screen/morning_icon.png" id="2_c7dat"]
 [ext_resource type="Texture2D" uid="uid://ry3ei4osqvmb" path="res://assets/ui/Main Screen/noon_icon.png" id="3_3qgpa"]
 [ext_resource type="FontFile" uid="uid://b3w8qw1vuyjm1" path="res://assets/fonts/FontsFree-Net-Art-nuvo.ttf" id="3_7a4el"]
@@ -17,7 +16,7 @@
 [ext_resource type="FontFile" uid="uid://clux6cekpic0m" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="13_3qsiq"]
 [ext_resource type="Texture2D" uid="uid://cgojjx8fa48vu" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/UI Big Play Button.png" id="14_7087c"]
 [ext_resource type="Texture2D" uid="uid://s818x6sucqov" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/emojis-free/emoji style ui/Inventory_Blocks_Spritesheet.png" id="15_do8p6"]
-[ext_resource type="Texture2D" uid="uid://cs0g3w7tc3b5d" path="res://assets/ui/Mixing screen/potion_sprite_sheet.png" id="16_c7dat"]
+[ext_resource type="Texture2D" uid="uid://dcahebo78kl4i" path="res://assets/ui/Mixing screen/potion_sprite_sheet.png" id="16_c7dat"]
 [ext_resource type="Texture2D" uid="uid://cakesrmx2b8qr" path="res://assets/ui/Main Screen/desk.png" id="17_30ndx"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c7dat"]
@@ -56,14 +55,12 @@ texture = ExtResource("10_c7dat")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6lq5t"]
 texture = ExtResource("11_21wo0")
 
-[node name="Main_screen" type="Control" unique_id=1356609430]
-layout_mode = 3
+[node name="Main_screen" type="MainScreen" unique_id=1981475378]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_rjk0d")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=730408955]
 layout_mode = 1
