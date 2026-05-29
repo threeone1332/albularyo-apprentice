@@ -9,6 +9,7 @@
 #include "tech_tree.h"
 #include "intro_cutscene.h"
 #include "main_screen.h"
+#include "settings.h"
 #include <gdextension_interface.h>
 #include <godot_cpp/core/defs.hpp>
 #include <godot_cpp/godot.hpp>
@@ -17,6 +18,7 @@ using namespace godot;
 
 void initialize_albularyo_module(ModuleInitializationLevel p_level) {
     if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) return;
+
     ClassDB::register_class<GameState>();
     ClassDB::register_class<Potion>();
     ClassDB::register_class<Ingredient>();
@@ -27,6 +29,7 @@ void initialize_albularyo_module(ModuleInitializationLevel p_level) {
     ClassDB::register_class<TechTree>();
     ClassDB::register_class<IntroCutscene>();
     ClassDB::register_class<MainScreen>();
+    ClassDB::register_class<Settings>();
 }
 
 void uninitialize_albularyo_module(ModuleInitializationLevel p_level) {}

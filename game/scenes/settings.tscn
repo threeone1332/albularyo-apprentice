@@ -6,13 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dm22iehvy7g21" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="5_1g033"]
 [ext_resource type="Texture2D" uid="uid://hnu7ebm0ee21" path="res://assets/ui/Main Menu/HOVEREDSprite sheet for Basic Pack.png" id="6_01roj"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6wm04"]
-texture = ExtResource("5_1g033")
-region_rect = Rect2(839, 5, 18, 20)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f4mfi"]
-texture = ExtResource("6_01roj")
-region_rect = Rect2(838.9809, 5.007865, 18.01178, 20.002514)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_es4n0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gis3k"]
 atlas = ExtResource("4_es4n0")
@@ -22,8 +16,16 @@ region = Rect2(11.015, 8.006, 58.011, 16.932)
 atlas = ExtResource("5_1g033")
 region = Rect2(772.9654, 67.99667, 22.026978, 24.002625)
 
-[node name="Settings" type="CanvasLayer" unique_id=628668099]
-process_mode = 2
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6wm04"]
+texture = ExtResource("5_1g033")
+region_rect = Rect2(839, 5, 18, 20)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f4mfi"]
+texture = ExtResource("6_01roj")
+region_rect = Rect2(838.9809, 5.007865, 18.01178, 20.002514)
+
+[node name="Settings" type="Settings" unique_id=1824771096]
+process_mode = 3
 
 [node name="DimBackground" type="ColorRect" parent="." unique_id=1131986052]
 anchors_preset = 15
@@ -32,13 +34,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.39215687)
-
-[node name="ClickOutsideDetector" type="TextureButton" parent="." unique_id=544133539]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="Panel" type="Panel" parent="." unique_id=482545468]
 anchors_preset = 8
@@ -52,6 +47,7 @@ offset_right = 463.0
 offset_bottom = 490.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_es4n0")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="Panel" unique_id=1759828352]
 layout_mode = 0
@@ -59,27 +55,6 @@ offset_right = 926.0
 offset_bottom = 980.0
 texture = ExtResource("1_f4mfi")
 region_rect = Rect2(138.92305, 12.006497, 106.14786, 121.993195)
-
-[node name="exit_settings" type="Button" parent="Panel" unique_id=979116772]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.823
-anchor_top = 0.055000003
-anchor_right = 0.93100005
-anchor_bottom = 0.157
-offset_left = 51.901855
-offset_top = -74.9
-offset_right = 147.58185
-offset_bottom = 21.020004
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.69, 0.69)
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_styles/normal = SubResource("StyleBoxTexture_6wm04")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_f4mfi")
-theme_override_styles/hover = SubResource("StyleBoxTexture_f4mfi")
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=2130146353]
 layout_mode = 1
@@ -162,7 +137,7 @@ texture_normal = SubResource("AtlasTexture_es4n0")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="DesktopButton" type="TextureButton" parent="Panel/MarginContainer/VBoxContainer/ButtonContainer" unique_id=1255370662]
+[node name="RestartButton" type="TextureButton" parent="Panel/MarginContainer/VBoxContainer/ButtonContainer" unique_id=1255370662]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -170,3 +145,26 @@ size_flags_vertical = 4
 texture_normal = SubResource("AtlasTexture_es4n0")
 ignore_texture_size = true
 stretch_mode = 5
+
+[node name="exit_settings" type="Button" parent="." unique_id=979116772]
+process_mode = 2
+custom_minimum_size = Vector2(100, 100)
+anchors_preset = -1
+offset_left = 1339.0
+offset_top = 35.0
+offset_right = 1439.0
+offset_bottom = 135.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxTexture_6wm04")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_f4mfi")
+theme_override_styles/hover = SubResource("StyleBoxTexture_f4mfi")
+
+[connection signal="value_changed" from="Panel/MarginContainer/VBoxContainer/SliderPaddingContainer/MusicRow/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="Panel/MarginContainer/VBoxContainer/SliderPaddingContainer/SFXRow/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/ButtonContainer/MainMenuButton" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/ButtonContainer/ResumeButton" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/ButtonContainer/RestartButton" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="exit_settings" to="." method="_on_resume_pressed"]
