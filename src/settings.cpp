@@ -2,6 +2,7 @@
 #include <godot_cpp/classes/scene_tree.hpp>
 #include <godot_cpp/classes/viewport.hpp>
 #include <godot_cpp/classes/audio_server.hpp>
+#include <godot_cpp/classes/base_button.hpp>
 #include <godot_cpp/variant/utility_functions.hpp>
 
 using namespace godot;
@@ -13,12 +14,12 @@ Settings::Settings() {
 Settings::~Settings() {}
 
 void Settings::_bind_methods() {
+    ClassDB::bind_method(D_METHOD("open_settings_menu"), &Settings::open_settings_menu);
+
+    // Regular UI Bindings
     ClassDB::bind_method(D_METHOD("_on_resume_pressed"), &Settings::_on_resume_pressed);
     ClassDB::bind_method(D_METHOD("_on_main_menu_pressed"), &Settings::_on_main_menu_pressed);
-
-    // Updated method binding registration name
     ClassDB::bind_method(D_METHOD("_on_restart_pressed"), &Settings::_on_restart_pressed);
-
     ClassDB::bind_method(D_METHOD("_on_music_slider_value_changed", "value"), &Settings::_on_music_slider_value_changed);
     ClassDB::bind_method(D_METHOD("_on_sfx_slider_value_changed", "value"), &Settings::_on_sfx_slider_value_changed);
 }
@@ -27,6 +28,35 @@ void Settings::_ready() {
     set_process_unhandled_input(true);
     set_process_mode(PROCESS_MODE_ALWAYS);
     set_visible(false);
+
+    set_process(true);
+}
+
+void Settings::_process(double delta) {
+    try_bind_settings_button();
+}
+
+void Settings::try_bind_settings_button() {
+    SceneTree *tree = get_tree();
+    if (!tree) return;
+
+    Node *current_scene = tree->get_current_scene();
+    if (!current_scene) return;
+
+    BaseButton *btn = cast_to<BaseButton>(current_scene->find_child("SettingsButton", true, false));
+
+    if (btn) {
+        if (!btn->is_connected("pressed", Callable(this, "open_settings_menu"))) {
+            btn->connect("pressed", Callable(this, "open_settings_menu"));
+            UtilityFunctions::print("C++ Safely Hooked TextureButton inside: ", current_scene->get_name());
+        }
+
+        set_process(false);
+    }
+}
+
+void Settings::open_settings_menu() {
+    set_paused(true);
 }
 
 void Settings::_unhandled_input(const Ref<InputEvent> &event) {
@@ -51,15 +81,9 @@ void Settings::_on_main_menu_pressed() {
     get_tree()->change_scene_to_file("res://scenes/main_menu.tscn");
 }
 
-// Renamed implementation function to match restart logic behavior
 void Settings::_on_restart_pressed() {
-    // 1. Unpause the engine processing loop first!
     get_tree()->set_pause(false);
-
-    // 2. Hide the pause menu layer interface
     set_paused(false);
-
-    // 3. Reload the currently active world map file from frame 0
     get_tree()->reload_current_scene();
 }
 

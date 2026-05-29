@@ -28,6 +28,15 @@
 [ext_resource type="Texture2D" uid="uid://37iymlgbtlj6" path="res://assets/ui/Mixing screen/Pressed State/Close_Button_Pressed.png" id="26_smwwv"]
 [ext_resource type="Texture2D" uid="uid://c0eeh1uqtxnhl" path="res://assets/ui/Mixing screen/Brew_button.png" id="27_s1xb8"]
 [ext_resource type="Texture2D" uid="uid://xn3j7b2crstr" path="res://assets/ui/Mixing screen/Pressed State/Brew_button_Pressed.png" id="28_cjahw"]
+[ext_resource type="Texture2D" uid="uid://dm22iehvy7g21" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="29_twubj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_twubj"]
+atlas = ExtResource("29_twubj")
+region = Rect2(645.054, 67.986, 22.889, 24.043)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ntwlg"]
+atlas = ExtResource("29_twubj")
+region = Rect2(677.007, 70.00832, 22.00177, 22.001442)
 
 [node name="MixingScreen" type="MixingScreen" unique_id=1334957587]
 anchors_preset = 15
@@ -434,6 +443,23 @@ grow_vertical = 0
 scale = Vector2(0.2, 0.2)
 texture_normal = ExtResource("27_s1xb8")
 texture_pressed = ExtResource("28_cjahw")
+
+[node name="SettingsButton" type="TextureButton" parent="." unique_id=883896860]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 24.275002
+anchor_right = 2.7250001
+anchor_bottom = 26.550001
+offset_left = -942.0
+offset_top = -25246.002
+offset_right = -5183.6675
+offset_bottom = -27672.67
+scale = Vector2(3, 3)
+texture_normal = SubResource("AtlasTexture_twubj")
+texture_pressed = SubResource("AtlasTexture_ntwlg")
+ignore_texture_size = true
+stretch_mode = 5
 
 [editable path="BookBackground/MgaSangkapContainer/LeftPageContent/IngredientsList/IngredientRow"]
 [editable path="BookBackground/MgaSangkapContainer/LeftPageContent/IngredientsList/IngredientRow2"]

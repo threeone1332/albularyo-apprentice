@@ -55,6 +55,14 @@ texture = ExtResource("10_c7dat")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6lq5t"]
 texture = ExtResource("11_21wo0")
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_rjk0d"]
+atlas = ExtResource("5_sjiej")
+region = Rect2(645.054, 67.986, 22.889, 24.043)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c7dat"]
+atlas = ExtResource("5_sjiej")
+region = Rect2(677.007, 70.00832, 22.00177, 22.001442)
+
 [node name="Main_screen" type="MainScreen" unique_id=1981475378]
 anchors_preset = 15
 anchor_right = 1.0
@@ -394,3 +402,20 @@ offset_right = 753.0
 offset_bottom = 779.0
 theme_override_fonts/font = ExtResource("7_3qgpa")
 theme_override_font_sizes/font_size = 200
+
+[node name="SettingsButton" type="TextureButton" parent="." unique_id=166778730]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 24.275002
+anchor_right = 2.7250001
+anchor_bottom = 26.550001
+offset_left = -942.0
+offset_top = -25246.002
+offset_right = -5183.6675
+offset_bottom = -27672.67
+scale = Vector2(3, 3)
+texture_normal = SubResource("AtlasTexture_rjk0d")
+texture_pressed = SubResource("AtlasTexture_c7dat")
+ignore_texture_size = true
+stretch_mode = 5

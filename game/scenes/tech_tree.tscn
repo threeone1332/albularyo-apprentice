@@ -20,6 +20,15 @@
 [ext_resource type="FontFile" uid="uid://b3w8qw1vuyjm1" path="res://assets/fonts/FontsFree-Net-Art-nuvo.ttf" id="13_8mk4n"]
 [ext_resource type="Texture2D" uid="uid://ds5xcqpsycb5w" path="res://assets/ui/Tech tree/coinholder.png" id="14_ovppy"]
 [ext_resource type="Texture2D" uid="uid://ceqagqj4rgp2w" path="res://assets/ui/Tech tree/p15.png" id="15_2qj3x"]
+[ext_resource type="Texture2D" uid="uid://dm22iehvy7g21" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="21_wfr7k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8w1sl"]
+atlas = ExtResource("21_wfr7k")
+region = Rect2(645.054, 67.986, 22.889, 24.043)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wfr7k"]
+atlas = ExtResource("21_wfr7k")
+region = Rect2(677.007, 70.00832, 22.00177, 22.001442)
 
 [node name="TechTree" type="TechTree" unique_id=983492638]
 offset_right = 40.0
@@ -88,10 +97,10 @@ stretch_mode = 0
 
 [node name="bag" type="TextureButton" parent="." unique_id=1916718491]
 layout_mode = 0
-offset_left = -11.0
-offset_top = 765.0
-offset_right = 473.0
-offset_bottom = 992.0
+offset_left = -13.0
+offset_top = 703.0
+offset_right = 471.0
+offset_bottom = 930.0
 texture_normal = ExtResource("11_ovppy")
 texture_pressed = ExtResource("15_2qj3x")
 texture_hover = ExtResource("12_xk7vt")
@@ -143,3 +152,20 @@ theme_override_font_sizes/font_size = 38
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="SettingsButton" type="TextureButton" parent="." unique_id=816747110]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 24.275002
+anchor_right = 2.7250001
+anchor_bottom = 26.550001
+offset_left = -2.0
+offset_top = -6.1035156e-05
+offset_right = -60.66667
+offset_bottom = -60.666687
+scale = Vector2(3, 3)
+texture_normal = SubResource("AtlasTexture_8w1sl")
+texture_pressed = SubResource("AtlasTexture_wfr7k")
+ignore_texture_size = true
+stretch_mode = 5
