@@ -143,7 +143,7 @@ void TechTree::buy_upgrade(String upgrade_id) {
 
     // Check if the player has enough gold.
     if (game_state->get_gold() < cost) {
-        show_message(String("Not enough gold for ") + upgrade_name + ".");
+        show_message(String("Cannot purchase ") + upgrade_name + ".");
         return;
     }
 
@@ -192,9 +192,10 @@ void TechTree::update_money_label() {
     if (!money_label) return;
 
     if (game_state) {
-        money_label->set_text(String("Gold: ") + String::num_int64(game_state->get_gold()));
+        // Show only the gold amount because the coin art already gives the context.
+        money_label->set_text(String::num_int64(game_state->get_gold()));
     } else {
-        money_label->set_text("Gold: --");
+        money_label->set_text("--");
     }
 }
 
