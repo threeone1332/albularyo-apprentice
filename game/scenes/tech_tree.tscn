@@ -8,9 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://b6uaxl6spr3ad" path="res://assets/ui/Tech tree/raw:unclicked/11.png" id="6_md45c"]
 [ext_resource type="Texture2D" uid="uid://dbuw8jlafm0md" path="res://assets/ui/Tech tree/hovered/2.png" id="7_q184u"]
 [ext_resource type="Texture2D" uid="uid://ccc1x335i2jnj" path="res://assets/ui/Mixing screen/width_800.png" id="7_qqldu"]
+[ext_resource type="Texture2D" uid="uid://cphn2cqmjeio8" path="res://assets/ui/Tech tree/111.png" id="8_5kh1x"]
 [ext_resource type="Texture2D" uid="uid://37iymlgbtlj6" path="res://assets/ui/Mixing screen/Pressed State/Close_Button_Pressed.png" id="8_7ts6d"]
-[ext_resource type="Texture2D" uid="uid://d2o4sf5mx0nr2" path="res://assets/ui/Tech tree/raw:unclicked/batsss.png" id="9_ktxgv"]
-[ext_resource type="Texture2D" uid="uid://bw3p61gbcyvr7" path="res://assets/ui/Tech tree/hovered/8.png" id="10_ktxgv"]
+[ext_resource type="Texture2D" uid="uid://bp82ejo25c2nl" path="res://assets/ui/Tech tree/222.png" id="9_ktxgv"]
 [ext_resource type="Texture2D" uid="uid://boxamcogj2pac" path="res://assets/ui/Tech tree/raw:unclicked/9.png" id="11_ovppy"]
 [ext_resource type="Texture2D" uid="uid://cb5rmdo6b7yjl" path="res://assets/ui/Tech tree/hovered/10.png" id="12_xk7vt"]
 
@@ -65,14 +65,14 @@ texture_hover = ExtResource("7_q184u")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="bat" type="TextureButton" parent="." unique_id=901106160]
+[node name="bat" type="TextureButton" parent="." unique_id=1354800044]
 layout_mode = 0
-offset_left = 281.0
-offset_top = 490.0
-offset_right = 1322.0
-offset_bottom = 995.0
-texture_normal = ExtResource("9_ktxgv")
-texture_hover = ExtResource("10_ktxgv")
+offset_left = 511.0
+offset_top = 521.0
+offset_right = 1019.0
+offset_bottom = 1022.0
+texture_normal = ExtResource("8_5kh1x")
+texture_hover = ExtResource("9_ktxgv")
 ignore_texture_size = true
 stretch_mode = 0
 
