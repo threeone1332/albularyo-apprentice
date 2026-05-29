@@ -1,0 +1,172 @@
+[gd_scene format=3 uid="uid://l43fipvaq8bs"]
+
+[ext_resource type="Texture2D" uid="uid://b0k6o3anq4iwo" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Setting menu.png" id="1_f4mfi"]
+[ext_resource type="FontFile" uid="uid://clux6cekpic0m" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="2_am25x"]
+[ext_resource type="Texture2D" uid="uid://p1d47f1jprsx" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/UI Settings Buttons.png" id="4_es4n0"]
+[ext_resource type="Texture2D" uid="uid://dm22iehvy7g21" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="5_1g033"]
+[ext_resource type="Texture2D" uid="uid://hnu7ebm0ee21" path="res://assets/ui/Main Menu/HOVEREDSprite sheet for Basic Pack.png" id="6_01roj"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6wm04"]
+texture = ExtResource("5_1g033")
+region_rect = Rect2(839, 5, 18, 20)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f4mfi"]
+texture = ExtResource("6_01roj")
+region_rect = Rect2(838.9809, 5.007865, 18.01178, 20.002514)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gis3k"]
+atlas = ExtResource("4_es4n0")
+region = Rect2(11.015, 8.006, 58.011, 16.932)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_es4n0"]
+atlas = ExtResource("5_1g033")
+region = Rect2(772.9654, 67.99667, 22.026978, 24.002625)
+
+[node name="Settings" type="CanvasLayer" unique_id=628668099]
+process_mode = 2
+
+[node name="DimBackground" type="ColorRect" parent="." unique_id=1131986052]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.39215687)
+
+[node name="ClickOutsideDetector" type="TextureButton" parent="." unique_id=544133539]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="." unique_id=482545468]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -463.0
+offset_top = -490.0
+offset_right = 463.0
+offset_bottom = 490.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Panel" unique_id=1759828352]
+layout_mode = 0
+offset_right = 926.0
+offset_bottom = 980.0
+texture = ExtResource("1_f4mfi")
+region_rect = Rect2(138.92305, 12.006497, 106.14786, 121.993195)
+
+[node name="exit_settings" type="Button" parent="Panel" unique_id=979116772]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.823
+anchor_top = 0.055000003
+anchor_right = 0.93100005
+anchor_bottom = 0.157
+offset_left = 51.901855
+offset_top = -74.9
+offset_right = 147.58185
+offset_bottom = 21.020004
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.69, 0.69)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxTexture_6wm04")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_f4mfi")
+theme_override_styles/hover = SubResource("StyleBoxTexture_f4mfi")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=2130146353]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 70
+theme_override_constants/margin_top = 65
+theme_override_constants/margin_right = 70
+theme_override_constants/margin_bottom = 85
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer" unique_id=1447256361]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="settings_text" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer" unique_id=1740492348]
+custom_minimum_size = Vector2(4.64, 94.315)
+layout_mode = 2
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_gis3k")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SliderPaddingContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=1431183365]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 50
+
+[node name="MusicRow" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/SliderPaddingContainer" unique_id=2027486191]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="MusicLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/SliderPaddingContainer/MusicRow" unique_id=1854389193]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_am25x")
+theme_override_font_sizes/font_size = 42
+text = "Music  Volume"
+
+[node name="MusicSlider" type="HSlider" parent="Panel/MarginContainer/VBoxContainer/SliderPaddingContainer/MusicRow" unique_id=261541260]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SFXRow" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/SliderPaddingContainer" unique_id=814327434]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="SFXLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/SliderPaddingContainer/SFXRow" unique_id=984365547]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_am25x")
+theme_override_font_sizes/font_size = 42
+text = "SFX  Volume"
+
+[node name="SFXSlider" type="HSlider" parent="Panel/MarginContainer/VBoxContainer/SliderPaddingContainer/SFXRow" unique_id=1923113974]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ButtonContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=2060305829]
+layout_mode = 2
+theme_override_constants/separation = -6
+
+[node name="MainMenuButton" type="TextureButton" parent="Panel/MarginContainer/VBoxContainer/ButtonContainer" unique_id=1232058765]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = SubResource("AtlasTexture_es4n0")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="ResumeButton" type="TextureButton" parent="Panel/MarginContainer/VBoxContainer/ButtonContainer" unique_id=1819796276]
+custom_minimum_size = Vector2(400, 300)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = SubResource("AtlasTexture_es4n0")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="DesktopButton" type="TextureButton" parent="Panel/MarginContainer/VBoxContainer/ButtonContainer" unique_id=1255370662]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = SubResource("AtlasTexture_es4n0")
+ignore_texture_size = true
+stretch_mode = 5
