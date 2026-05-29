@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://bnw03l7nkbn3l"]
 
-[ext_resource type="Script" uid="uid://ca2j1lr2vwown" path="res://scenes/tech_tree.gd" id="1_7ts6d"]
 [ext_resource type="Texture2D" uid="uid://bd2xj8nya3clt" path="res://assets/ui/Tech tree/TECH TREE-2.png" id="1_nnlgh"]
 [ext_resource type="Texture2D" uid="uid://c2qk11kcyvl3l" path="res://assets/ui/Tech tree/crowws.png" id="3_yojnh"]
 [ext_resource type="Texture2D" uid="uid://un4msje08ppf" path="res://assets/ui/Tech tree/Untitled design.png" id="4_md45c"]
@@ -15,12 +14,9 @@
 [ext_resource type="Texture2D" uid="uid://boxamcogj2pac" path="res://assets/ui/Tech tree/raw:unclicked/9.png" id="11_ovppy"]
 [ext_resource type="Texture2D" uid="uid://cb5rmdo6b7yjl" path="res://assets/ui/Tech tree/hovered/10.png" id="12_xk7vt"]
 
-[node name="TechTree" type="Control" unique_id=882599207]
-layout_mode = 3
-anchors_preset = 0
+[node name="TechTree" type="TechTree" unique_id=983492638]
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("1_7ts6d")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1636362881]
 layout_mode = 1
@@ -104,14 +100,14 @@ stretch_mode = 0
 
 [node name="MoneyLabel" type="Label" parent="." unique_id=855914083]
 layout_mode = 0
-offset_left = 161.0
-offset_top = 118.0
-offset_right = 201.0
-offset_bottom = 141.0
+offset_left = 1427.0
+offset_top = 63.0
+offset_right = 1666.0
+offset_bottom = 224.0
 
 [node name="MessageLabel" type="Label" parent="." unique_id=1538788067]
 layout_mode = 0
-offset_left = 1218.0
-offset_top = 948.0
-offset_right = 1258.0
-offset_bottom = 971.0
+offset_left = 1414.0
+offset_top = 419.0
+offset_right = 1619.0
+offset_bottom = 517.0

@@ -1,5 +1,5 @@
 #include "register_types.h"
-#include "GameState.h"
+#include "Gamestate.h"
 #include "Potion.h"
 #include "Ingredient.h"
 #include "loading_screen.h"
@@ -9,7 +9,6 @@
 #include "tech_tree.h"
 #include "intro_cutscene.h"
 #include "main_screen.h"
-#include "shop_item_button.h"
 #include <gdextension_interface.h>
 #include <godot_cpp/core/defs.hpp>
 #include <godot_cpp/godot.hpp>
@@ -28,7 +27,6 @@ void initialize_albularyo_module(ModuleInitializationLevel p_level) {
     ClassDB::register_class<TechTree>();
     ClassDB::register_class<IntroCutscene>();
     ClassDB::register_class<MainScreen>();
-    ClassDB::register_class<ShopItemButton>();
 }
 
 void uninitialize_albularyo_module(ModuleInitializationLevel p_level) {}
