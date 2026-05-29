@@ -1,26 +1,29 @@
 [gd_scene format=3 uid="uid://bnw03l7nkbn3l"]
 
-[ext_resource type="Script" uid="uid://ca2j1lr2vwown" path="res://scenes/tech_tree.gd" id="1_7ts6d"]
-[ext_resource type="Texture2D" uid="uid://bd2xj8nya3clt" path="res://assets/ui/Tech tree/TECH TREE-2.png" id="1_nnlgh"]
+[ext_resource type="Texture2D" uid="uid://bo0eo35kaoefc" path="res://assets/ui/Tech tree/TECH TREE-3.png" id="1_ovppy"]
+[ext_resource type="Texture2D" uid="uid://dct81yu3jqp6l" path="res://assets/ui/Tech tree/p6.png" id="3_64os6"]
 [ext_resource type="Texture2D" uid="uid://c2qk11kcyvl3l" path="res://assets/ui/Tech tree/crowws.png" id="3_yojnh"]
 [ext_resource type="Texture2D" uid="uid://un4msje08ppf" path="res://assets/ui/Tech tree/Untitled design.png" id="4_md45c"]
 [ext_resource type="Texture2D" uid="uid://cfo8haf8g7rxo" path="res://assets/ui/Tech tree/raw:unclicked/5.png" id="5_q184u"]
 [ext_resource type="Texture2D" uid="uid://boft6lti1r08e" path="res://assets/ui/Tech tree/hovered/6.png" id="6_5kh1x"]
 [ext_resource type="Texture2D" uid="uid://b6uaxl6spr3ad" path="res://assets/ui/Tech tree/raw:unclicked/11.png" id="6_md45c"]
+[ext_resource type="Texture2D" uid="uid://64y2x5iresti" path="res://assets/ui/Tech tree/p9.png" id="6_wfr7k"]
 [ext_resource type="Texture2D" uid="uid://dbuw8jlafm0md" path="res://assets/ui/Tech tree/hovered/2.png" id="7_q184u"]
 [ext_resource type="Texture2D" uid="uid://ccc1x335i2jnj" path="res://assets/ui/Mixing screen/width_800.png" id="7_qqldu"]
+[ext_resource type="Texture2D" uid="uid://brxbbvb0akt57" path="res://assets/ui/Tech tree/Untitled design-3.png" id="7_xk7vt"]
+[ext_resource type="Texture2D" uid="uid://cphn2cqmjeio8" path="res://assets/ui/Tech tree/111.png" id="8_5kh1x"]
 [ext_resource type="Texture2D" uid="uid://37iymlgbtlj6" path="res://assets/ui/Mixing screen/Pressed State/Close_Button_Pressed.png" id="8_7ts6d"]
-[ext_resource type="Texture2D" uid="uid://d2o4sf5mx0nr2" path="res://assets/ui/Tech tree/raw:unclicked/batsss.png" id="9_ktxgv"]
-[ext_resource type="Texture2D" uid="uid://bw3p61gbcyvr7" path="res://assets/ui/Tech tree/hovered/8.png" id="10_ktxgv"]
+[ext_resource type="Texture2D" uid="uid://bp82ejo25c2nl" path="res://assets/ui/Tech tree/222.png" id="9_ktxgv"]
 [ext_resource type="Texture2D" uid="uid://boxamcogj2pac" path="res://assets/ui/Tech tree/raw:unclicked/9.png" id="11_ovppy"]
+[ext_resource type="Texture2D" uid="uid://xdq0iwbjuxre" path="res://assets/ui/Tech tree/p12.png" id="12_8w1sl"]
 [ext_resource type="Texture2D" uid="uid://cb5rmdo6b7yjl" path="res://assets/ui/Tech tree/hovered/10.png" id="12_xk7vt"]
+[ext_resource type="FontFile" uid="uid://b3w8qw1vuyjm1" path="res://assets/fonts/FontsFree-Net-Art-nuvo.ttf" id="13_8mk4n"]
+[ext_resource type="Texture2D" uid="uid://ds5xcqpsycb5w" path="res://assets/ui/Tech tree/coinholder.png" id="14_ovppy"]
+[ext_resource type="Texture2D" uid="uid://ceqagqj4rgp2w" path="res://assets/ui/Tech tree/p15.png" id="15_2qj3x"]
 
-[node name="TechTree" type="Control" unique_id=882599207]
-layout_mode = 3
-anchors_preset = 0
+[node name="TechTree" type="TechTree" unique_id=983492638]
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("1_7ts6d")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1636362881]
 layout_mode = 1
@@ -31,7 +34,7 @@ offset_right = 1878.0
 offset_bottom = 1041.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_nnlgh")
+texture = ExtResource("1_ovppy")
 expand_mode = 1
 stretch_mode = 6
 
@@ -42,7 +45,7 @@ offset_top = 83.0
 offset_right = 1335.0
 offset_bottom = 420.0
 texture_normal = ExtResource("3_yojnh")
-texture_pressed = ExtResource("4_md45c")
+texture_pressed = ExtResource("3_64os6")
 texture_hover = ExtResource("4_md45c")
 ignore_texture_size = true
 stretch_mode = 0
@@ -54,6 +57,7 @@ offset_top = 248.0
 offset_right = 583.0
 offset_bottom = 519.0
 texture_normal = ExtResource("5_q184u")
+texture_pressed = ExtResource("6_wfr7k")
 texture_hover = ExtResource("6_5kh1x")
 ignore_texture_size = true
 stretch_mode = 0
@@ -61,22 +65,24 @@ stretch_mode = 0
 [node name="sparkle" type="TextureButton" parent="." unique_id=597930799]
 layout_mode = 0
 offset_left = 1134.0
-offset_top = 536.0
+offset_top = 526.0
 offset_right = 1807.0
-offset_bottom = 873.0
+offset_bottom = 863.0
 texture_normal = ExtResource("6_md45c")
+texture_pressed = ExtResource("7_xk7vt")
 texture_hover = ExtResource("7_q184u")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="bat" type="TextureButton" parent="." unique_id=901106160]
+[node name="bat" type="TextureButton" parent="." unique_id=1354800044]
 layout_mode = 0
-offset_left = 281.0
-offset_top = 490.0
-offset_right = 1322.0
-offset_bottom = 995.0
-texture_normal = ExtResource("9_ktxgv")
-texture_hover = ExtResource("10_ktxgv")
+offset_left = 511.0
+offset_top = 521.0
+offset_right = 1019.0
+offset_bottom = 1022.0
+texture_normal = ExtResource("8_5kh1x")
+texture_pressed = ExtResource("12_8w1sl")
+texture_hover = ExtResource("9_ktxgv")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -87,6 +93,7 @@ offset_top = 765.0
 offset_right = 473.0
 offset_bottom = 992.0
 texture_normal = ExtResource("11_ovppy")
+texture_pressed = ExtResource("15_2qj3x")
 texture_hover = ExtResource("12_xk7vt")
 ignore_texture_size = true
 stretch_mode = 0
@@ -102,16 +109,37 @@ texture_pressed = ExtResource("8_7ts6d")
 ignore_texture_size = true
 stretch_mode = 0
 
+[node name="MoneyPanel" type="TextureRect" parent="." unique_id=1194652912]
+layout_mode = 0
+offset_left = 1480.0
+offset_top = 24.0
+offset_right = 1760.0
+offset_bottom = 132.0
+texture = ExtResource("14_ovppy")
+expand_mode = 1
+stretch_mode = 5
+
 [node name="MoneyLabel" type="Label" parent="." unique_id=855914083]
 layout_mode = 0
-offset_left = 161.0
-offset_top = 118.0
-offset_right = 201.0
-offset_bottom = 141.0
+offset_left = 1582.0
+offset_top = 43.0
+offset_right = 1732.0
+offset_bottom = 113.0
+theme_override_colors/font_color = Color(0.330828, 0.16204828, 0.11011856, 1)
+theme_override_fonts/font = ExtResource("13_8mk4n")
+theme_override_font_sizes/font_size = 60
 
 [node name="MessageLabel" type="Label" parent="." unique_id=1538788067]
 layout_mode = 0
-offset_left = 1218.0
-offset_top = 948.0
-offset_right = 1258.0
-offset_bottom = 971.0
+offset_left = 1074.0
+offset_top = 845.0
+offset_right = 1874.0
+offset_bottom = 945.0
+theme_override_colors/font_color = Color(0.019265706, 0.0047861747, 0.0024611456, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.16078432)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("13_8mk4n")
+theme_override_font_sizes/font_size = 38
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2

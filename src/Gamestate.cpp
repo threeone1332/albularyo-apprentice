@@ -5,7 +5,7 @@
 using namespace godot;
 
 GameState::GameState() :
-    gold(50),
+    gold(1000),
     current_phase(Phase::SUN),
     price_slider_value(10),
     adventurers_unlocked(false),
@@ -142,11 +142,21 @@ bool GameState::attempt_sale() {
 }
 
 void GameState::apply_tech_unlock(String unlock_name) {
-    if      (unlock_name == "cat_companion")    cat_companion = true;
-    else if (unlock_name == "bat_companion")    bat_companion = true;
-    else if (unlock_name == "murder_of_crows")  murder_of_crows = true;
-    else if (unlock_name == "awaken_anito")     awaken_anito = true;
-    else if (unlock_name == "hire_adventurers") hire_adventurers = true;
+    // These booleans are checked by demand and gathering functions.
+    if (unlock_name == "cat_companion") {
+        cat_companion = true;
+    } else if (unlock_name == "bat_companion") {
+        bat_companion = true;
+    } else if (unlock_name == "murder_of_crows") {
+        murder_of_crows = true;
+    } else if (unlock_name == "awaken_anito") {
+        awaken_anito = true;
+    } else if (unlock_name == "hire_adventurers") {
+        hire_adventurers = true;
+
+        // This allows rare ingredient deliveries to start.
+        adventurers_unlocked = true;
+    }
 }
 
 bool GameState::is_unlocked(String unlock_name) const {
