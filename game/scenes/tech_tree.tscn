@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bo0eo35kaoefc" path="res://assets/ui/Tech tree/TECH TREE-3.png" id="1_ovppy"]
 [ext_resource type="Texture2D" uid="uid://dct81yu3jqp6l" path="res://assets/ui/Tech tree/p6.png" id="3_64os6"]
 [ext_resource type="Texture2D" uid="uid://c2qk11kcyvl3l" path="res://assets/ui/Tech tree/crowws.png" id="3_yojnh"]
-[ext_resource type="Texture2D" uid="uid://dh84l374vmx7r" path="res://assets/ui/Tech tree/Untitled design.png" id="4_md45c"]
+[ext_resource type="Texture2D" uid="uid://un4msje08ppf" path="res://assets/ui/Tech tree/Untitled design.png" id="4_md45c"]
 [ext_resource type="Texture2D" uid="uid://b0jdyflmrsx8q" path="res://assets/ui/Tech tree/raw_unclicked/5.png" id="5_q184u"]
 [ext_resource type="Texture2D" uid="uid://boft6lti1r08e" path="res://assets/ui/Tech tree/hovered/6.png" id="6_5kh1x"]
 [ext_resource type="Texture2D" uid="uid://bndv4lbeeaal6" path="res://assets/ui/Tech tree/raw_unclicked/11.png" id="6_md45c"]
@@ -11,15 +11,17 @@
 [ext_resource type="Texture2D" uid="uid://dbuw8jlafm0md" path="res://assets/ui/Tech tree/hovered/2.png" id="7_q184u"]
 [ext_resource type="Texture2D" uid="uid://ccc1x335i2jnj" path="res://assets/ui/Mixing screen/width_800.png" id="7_qqldu"]
 [ext_resource type="Texture2D" uid="uid://brxbbvb0akt57" path="res://assets/ui/Tech tree/Untitled design-3.png" id="7_xk7vt"]
-[ext_resource type="Texture2D" uid="uid://dqw7mwho720mw" path="res://assets/ui/Tech tree/111.png" id="8_5kh1x"]
+[ext_resource type="Texture2D" uid="uid://cphn2cqmjeio8" path="res://assets/ui/Tech tree/111.png" id="8_5kh1x"]
 [ext_resource type="Texture2D" uid="uid://37iymlgbtlj6" path="res://assets/ui/Mixing screen/Pressed State/Close_Button_Pressed.png" id="8_7ts6d"]
-[ext_resource type="Texture2D" uid="uid://wx5wpbosbiv3" path="res://assets/ui/Tech tree/222.png" id="9_ktxgv"]
+[ext_resource type="Texture2D" uid="uid://bp82ejo25c2nl" path="res://assets/ui/Tech tree/222.png" id="9_ktxgv"]
 [ext_resource type="Texture2D" uid="uid://qq52u6mro6rw" path="res://assets/ui/Tech tree/raw_unclicked/9.png" id="11_ovppy"]
-[ext_resource type="Texture2D" uid="uid://b3ycgbu1cb7i4" path="res://assets/ui/Tech tree/p12.png" id="12_8w1sl"]
+[ext_resource type="Texture2D" uid="uid://xdq0iwbjuxre" path="res://assets/ui/Tech tree/p12.png" id="12_8w1sl"]
 [ext_resource type="Texture2D" uid="uid://cb5rmdo6b7yjl" path="res://assets/ui/Tech tree/hovered/10.png" id="12_xk7vt"]
 [ext_resource type="FontFile" uid="uid://b3w8qw1vuyjm1" path="res://assets/fonts/FontsFree-Net-Art-nuvo.ttf" id="13_8mk4n"]
 [ext_resource type="Texture2D" uid="uid://ds5xcqpsycb5w" path="res://assets/ui/Tech tree/coinholder.png" id="14_ovppy"]
 [ext_resource type="Texture2D" uid="uid://ceqagqj4rgp2w" path="res://assets/ui/Tech tree/p15.png" id="15_2qj3x"]
+[ext_resource type="Texture2D" uid="uid://bsg846eudw58s" path="res://assets/ui/Tech tree/exit_confirmation/4.png" id="16_n2k5c"]
+[ext_resource type="Texture2D" uid="uid://bovxnny2458dm" path="res://assets/ui/Tech tree/exit_confirmation/bat_cropped.png" id="17_k3m6p"]
 [ext_resource type="Texture2D" uid="uid://dm22iehvy7g21" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="21_wfr7k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8w1sl"]
@@ -169,3 +171,85 @@ texture_normal = SubResource("AtlasTexture_8w1sl")
 texture_pressed = SubResource("AtlasTexture_wfr7k")
 ignore_texture_size = true
 stretch_mode = 5
+
+[node name="ExitConfirmOverlay" type="Control" parent="." unique_id=724459572]
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="DimBackground" type="ColorRect" parent="ExitConfirmOverlay" unique_id=2110431714]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 0.6666667)
+
+[node name="ConfirmBox" type="TextureRect" parent="ExitConfirmOverlay" unique_id=597187340]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 1921.0
+offset_bottom = 1080.0
+mouse_filter = 2
+texture = ExtResource("16_n2k5c")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BatDecoration" type="TextureRect" parent="ExitConfirmOverlay" unique_id=919193]
+layout_mode = 0
+offset_left = 93.0
+offset_top = 848.0
+offset_right = 323.0
+offset_bottom = 991.0
+pivot_offset = Vector2(115, 71.5)
+mouse_filter = 2
+texture = ExtResource("17_k3m6p")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ConfirmTitle" type="Label" parent="ExitConfirmOverlay" unique_id=1862225123]
+layout_mode = 0
+offset_left = 520.0
+offset_top = 300.0
+offset_right = 1535.0
+offset_bottom = 390.0
+theme_override_colors/font_color = Color(0.16470589, 0.09019608, 0.23921569, 1)
+theme_override_fonts/font = ExtResource("13_8mk4n")
+theme_override_font_sizes/font_size = 58
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConfirmMessage" type="Label" parent="ExitConfirmOverlay" unique_id=1995587851]
+layout_mode = 0
+offset_left = 520.0
+offset_top = 415.0
+offset_right = 1535.0
+offset_bottom = 545.0
+theme_override_colors/font_color = Color(0.29411766, 0.14117648, 0.09411765, 1)
+theme_override_fonts/font = ExtResource("13_8mk4n")
+theme_override_font_sizes/font_size = 40
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="StayButton" type="Button" parent="ExitConfirmOverlay" unique_id=1469193952]
+modulate = Color(1, 1, 1, 0.8)
+layout_mode = 0
+offset_left = 715.0
+offset_top = 554.0
+offset_right = 930.0
+offset_bottom = 629.0
+theme_override_colors/font_color = Color(0.16470589, 0.09019608, 0.23921569, 1)
+theme_override_fonts/font = ExtResource("13_8mk4n")
+theme_override_font_sizes/font_size = 45
+text = "STAY"
+
+[node name="LeaveButton" type="Button" parent="ExitConfirmOverlay" unique_id=1167816401]
+modulate = Color(1, 1, 1, 0.8)
+layout_mode = 0
+offset_left = 1114.0
+offset_top = 554.0
+offset_right = 1329.0
+offset_bottom = 629.0
+theme_override_colors/font_color = Color(0.16470589, 0.09019608, 0.23921569, 1)
+theme_override_fonts/font = ExtResource("13_8mk4n")
+theme_override_font_sizes/font_size = 45
+text = "LEAVE"

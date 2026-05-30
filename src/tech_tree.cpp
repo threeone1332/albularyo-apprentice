@@ -1,5 +1,6 @@
 #include "tech_tree.h"
 
+#include <cmath>
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/variant/node_path.hpp>
 #include <godot_cpp/variant/utility_functions.hpp>
@@ -17,6 +18,8 @@ void TechTree::_bind_methods() {
     ClassDB::bind_method(D_METHOD("buy_upgrade", "upgrade_id"), &TechTree::buy_upgrade);
     ClassDB::bind_method(D_METHOD("show_upgrade_hover", "upgrade_id"), &TechTree::show_upgrade_hover);
     ClassDB::bind_method(D_METHOD("clear_upgrade_hover"), &TechTree::clear_upgrade_hover);
+    ClassDB::bind_method(D_METHOD("_on_stay_pressed"), &TechTree::_on_stay_pressed);
+    ClassDB::bind_method(D_METHOD("_on_leave_pressed"), &TechTree::_on_leave_pressed);
 }
 
 void TechTree::_ready() {
@@ -29,6 +32,12 @@ void TechTree::_ready() {
     // These names must match the nodes in tech_tree.tscn.
     money_label = Object::cast_to<Label>(get_node_or_null("MoneyLabel"));
     message_label = Object::cast_to<Label>(get_node_or_null("MessageLabel"));
+    exit_confirm_overlay = Object::cast_to<Control>(get_node_or_null("ExitConfirmOverlay"));
+    confirm_bat = Object::cast_to<TextureRect>(get_node_or_null("ExitConfirmOverlay/BatDecoration"));
+    confirm_title = Object::cast_to<Label>(get_node_or_null("ExitConfirmOverlay/ConfirmTitle"));
+    confirm_message = Object::cast_to<Label>(get_node_or_null("ExitConfirmOverlay/ConfirmMessage"));
+    stay_button = Object::cast_to<Button>(get_node_or_null("ExitConfirmOverlay/StayButton"));
+    leave_button = Object::cast_to<Button>(get_node_or_null("ExitConfirmOverlay/LeaveButton"));
 
     if (!game_state) {
         UtilityFunctions::printerr("TechTree C++: GlobalGameState autoload not found.");
@@ -40,6 +49,10 @@ void TechTree::_ready() {
 
     if (!message_label) {
         UtilityFunctions::printerr("TechTree C++: MessageLabel node not found.");
+    }
+
+    if (!exit_confirm_overlay) {
+        UtilityFunctions::printerr("TechTree C++: ExitConfirmOverlay node not found.");
     }
 
     // Connect the exit button.
@@ -62,11 +75,68 @@ void TechTree::_ready() {
     connect_upgrade_button("sparkle", "awaken_anito");
     connect_upgrade_button("bag", "hire_adventurers");
 
+    if (stay_button && !stay_button->is_connected("pressed", Callable(this, "_on_stay_pressed"))) {
+        stay_button->connect("pressed", Callable(this, "_on_stay_pressed"));
+    }
+
+    if (leave_button && !leave_button->is_connected("pressed", Callable(this, "_on_leave_pressed"))) {
+        leave_button->connect("pressed", Callable(this, "_on_leave_pressed"));
+    }
+
+    hide_exit_confirmation();
+    set_process(true);
+
     update_money_label();
     show_message("");
 }
 
+void TechTree::_process(double delta) {
+    if (!exit_confirm_overlay || !exit_confirm_overlay->is_visible()) return;
+
+    if (confirm_bat) {
+        bat_animation_time += delta;
+
+        // A gentle fake wing-flap using one bat image.
+        float flap = static_cast<float>(std::sin(bat_animation_time * 8.0));
+        confirm_bat->set_scale(Vector2(1.0f + (flap * 0.025f), 1.0f - (flap * 0.055f)));
+        confirm_bat->set_rotation(static_cast<float>(flap * 0.035f));
+    }
+
+    if (!typing_confirm_text) return;
+
+    typewriter_timer += delta;
+    if (typewriter_timer < 0.035) return;
+
+    typewriter_timer = 0.0;
+
+    if (title_visible_chars < confirm_title_text.length()) {
+        title_visible_chars++;
+        if (confirm_title) {
+            confirm_title->set_text(confirm_title_text.substr(0, title_visible_chars));
+        }
+        return;
+    }
+
+    if (message_visible_chars < confirm_message_text.length()) {
+        message_visible_chars++;
+        if (confirm_message) {
+            confirm_message->set_text(confirm_message_text.substr(0, message_visible_chars));
+        }
+        return;
+    }
+
+    finish_exit_confirmation_typing();
+}
+
 void TechTree::_on_exit_pressed() {
+    show_exit_confirmation();
+}
+
+void TechTree::_on_stay_pressed() {
+    hide_exit_confirmation();
+}
+
+void TechTree::_on_leave_pressed() {
     // Return to the main game screen.
     SceneTree* tree = get_tree();
 
@@ -109,7 +179,7 @@ int TechTree::get_upgrade_cost(String upgrade_id) const {
     if (upgrade_id == "cat_companion") return 200;
     if (upgrade_id == "bat_companion") return 300;
     if (upgrade_id == "murder_of_crows") return 600;
-    if (upgrade_id == "awaken_anito") return 500;
+    if (upgrade_id == "awaken_anito") return 600;
     if (upgrade_id == "hire_adventurers") return 500;
 
     return 0;
@@ -196,6 +266,60 @@ void TechTree::update_money_label() {
         money_label->set_text(String::num_int64(game_state->get_gold()));
     } else {
         money_label->set_text("--");
+    }
+}
+
+void TechTree::show_exit_confirmation() {
+    if (!exit_confirm_overlay) return;
+
+    exit_confirm_overlay->set_visible(true);
+    exit_confirm_overlay->move_to_front();
+
+    title_visible_chars = 0;
+    message_visible_chars = 0;
+    typewriter_timer = 0.0;
+    bat_animation_time = 0.0;
+    typing_confirm_text = true;
+
+    if (confirm_title) {
+        confirm_title->set_text("");
+    }
+
+    if (confirm_message) {
+        confirm_message->set_text("");
+    }
+
+    if (stay_button) {
+        stay_button->set_visible(false);
+    }
+
+    if (leave_button) {
+        leave_button->set_visible(false);
+    }
+}
+
+void TechTree::hide_exit_confirmation() {
+    typing_confirm_text = false;
+
+    if (exit_confirm_overlay) {
+        exit_confirm_overlay->set_visible(false);
+    }
+
+    if (confirm_bat) {
+        confirm_bat->set_scale(Vector2(1.0f, 1.0f));
+        confirm_bat->set_rotation(0.0f);
+    }
+}
+
+void TechTree::finish_exit_confirmation_typing() {
+    typing_confirm_text = false;
+
+    if (stay_button) {
+        stay_button->set_visible(true);
+    }
+
+    if (leave_button) {
+        leave_button->set_visible(true);
     }
 }
 
