@@ -9,6 +9,7 @@ using namespace godot;
 
 Settings::Settings() {
     is_paused = false;
+    bound_scene = nullptr;
 }
 
 Settings::~Settings() {}
@@ -29,6 +30,7 @@ void Settings::_ready() {
     set_process_mode(PROCESS_MODE_ALWAYS);
     set_visible(false);
 
+    bound_scene = nullptr;
     set_process(true);
 }
 
@@ -43,6 +45,8 @@ void Settings::try_bind_settings_button() {
     Node *current_scene = tree->get_current_scene();
     if (!current_scene) return;
 
+    if (bound_scene == current_scene) return;
+
     BaseButton *btn = cast_to<BaseButton>(current_scene->find_child("SettingsButton", true, false));
 
     if (btn) {
@@ -51,7 +55,7 @@ void Settings::try_bind_settings_button() {
             UtilityFunctions::print("C++ Safely Hooked TextureButton inside: ", current_scene->get_name());
         }
 
-        set_process(false);
+        bound_scene = current_scene;
     }
 }
 

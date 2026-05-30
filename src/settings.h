@@ -12,6 +12,7 @@ class Settings : public CanvasLayer {
 
 private:
     bool is_paused;
+    Node *bound_scene = nullptr;
     void set_paused(bool p_state);
     void try_bind_settings_button();
 
