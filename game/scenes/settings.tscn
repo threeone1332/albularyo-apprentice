@@ -4,7 +4,9 @@
 [ext_resource type="FontFile" uid="uid://clux6cekpic0m" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="2_am25x"]
 [ext_resource type="Texture2D" uid="uid://p1d47f1jprsx" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/UI Settings Buttons.png" id="4_es4n0"]
 [ext_resource type="Texture2D" uid="uid://dm22iehvy7g21" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="5_1g033"]
+[ext_resource type="Texture2D" uid="uid://bn6pmtusc04ft" path="res://assets/ui/Settings Panel/play button.png" id="5_gis3k"]
 [ext_resource type="Texture2D" uid="uid://hnu7ebm0ee21" path="res://assets/ui/Main Menu/HOVEREDSprite sheet for Basic Pack.png" id="6_01roj"]
+[ext_resource type="Texture2D" uid="uid://1cmnnk42vtsl" path="res://assets/ui/Settings Panel/replay button.png" id="6_83j8s"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_es4n0"]
 
@@ -15,6 +17,26 @@ region = Rect2(11.015, 8.006, 58.011, 16.932)
 [sub_resource type="AtlasTexture" id="AtlasTexture_es4n0"]
 atlas = ExtResource("5_1g033")
 region = Rect2(772.9654, 67.99667, 22.026978, 24.002625)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_am25x"]
+atlas = ExtResource("5_1g033")
+region = Rect2(804.994, 70.005, 22.012, 22.515)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_83j8s"]
+atlas = ExtResource("5_gis3k")
+region = Rect2(772.99646, 67.97942, 22.01532, 24.03646)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ppmf"]
+atlas = ExtResource("5_gis3k")
+region = Rect2(804.971, 69.987, 22.017, 22.219)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gjs24"]
+atlas = ExtResource("6_83j8s")
+region = Rect2(772.94165, 67.98916, 22.078552, 24.038254)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uhhto"]
+atlas = ExtResource("6_83j8s")
+region = Rect2(805.028, 69.997, 22.787, 22.025)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6wm04"]
 texture = ExtResource("5_1g033")
@@ -125,6 +147,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = SubResource("AtlasTexture_es4n0")
+texture_pressed = SubResource("AtlasTexture_am25x")
 ignore_texture_size = true
 stretch_mode = 5
 
@@ -133,7 +156,8 @@ custom_minimum_size = Vector2(400, 300)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture_normal = SubResource("AtlasTexture_es4n0")
+texture_normal = SubResource("AtlasTexture_83j8s")
+texture_pressed = SubResource("AtlasTexture_4ppmf")
 ignore_texture_size = true
 stretch_mode = 5
 
@@ -142,7 +166,8 @@ custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture_normal = SubResource("AtlasTexture_es4n0")
+texture_normal = SubResource("AtlasTexture_gjs24")
+texture_pressed = SubResource("AtlasTexture_uhhto")
 ignore_texture_size = true
 stretch_mode = 5
 
