@@ -1,3 +1,16 @@
+# ==========================================
+# C++ Build Output & SCons Caches
+# ==========================================
+.sconsign.dblite
+scons.cache/
+**/*.obj
+**/*.o
+**/*.pdb
+**/*.idb
+**/*.ilk
+**/*.exp
+**/*.lib
+
 # Compiled GDExtension output
 game/bin/*.dll
 game/bin/*.dylib
@@ -16,7 +29,5 @@ game/.godot/
 # macOS
 .DS_Store
 
-# SCons cache
-.sconsign.dblite
 # Local VS Code configuration profiles
 .vscode/
