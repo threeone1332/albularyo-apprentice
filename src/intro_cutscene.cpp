@@ -1,5 +1,6 @@
 #include "intro_cutscene.h"
 #include <godot_cpp/variant/utility_functions.hpp>
+#include <godot_cpp/variant/callable.hpp>
 
 namespace godot {
 
@@ -14,6 +15,7 @@ IntroCutscene::~IntroCutscene() {}
 void IntroCutscene::_bind_methods() {
     // Bind the callback method so the AnimationPlayer signal can find it
     ClassDB::bind_method(D_METHOD("_on_animation_player_animation_finished", "anim_name"), &IntroCutscene::_on_animation_player_animation_finished);
+    ClassDB::bind_method(D_METHOD("_on_skip_pressed"), &IntroCutscene::_on_skip_pressed);
 }
 
 void IntroCutscene::_ready() {
@@ -46,6 +48,12 @@ void IntroCutscene::_ready() {
         animation_player->connect("animation_finished", Callable(this, "_on_animation_player_animation_finished"));
     }
 
+    Button* skip_button = get_node<Button>("CanvasLayer/MarginContainer/Skip");
+    
+    if (skip_button) {
+        skip_button->connect("pressed", Callable(this, "_on_skip_pressed"));
+    }
+
     // Kickstart the narrative crawl
     show_current_line();
 }
@@ -69,6 +77,14 @@ void IntroCutscene::_on_animation_player_animation_finished(String anim_name) {
     // Advance line tracker when the current text sequence finishes its fade out sequence
     current_line++;
     show_current_line();
+}
+
+void IntroCutscene::_on_skip_pressed() {
+    SceneTree* tree = get_tree();
+
+    if (tree) {
+        tree->change_scene_to_file("res://scenes/game_loading_screen.tscn");
+    }
 }
 
 } // namespace godot

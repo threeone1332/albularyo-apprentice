@@ -7,6 +7,7 @@
 #include <godot_cpp/classes/scene_tree.hpp>
 #include <godot_cpp/classes/engine.hpp>
 #include <godot_cpp/templates/vector.hpp>
+#include <godot_cpp/classes/button.hpp>
 
 namespace godot {
 
@@ -32,6 +33,8 @@ public:
 
     // Animation signal callback
     void _on_animation_player_animation_finished(String anim_name);
+    
+    void _on_skip_pressed();
 };
 
 } // namespace godot
