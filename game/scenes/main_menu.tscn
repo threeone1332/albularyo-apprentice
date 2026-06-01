@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cjbnjt4newjg8"]
 
+[ext_resource type="VideoStream" uid="uid://teluxe7t5x5q" path="res://assets/ui/Main Menu/Main Menu Scene BG.ogv" id="1_tbmy8"]
 [ext_resource type="Texture2D" uid="uid://cgojjx8fa48vu" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/UI Big Play Button.png" id="2_7vrkn"]
-[ext_resource type="Texture2D" uid="uid://7lqee2x74ear" path="res://assets/ui/Main Menu/opening_screen.png" id="2_fu7sn"]
 [ext_resource type="FontFile" uid="uid://clux6cekpic0m" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="2_jix8l"]
 [ext_resource type="Texture2D" uid="uid://b0k6o3anq4iwo" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Setting menu.png" id="5_8ln24"]
 [ext_resource type="Texture2D" uid="uid://dm22iehvy7g21" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="6_rtw2f"]
@@ -48,11 +48,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer2" unique_id=952973023]
+[node name="BG" type="VideoStreamPlayer" parent="MarginContainer2" unique_id=16178695]
 layout_mode = 2
-texture = ExtResource("2_fu7sn")
+stream = ExtResource("1_tbmy8")
+autoplay = true
+loop = true
 
-[node name="MainButtons" type="VBoxContainer" parent="MarginContainer2/NinePatchRect" unique_id=618780877]
+[node name="MainButtons" type="VBoxContainer" parent="MarginContainer2/BG" unique_id=618780877]
 custom_minimum_size = Vector2(0, 400)
 layout_mode = 1
 anchors_preset = -1
@@ -60,12 +62,13 @@ anchor_left = 0.186
 anchor_top = 0.5
 anchor_right = 0.342
 anchor_bottom = 0.87000006
-offset_left = -0.11999512
-offset_right = 0.35998535
+offset_left = -72.69501
+offset_right = -72.21619
 offset_bottom = 0.39990234
+scale = Vector2(1.1, 1.1)
 theme_override_constants/separation = 11
 
-[node name="Start" type="Button" parent="MarginContainer2/NinePatchRect/MainButtons" unique_id=1565870523]
+[node name="Start" type="Button" parent="MarginContainer2/BG/MainButtons" unique_id=1565870523]
 custom_minimum_size = Vector2(50, 100)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.627451, 0.41568628, 0.37254903, 1)
@@ -76,7 +79,7 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_jix8l")
 theme_override_styles/hover = SubResource("StyleBoxTexture_jix8l")
 text = "START"
 
-[node name="Setting" type="Button" parent="MarginContainer2/NinePatchRect/MainButtons" unique_id=2016645536]
+[node name="Setting" type="Button" parent="MarginContainer2/BG/MainButtons" unique_id=2016645536]
 custom_minimum_size = Vector2(50, 100)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.6269185, 0.4171387, 0.3713367, 1)
@@ -87,7 +90,7 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_jix8l")
 theme_override_styles/hover = SubResource("StyleBoxTexture_jix8l")
 text = "SETTINGS"
 
-[node name="Quit" type="Button" parent="MarginContainer2/NinePatchRect/MainButtons" unique_id=1749523108]
+[node name="Quit" type="Button" parent="MarginContainer2/BG/MainButtons" unique_id=1749523108]
 custom_minimum_size = Vector2(50, 100)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.6269185, 0.4171387, 0.3713367, 1)
@@ -99,6 +102,7 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_jix8l")
 text = "QUIT"
 
 [node name="Panel" type="Panel" parent="." unique_id=600317187]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -218,7 +222,7 @@ region_rect = Rect2(11, 8, 58, 16)
 stream = ExtResource("9_jk1qb")
 autoplay = true
 
-[connection signal="pressed" from="MarginContainer2/NinePatchRect/MainButtons/Start" to="." method="_on_start_button_pressed"]
-[connection signal="pressed" from="MarginContainer2/NinePatchRect/MainButtons/Setting" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="MarginContainer2/NinePatchRect/MainButtons/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="MarginContainer2/BG/MainButtons/Start" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MarginContainer2/BG/MainButtons/Setting" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="MarginContainer2/BG/MainButtons/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="Panel/MarginContainer/NinePatchRect/exit_settings" to="." method="_on_exit_settings_pressed"]

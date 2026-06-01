@@ -48,6 +48,8 @@ region_rect = Rect2(838.9809, 5.007865, 18.01178, 20.002514)
 
 [node name="Settings" type="Settings" unique_id=1824771096]
 process_mode = 3
+layer = 15
+visible = false
 
 [node name="DimBackground" type="ColorRect" parent="." unique_id=1131986052]
 anchors_preset = 15

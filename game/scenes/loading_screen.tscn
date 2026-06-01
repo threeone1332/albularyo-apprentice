@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ds1l00sbuxk5t"]
 
-[ext_resource type="Texture2D" uid="uid://tkmnr5p7l42n" path="res://assets/ui/loading screen/LOADING SCREEN.png" id="1_mggpi"]
+[ext_resource type="VideoStream" uid="uid://du4j1b63l8jxy" path="res://assets/ui/Loading Screen/Loading Scene BG.ogv" id="1_hprjd"]
 [ext_resource type="FontFile" uid="uid://clux6cekpic0m" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="2_htrc2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mggpi"]
@@ -16,14 +16,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=528093465]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("1_mggpi")
+[node name="BG" type="VideoStreamPlayer" parent="." unique_id=1002680347]
+layout_mode = 0
+stream = ExtResource("1_hprjd")
+autoplay = true
+loop = true
 
 [node name="LoadingBar" type="ProgressBar" parent="." unique_id=1609216582]
 layout_mode = 1
