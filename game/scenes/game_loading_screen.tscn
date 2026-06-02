@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dxfthbty0cr0u"]
 
-[ext_resource type="Texture2D" uid="uid://tkmnr5p7l42n" path="res://assets/ui/loading screen/LOADING SCREEN.png" id="1_bewip"]
+[ext_resource type="Texture2D" uid="uid://du82kh8iqldbe" path="res://assets/ui/loading screen/LOADING SCREEN.png" id="1_bewip"]
 [ext_resource type="FontFile" uid="uid://clux6cekpic0m" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="2_4cmoq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tmcx7"]

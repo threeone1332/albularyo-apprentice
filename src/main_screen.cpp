@@ -53,7 +53,10 @@ void MainScreen::_ready() {
 
     // 3. Bind UI Components securely
     money_label = get_node<Label>("MarginContainer/NinePatchRect/MoneyArea/Money/Label");
-    gain_label = get_node<Label>("MarginContainer/NinePatchRect/MoneyArea/GainSlot/GainLabel");    sale_feedback = get_node<Label>("SaleFeedback");
+
+    // FIX: Fixed structural path mapping to include GainSlot
+    gain_label = get_node<Label>("MarginContainer/NinePatchRect/MoneyArea/GainSlot/GainLabel");
+    sale_feedback = get_node<Label>("SaleFeedback");
 
     morning_icon = get_node<TextureRect>("MarginContainer/NinePatchRect/Time/Morning");
     noon_icon = get_node<TextureRect>("MarginContainer/NinePatchRect/Time/Noon");
@@ -72,9 +75,17 @@ void MainScreen::_ready() {
 
     potion_icon = get_node<NinePatchRect>("MarginContainer/NinePatchRect/Feature/NinePatchRect/MarginContainer/MarginContainer/potionandname/NinePatchRect/MarginContainer/picofpotion");
 
-    // 4. Fallback fail safe validations
-    if (!sale_feedback || !gain_label || !game_state) {
-        UtilityFunctions::printerr("MainScreen C++ Error: Core nodes or GlobalGameState autoload missing!");
+    // 4. FIX: Detailed, verbose fallback validations to track down specific runtime issues
+    if (!game_state) {
+        UtilityFunctions::printerr("MainScreen C++ Error: GlobalGameState Autoload is missing from Project Settings!");
+        return;
+    }
+    if (!sale_feedback) {
+        UtilityFunctions::printerr("MainScreen C++ Error: Core node 'SaleFeedback' not found! Make sure it's a child of Main_screen.");
+        return;
+    }
+    if (!gain_label) {
+        UtilityFunctions::printerr("MainScreen C++ Error: Core node 'GainLabel' not found at the specified path!");
         return;
     }
 
@@ -84,7 +95,6 @@ void MainScreen::_ready() {
     gain_label->set_visible(true);
 
     sale_feedback_start_pos = sale_feedback->get_position();
-
     gain_label_start_pos = gain_label->get_position();
 
     // 6. Hook signals safely
@@ -257,4 +267,4 @@ void MainScreen::_on_tech_tree_pressed() {
     get_tree()->change_scene_to_file("res://scenes/tech_tree.tscn");
 }
 
-} // namespace godot
+} //
