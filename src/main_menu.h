@@ -11,6 +11,8 @@
 #include <godot_cpp/classes/file_access.hpp>
 #include <godot_cpp/classes/json.hpp>
 #include <godot_cpp/classes/scene_tree.hpp>
+#include <godot_cpp/classes/audio_stream_player.hpp>
+#include <godot_cpp/classes/scene_tree_timer.hpp>
 
 namespace godot {
 
@@ -24,8 +26,11 @@ private:
     HSlider* sfx_slider;
     Button* click_outside_detector;
     TextureButton* exit_button;
+    AudioStreamPlayer* button_click_sfx;
+    String pending_scene_path;
 
     const String SAVE_PATH = "user://savegame.json";
+    void play_button_click_sfx();
 
 protected:
     static void _bind_methods();
@@ -48,6 +53,9 @@ public:
     void _on_sfx_slider_value_changed(double value);
 
     void load_game();
+
+    void _on_start_scene_delay_timeout();
+    void _on_quit_delay_timeout();
 };
 
 } // namespace godot
