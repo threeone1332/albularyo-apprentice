@@ -63,7 +63,7 @@ void IntroCutscene::show_current_line() {
         SceneTree* tree = get_tree();
         if (tree) {
             // Cut introduction completed -> Route into your loading layer
-            tree->change_scene_to_file("res://scenes/game_loading_screen.tscn");
+            tree->change_scene_to_file("res://scenes/tutorial_scene.tscn");
         }
         return;
     }
@@ -83,7 +83,7 @@ void IntroCutscene::_on_skip_pressed() {
     SceneTree* tree = get_tree();
 
     if (tree) {
-        tree->change_scene_to_file("res://scenes/game_loading_screen.tscn");
+        tree->change_scene_to_file("res://scenes/tutorial_scene.tscn");
     }
 }
 
