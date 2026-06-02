@@ -14,7 +14,7 @@ private:
     bool is_paused;
     Node *bound_scene = nullptr;
     void set_paused(bool p_state);
-    void try_bind_settings_button();
+    void try_bind_settings_button(Node *current_scene);
 
 protected:
     static void _bind_methods();

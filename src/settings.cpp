@@ -35,18 +35,19 @@ void Settings::_ready() {
 }
 
 void Settings::_process(double delta) {
-    try_bind_settings_button();
-}
-
-void Settings::try_bind_settings_button() {
     SceneTree *tree = get_tree();
     if (!tree) return;
 
     Node *current_scene = tree->get_current_scene();
     if (!current_scene) return;
 
-    if (bound_scene == current_scene) return;
+    // FIX: Only run the heavy find_child lookup when the scene actually changes!
+    if (bound_scene != current_scene) {
+        try_bind_settings_button(current_scene);
+    }
+}
 
+void Settings::try_bind_settings_button(Node *current_scene) {
     BaseButton *btn = cast_to<BaseButton>(current_scene->find_child("SettingsButton", true, false));
 
     if (btn) {
@@ -54,7 +55,6 @@ void Settings::try_bind_settings_button() {
             btn->connect("pressed", Callable(this, "open_settings_menu"));
             UtilityFunctions::print("C++ Safely Hooked TextureButton inside: ", current_scene->get_name());
         }
-
         bound_scene = current_scene;
     }
 }
@@ -81,12 +81,14 @@ void Settings::_on_resume_pressed() {
 }
 
 void Settings::_on_main_menu_pressed() {
-    get_tree()->set_pause(false);
+    // FIX: Forcefully clear the pause state and hide the menu overlay completely before moving
+    set_paused(false);
+    bound_scene = nullptr; // Reset the binding cache layer so the next scene re-scans smoothly
+
     get_tree()->change_scene_to_file("res://scenes/main_menu.tscn");
 }
 
 void Settings::_on_restart_pressed() {
-    get_tree()->set_pause(false);
     set_paused(false);
     get_tree()->reload_current_scene();
 }

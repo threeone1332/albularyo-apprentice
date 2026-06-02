@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dxfthbty0cr0u"]
 
-[ext_resource type="Texture2D" uid="uid://du82kh8iqldbe" path="res://assets/ui/loading screen/LOADING SCREEN.png" id="1_bewip"]
+[ext_resource type="VideoStream" uid="uid://b6v815qliuhxi" path="res://assets/ui/Loading Screen/Game Loading Scene BG.ogv" id="1_bewip"]
 [ext_resource type="FontFile" uid="uid://clux6cekpic0m" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="2_4cmoq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tmcx7"]
@@ -17,14 +17,16 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_horizontal_guides_ = [980.0]
 
-[node name="Background" type="TextureRect" parent="." unique_id=900608524]
+[node name="Background" type="VideoStreamPlayer" parent="." unique_id=1360236101]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_bewip")
+stream = ExtResource("1_bewip")
+autoplay = true
+loop = true
 
 [node name="TextLines" type="Label" parent="." unique_id=340455824]
 layout_mode = 1
