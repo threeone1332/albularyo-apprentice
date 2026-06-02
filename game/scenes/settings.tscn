@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://l43fipvaq8bs"]
 
-[ext_resource type="Texture2D" uid="uid://b0k6o3anq4iwo" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Setting menu.png" id="1_f4mfi"]
-[ext_resource type="FontFile" uid="uid://clux6cekpic0m" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="2_am25x"]
-[ext_resource type="Texture2D" uid="uid://p1d47f1jprsx" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/UI Settings Buttons.png" id="4_es4n0"]
-[ext_resource type="Texture2D" uid="uid://dm22iehvy7g21" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="5_1g033"]
+[ext_resource type="Texture2D" uid="uid://dkjkorsaag42k" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Setting menu.png" id="1_f4mfi"]
+[ext_resource type="FontFile" uid="uid://bh5e6m7dcmnm5" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="2_am25x"]
+[ext_resource type="Texture2D" uid="uid://bculb6w6t58wd" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/UI Settings Buttons.png" id="4_es4n0"]
+[ext_resource type="Texture2D" uid="uid://bvib5w8emuue5" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="5_1g033"]
 [ext_resource type="Texture2D" uid="uid://bn6pmtusc04ft" path="res://assets/ui/Settings Panel/play button.png" id="5_gis3k"]
 [ext_resource type="Texture2D" uid="uid://hnu7ebm0ee21" path="res://assets/ui/Main Menu/HOVEREDSprite sheet for Basic Pack.png" id="6_01roj"]
 [ext_resource type="Texture2D" uid="uid://1cmnnk42vtsl" path="res://assets/ui/Settings Panel/replay button.png" id="6_83j8s"]

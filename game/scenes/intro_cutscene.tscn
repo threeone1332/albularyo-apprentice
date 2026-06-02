@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://ccv780w1dgvjx"]
 
-[ext_resource type="FontFile" uid="uid://b3w8qw1vuyjm1" path="res://assets/fonts/FontsFree-Net-Art-nuvo.ttf" id="1_vuduy"]
-[ext_resource type="FontFile" uid="uid://clux6cekpic0m" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="2_3438a"]
-[ext_resource type="Texture2D" uid="uid://cgojjx8fa48vu" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/UI Big Play Button.png" id="3_wifpd"]
+[ext_resource type="FontFile" uid="uid://dypmd8h0gs5da" path="res://assets/fonts/FontsFree-Net-Art-nuvo.ttf" id="1_vuduy"]
+[ext_resource type="FontFile" uid="uid://bh5e6m7dcmnm5" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="2_3438a"]
+[ext_resource type="Texture2D" uid="uid://c3u45uu6homm" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/UI Big Play Button.png" id="3_wifpd"]
 
 [sub_resource type="Animation" id="Animation_juow0"]
 length = 0.001

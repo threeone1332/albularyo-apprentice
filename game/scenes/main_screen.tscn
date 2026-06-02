@@ -1,23 +1,23 @@
 [gd_scene format=3 uid="uid://bec5mps3luj7r"]
 
-[ext_resource type="Texture2D" uid="uid://bw6kilrc7jm1k" path="res://assets/ui/Main Screen/main_screen_background.png" id="1_c7dat"]
-[ext_resource type="Texture2D" uid="uid://dyp52dntr1dr4" path="res://assets/ui/Main Screen/morning_icon.png" id="2_c7dat"]
-[ext_resource type="Texture2D" uid="uid://ry3ei4osqvmb" path="res://assets/ui/Main Screen/noon_icon.png" id="3_3qgpa"]
-[ext_resource type="FontFile" uid="uid://b3w8qw1vuyjm1" path="res://assets/fonts/FontsFree-Net-Art-nuvo.ttf" id="3_7a4el"]
-[ext_resource type="Texture2D" uid="uid://bpawle5i4j1so" path="res://assets/ui/Main Screen/night_icon.png" id="4_3qgpa"]
-[ext_resource type="Texture2D" uid="uid://cdnea6io2pb43" path="res://assets/ui/Main Screen/money_icon.png" id="5_ihpp7"]
-[ext_resource type="Texture2D" uid="uid://dm22iehvy7g21" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="5_sjiej"]
-[ext_resource type="FontFile" uid="uid://kioijc5gmbl1" path="res://assets/fonts/Maragsâ-Display.otf" id="7_3qgpa"]
-[ext_resource type="Texture2D" uid="uid://45r7lj80g6c6" path="res://assets/ui/Main Screen/techtree_buttontexture.png" id="8_ihpp7"]
-[ext_resource type="Texture2D" uid="uid://baxyfwd03vltq" path="res://assets/ui/Main Screen/techtree_buttontexture_darker.png" id="9_6lq5t"]
-[ext_resource type="Texture2D" uid="uid://bkq8plccjiiqe" path="res://assets/ui/Main Screen/mixing_buttontexture.png" id="10_c7dat"]
-[ext_resource type="Texture2D" uid="uid://cct04ev6i8ubw" path="res://assets/ui/Main Screen/mixing_buttontexture_darker.png" id="11_21wo0"]
-[ext_resource type="Texture2D" uid="uid://b0k6o3anq4iwo" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Setting menu.png" id="12_cxp7d"]
-[ext_resource type="FontFile" uid="uid://clux6cekpic0m" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="13_3qsiq"]
-[ext_resource type="Texture2D" uid="uid://cgojjx8fa48vu" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/UI Big Play Button.png" id="14_7087c"]
-[ext_resource type="Texture2D" uid="uid://s818x6sucqov" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/emojis-free/emoji style ui/Inventory_Blocks_Spritesheet.png" id="15_do8p6"]
-[ext_resource type="Texture2D" uid="uid://dcahebo78kl4i" path="res://assets/ui/Mixing screen/potion_sprite_sheet.png" id="16_c7dat"]
-[ext_resource type="Texture2D" uid="uid://cakesrmx2b8qr" path="res://assets/ui/Main Screen/desk.png" id="17_30ndx"]
+[ext_resource type="Texture2D" uid="uid://b40eekfg5n8l1" path="res://assets/ui/Main Screen/main_screen_background.png" id="1_c7dat"]
+[ext_resource type="Texture2D" uid="uid://ctciectnovvoy" path="res://assets/ui/Main Screen/morning_icon.png" id="2_c7dat"]
+[ext_resource type="Texture2D" uid="uid://ds67smkef3k7g" path="res://assets/ui/Main Screen/noon_icon.png" id="3_3qgpa"]
+[ext_resource type="FontFile" uid="uid://dypmd8h0gs5da" path="res://assets/fonts/FontsFree-Net-Art-nuvo.ttf" id="3_7a4el"]
+[ext_resource type="Texture2D" uid="uid://b0natdgn2wges" path="res://assets/ui/Main Screen/night_icon.png" id="4_3qgpa"]
+[ext_resource type="Texture2D" uid="uid://chd4fq1x35at0" path="res://assets/ui/Main Screen/money_icon.png" id="5_ihpp7"]
+[ext_resource type="Texture2D" uid="uid://bvib5w8emuue5" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="5_sjiej"]
+[ext_resource type="FontFile" uid="uid://bvvktptotfio3" path="res://assets/fonts/Maragsâ-Display.otf" id="7_3qgpa"]
+[ext_resource type="Texture2D" uid="uid://be2e5g2nq4jx1" path="res://assets/ui/Main Screen/techtree_buttontexture.png" id="8_ihpp7"]
+[ext_resource type="Texture2D" uid="uid://dmvs61rps8v24" path="res://assets/ui/Main Screen/techtree_buttontexture_darker.png" id="9_6lq5t"]
+[ext_resource type="Texture2D" uid="uid://bl0qrbdjvo8i1" path="res://assets/ui/Main Screen/mixing_buttontexture.png" id="10_c7dat"]
+[ext_resource type="Texture2D" uid="uid://boh72nlxcwtd3" path="res://assets/ui/Main Screen/mixing_buttontexture_darker.png" id="11_21wo0"]
+[ext_resource type="Texture2D" uid="uid://dkjkorsaag42k" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Setting menu.png" id="12_cxp7d"]
+[ext_resource type="FontFile" uid="uid://bh5e6m7dcmnm5" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="13_3qsiq"]
+[ext_resource type="Texture2D" uid="uid://c3u45uu6homm" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/UI Big Play Button.png" id="14_7087c"]
+[ext_resource type="Texture2D" uid="uid://crut7x228lq3c" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/emojis-free/emoji style ui/Inventory_Blocks_Spritesheet.png" id="15_do8p6"]
+[ext_resource type="Texture2D" uid="uid://cs0g3w7tc3b5d" path="res://assets/ui/Mixing screen/potion_sprite_sheet.png" id="16_c7dat"]
+[ext_resource type="Texture2D" uid="uid://dux8pqaw4ayqm" path="res://assets/ui/Main Screen/desk.png" id="17_30ndx"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c7dat"]
 texture = ExtResource("8_ihpp7")
@@ -123,7 +123,7 @@ offset_right = 272.21994
 offset_bottom = 119.97998
 scale = Vector2(0.4, 0.4)
 tooltip_text = "Money"
-theme_override_constants/separation = 20
+theme_override_constants/separation = 40
 
 [node name="Money" type="HBoxContainer" parent="MarginContainer/NinePatchRect/MoneyArea" unique_id=1154025701]
 layout_mode = 2
@@ -145,8 +145,15 @@ theme_override_font_sizes/font_size = 200
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GainLabel" type="Label" parent="MarginContainer/NinePatchRect/MoneyArea" unique_id=1418930507]
+[node name="GainSlot" type="Control" parent="MarginContainer/NinePatchRect/MoneyArea" unique_id=1098945442]
 layout_mode = 2
+
+[node name="GainLabel" type="Label" parent="MarginContainer/NinePatchRect/MoneyArea/GainSlot" unique_id=1418930507]
+layout_mode = 0
+offset_left = -21.0
+offset_top = 54.0
+offset_right = -20.0
+offset_bottom = 163.0
 theme_override_colors/font_color = Color(0.7657576, 0.46205914, 0.16324592, 1)
 theme_override_fonts/font = ExtResource("3_7a4el")
 theme_override_font_sizes/font_size = 100
@@ -395,13 +402,15 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_6lq5t")
 theme_override_styles/hover = SubResource("StyleBoxTexture_6lq5t")
 
 [node name="SaleFeedback" type="Label" parent="." unique_id=377151671]
-layout_mode = 0
-offset_left = 24.0
-offset_top = 506.0
-offset_right = 753.0
-offset_bottom = 779.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.013541667
+anchor_top = 0.4037037
+anchor_right = 0.39322916
+anchor_bottom = 0.6564815
 theme_override_fonts/font = ExtResource("7_3qgpa")
 theme_override_font_sizes/font_size = 200
+metadata/_edit_use_anchors_ = true
 
 [node name="SettingsButton" type="TextureButton" parent="." unique_id=166778730]
 layout_mode = 1

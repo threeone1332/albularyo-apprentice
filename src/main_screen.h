@@ -47,6 +47,8 @@ private:
     int gain_id;
 
     Vector<Rect2> potion_icon_regions;
+    Vector2 sale_feedback_start_pos;
+    Vector2 gain_label_start_pos;
 
 protected:
     static void _bind_methods();

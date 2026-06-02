@@ -53,8 +53,7 @@ void MainScreen::_ready() {
 
     // 3. Bind UI Components securely
     money_label = get_node<Label>("MarginContainer/NinePatchRect/MoneyArea/Money/Label");
-    gain_label = get_node<Label>("MarginContainer/NinePatchRect/MoneyArea/GainLabel");
-    sale_feedback = get_node<Label>("SaleFeedback");
+    gain_label = get_node<Label>("MarginContainer/NinePatchRect/MoneyArea/GainSlot/GainLabel");    sale_feedback = get_node<Label>("SaleFeedback");
 
     morning_icon = get_node<TextureRect>("MarginContainer/NinePatchRect/Time/Morning");
     noon_icon = get_node<TextureRect>("MarginContainer/NinePatchRect/Time/Noon");
@@ -83,6 +82,10 @@ void MainScreen::_ready() {
     sale_feedback->set_visible(false);
     gain_label->set_text("");
     gain_label->set_visible(true);
+
+    sale_feedback_start_pos = sale_feedback->get_position();
+
+    gain_label_start_pos = gain_label->get_position();
 
     // 6. Hook signals safely
     decrease_button->connect("pressed", Callable(this, "_on_decrease_pressed"));
@@ -138,7 +141,7 @@ void MainScreen::_advance_phase_tick() {
     int difference = new_gold - old_gold;
 
     if (difference < 0) {
-        _show_sale_feedback("ADVENTURERS PAID", false);
+        _show_sale_feedback("ADVENTURERS FEE", false);
         _show_gold_loss(UtilityFunctions::abs(difference));
     }
 
@@ -189,10 +192,10 @@ void MainScreen::_update_time_icons() {
 
 void MainScreen::_show_sale_feedback(String text, bool sold) {
     feedback_id++;
-    int current_id = feedback_id;
 
     sale_feedback->set_text(text);
     sale_feedback->set_visible(true);
+    sale_feedback->set_position(sale_feedback_start_pos);
     sale_feedback->set_modulate(Color(1.0, 1.0, 1.0, 1.0));
 
     if (sold) {
@@ -201,60 +204,49 @@ void MainScreen::_show_sale_feedback(String text, bool sold) {
         sale_feedback->add_theme_color_override("font_color", Color::html("#8A5A52"));
     }
 
-    Vector2 start_pos = sale_feedback->get_position();
-    Vector2 end_pos = start_pos + Vector2(0, -18);
+    Vector2 end_pos = sale_feedback_start_pos + Vector2(0, -18);
 
     Ref<Tween> tween = create_tween();
     tween->tween_interval(0.25);
     tween->set_parallel(true);
     tween->tween_property(sale_feedback, "position", end_pos, 0.9);
     tween->tween_property(sale_feedback, "modulate:a", 0.0, 0.9);
-
-    // In GDExtension, we track 'finished' callbacks cleanly using callables or lambda delays rather than blocking loops
-    tween->connect("finished", Callable(this, "_update_ui"));
-
-    // Position restore reset check logic sequence tracking
-    sale_feedback->set_position(start_pos);
 }
 
 void MainScreen::_show_gold_gain(int amount) {
     gain_id++;
-    int current_id = gain_id;
 
     gain_label->set_text("+" + UtilityFunctions::str(amount));
     gain_label->add_theme_color_override("font_color", Color::html("#D39B38"));
-    gain_label->set_modulate(Color(1.0, 1.0, 1.0, 1.0));
-    gain_label->set_scale(Vector2(1.15, 1.15));
 
-    Vector2 start_pos = gain_label->get_position();
-    Vector2 end_pos = start_pos + Vector2(18, -35);
+    gain_label->set_position(gain_label_start_pos);
+    gain_label->set_modulate(Color(1, 1, 1, 1));
+    gain_label->set_scale(Vector2(1.5, 1.5));
+
+    Vector2 end_pos = gain_label_start_pos + Vector2(0, -25);
 
     Ref<Tween> tween = create_tween();
-    tween->tween_interval(0.15);
     tween->set_parallel(true);
-    tween->tween_property(gain_label, "position", end_pos, 1.0);
-    tween->tween_property(gain_label, "modulate:a", 0.0, 1.0);
-    tween->tween_property(gain_label, "scale", Vector2(1.35, 1.35), 0.25);
+    tween->tween_property(gain_label, "position", end_pos, 0.8);
+    tween->tween_property(gain_label, "modulate:a", 0.0, 0.8);
 }
 
 void MainScreen::_show_gold_loss(int amount) {
     gain_id++;
-    int current_id = gain_id;
 
     gain_label->set_text("-" + UtilityFunctions::str(amount));
     gain_label->add_theme_color_override("font_color", Color::html("#8A5A52"));
-    gain_label->set_modulate(Color(1.0, 1.0, 1.0, 1.0));
+
+    gain_label->set_position(gain_label_start_pos);
+    gain_label->set_modulate(Color(1, 1, 1, 1));
     gain_label->set_scale(Vector2(1.5, 1.5));
 
-    Vector2 start_pos = gain_label->get_position();
-    Vector2 end_pos = start_pos + Vector2(18, -35);
+    Vector2 end_pos = gain_label_start_pos + Vector2(0, -25);
 
     Ref<Tween> tween = create_tween();
-    tween->tween_interval(0.15);
     tween->set_parallel(true);
-    tween->tween_property(gain_label, "position", end_pos, 1.0);
-    tween->tween_property(gain_label, "modulate:a", 0.0, 1.0);
-    tween->tween_property(gain_label, "scale", Vector2(2.0, 2.0), 0.22);
+    tween->tween_property(gain_label, "position", end_pos, 0.8);
+    tween->tween_property(gain_label, "modulate:a", 0.0, 0.8);
 }
 
 void MainScreen::_on_mixing_pressed() {
