@@ -151,7 +151,7 @@ void MainMenu::_on_music_slider_value_changed(double value) {
     AudioServer* audio_server = AudioServer::get_singleton();
     if (!audio_server) return;
 
-    int bus_index = audio_server->get_bus_index("Master");
+    int bus_index = audio_server->get_bus_index("Music");
     if (bus_index != -1) {
         if (value <= 0.005) {
             audio_server->set_bus_mute(bus_index, true);
@@ -165,7 +165,19 @@ void MainMenu::_on_music_slider_value_changed(double value) {
 }
 
 void MainMenu::_on_sfx_slider_value_changed(double value) {
-    // Left blank for future SFX layout expansion
+    AudioServer* audio_server = AudioServer::get_singleton();
+    if (!audio_server) return;
+
+    int bus_index = audio_server->get_bus_index("SFX");
+    if (bus_index != -1) {
+        if (value <= 0.005) {
+            audio_server->set_bus_mute(bus_index, true);
+        } else {
+            audio_server->set_bus_mute(bus_index, false);
+            double volume_db = UtilityFunctions::linear_to_db(value);
+            audio_server->set_bus_volume_db(bus_index, volume_db);
+        }
+    }
 }
 
 void MainMenu::play_button_click_sfx() {
