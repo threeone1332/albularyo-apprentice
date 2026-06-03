@@ -13,6 +13,7 @@
 #include <gdextension_interface.h>
 #include <godot_cpp/core/defs.hpp>
 #include <godot_cpp/godot.hpp>
+#include "tutorial_scene.h"
 
 using namespace godot;
 
@@ -30,6 +31,7 @@ void initialize_albularyo_module(ModuleInitializationLevel p_level) {
     ClassDB::register_class<IntroCutscene>();
     ClassDB::register_class<MainScreen>();
     ClassDB::register_class<Settings>();
+    ClassDB::register_class<TutorialScene>();
 }
 
 void uninitialize_albularyo_module(ModuleInitializationLevel p_level) {}
