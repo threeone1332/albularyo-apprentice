@@ -16,7 +16,7 @@
 [ext_resource type="FontFile" uid="uid://clux6cekpic0m" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="13_3qsiq"]
 [ext_resource type="Texture2D" uid="uid://cgojjx8fa48vu" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/UI Big Play Button.png" id="14_7087c"]
 [ext_resource type="Texture2D" uid="uid://s818x6sucqov" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/emojis-free/emoji style ui/Inventory_Blocks_Spritesheet.png" id="15_do8p6"]
-[ext_resource type="Texture2D" uid="uid://cr4juofku7b1f" path="res://assets/ui/Mixing screen/potion_sprite_sheet.png" id="16_c7dat"]
+[ext_resource type="Texture2D" uid="uid://cr4juofku7b1f" path="res://assets/ui/Mixing Screen/potion_sprite_sheet.png" id="16_c7dat"]
 [ext_resource type="Texture2D" uid="uid://cakesrmx2b8qr" path="res://assets/ui/Main Screen/desk.png" id="17_30ndx"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c7dat"]
