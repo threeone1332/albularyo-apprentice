@@ -5,7 +5,7 @@
 using namespace godot;
 
 GameState::GameState() :
-    gold(1000),
+    gold(100),
     current_phase(Phase::SUN),
     price_slider_value(10),
     adventurers_unlocked(false),

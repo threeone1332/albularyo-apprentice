@@ -228,11 +228,13 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_sj757")
 
 [node name="Label" type="Label" parent="MarginContainer/NinePatchRect/Price/Slider" unique_id=1164929174]
 z_index = 1
+custom_minimum_size = Vector2(107, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.38431373, 0.24313726, 0.24313726, 1)
 theme_override_fonts/font = ExtResource("3_7a4el")
 theme_override_font_sizes/font_size = 70
 text = "INT"
+horizontal_alignment = 1
 
 [node name="Increase" type="Button" parent="MarginContainer/NinePatchRect/Price/Slider" unique_id=582681066]
 custom_minimum_size = Vector2(100, 90)
@@ -254,14 +256,17 @@ theme_override_colors/font_color = Color(0.38431373, 0.24313726, 0.24313726, 1)
 theme_override_fonts/font = ExtResource("3_7a4el")
 theme_override_font_sizes/font_size = 38
 text = "SELL CHANCE"
+horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="MarginContainer/NinePatchRect/Price/Demand" unique_id=783570616]
 z_index = 1
+custom_minimum_size = Vector2(280, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.38431373, 0.24313726, 0.24313726, 1)
 theme_override_fonts/font = ExtResource("3_7a4el")
 theme_override_font_sizes/font_size = 38
 text = "INT% PER SECOND"
+horizontal_alignment = 1
 
 [node name="Feature" type="MarginContainer" parent="MarginContainer/NinePatchRect" unique_id=244627103]
 layout_mode = 1
