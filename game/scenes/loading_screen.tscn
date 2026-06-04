@@ -63,6 +63,6 @@ text = "Loading... 0 / 100"
 
 [node name="LoadingSFX" type="AudioStreamPlayer" parent="." unique_id=1220633594]
 stream = ExtResource("3_ku3bi")
-volume_db = -12.0
+volume_db = -10.0
 autoplay = true
 bus = &"SFX"

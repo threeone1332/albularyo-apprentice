@@ -13,6 +13,10 @@
 #include <godot_cpp/classes/property_tweener.hpp>
 #include <godot_cpp/classes/interval_tweener.hpp>
 #include <godot_cpp/templates/vector.hpp>
+#include <godot_cpp/classes/audio_stream_player.hpp>
+#include <godot_cpp/classes/resource_loader.hpp>
+#include <godot_cpp/classes/audio_stream.hpp>
+#include <godot_cpp/classes/scene_tree_timer.hpp>
 
 namespace godot {
 
@@ -60,6 +64,15 @@ private:
     // Private function signature to match main_screen.cpp
     void _save_game_to_disk();
 
+    //for SFX 
+    AudioStreamPlayer* button_click_sfx;
+    AudioStreamPlayer* money_sfx;
+    String pending_scene_path;
+
+    void play_button_click_sfx();
+    void play_money_sfx();
+    void ensure_main_game_music();
+
 protected:
     static void _bind_methods();
 
@@ -86,6 +99,7 @@ public:
     void _show_sale_feedback(String text, bool sold);
     void _show_gold_gain(int amount);
     void _show_gold_loss(int amount);
+    void _on_scene_change_delay_timeout();
 };
 
 } // namespace godot

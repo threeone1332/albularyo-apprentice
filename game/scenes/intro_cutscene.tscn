@@ -113,9 +113,11 @@ metadata/_edit_use_anchors_ = true
 stream = ExtResource("4_dw6o5")
 volume_db = -5.0
 autoplay = true
+bus = &"Music"
 
 [node name="ButtonClickSFX" type="AudioStreamPlayer" parent="." unique_id=635912222]
 stream = ExtResource("5_xeku4")
 volume_db = -6.0
+bus = &"SFX"
 
 [connection signal="animation_finished" from="CanvasLayer/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

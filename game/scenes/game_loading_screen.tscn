@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://dxfthbty0cr0u"]
 
-[ext_resource type="VideoStream" uid="uid://b6v815qliuhxi" path="res://assets/ui/Loading Screen/Game Loading Scene BG.ogv" id="1_bewip"]
-[ext_resource type="FontFile" uid="uid://clux6cekpic0m" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="2_4cmoq"]
+[ext_resource type="VideoStream" uid="uid://b6v815qliuhxi" path="res://assets/ui/loading screen/Game Loading Scene BG.ogv" id="1_bewip"]
+[ext_resource type="FontFile" uid="uid://bh5e6m7dcmnm5" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="2_4cmoq"]
+[ext_resource type="AudioStream" uid="uid://ctjppe5ika7g0" path="res://assets/Sounds/(Loading Screen) denielcz-loading-dips-scary-437831.mp3" id="3_4cmoq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tmcx7"]
 bg_color = Color(0.34117648, 0.41960785, 0.16078432, 1)
@@ -83,3 +84,9 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("2_4cmoq")
 theme_override_font_sizes/font_size = 43
 text = "Loading... 0 / 100"
+
+[node name="GameLoadingSFX" type="AudioStreamPlayer" parent="." unique_id=1988703988]
+stream = ExtResource("3_4cmoq")
+volume_db = -12.0
+autoplay = true
+bus = &"Music"

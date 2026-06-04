@@ -14,6 +14,8 @@ TutorialScene::TutorialScene() {
     next_button = nullptr;
     skip_button = nullptr;
     start_button = nullptr;
+    button_click_sfx = nullptr;
+    pending_scene_path = "";
     current_slide = 0;
 }
 
@@ -24,6 +26,7 @@ void TutorialScene::_bind_methods() {
     ClassDB::bind_method(D_METHOD("_on_back_pressed"), &TutorialScene::_on_back_pressed);
     ClassDB::bind_method(D_METHOD("_on_skip_pressed"), &TutorialScene::_on_skip_pressed);
     ClassDB::bind_method(D_METHOD("_on_start_pressed"), &TutorialScene::_on_start_pressed);
+    ClassDB::bind_method(D_METHOD("_on_start_delay_timeout"), &TutorialScene::_on_start_delay_timeout);
 }
 
 void TutorialScene::_ready() {
@@ -34,6 +37,14 @@ void TutorialScene::_ready() {
     next_button = get_node<TextureButton>("NextButton");
     skip_button = get_node<TextureButton>("SkipButton");
     start_button = get_node<TextureButton>("StartButton");
+
+    button_click_sfx = Object::cast_to<AudioStreamPlayer>(
+        get_node_or_null("ButtonClickSFX")
+    );
+
+    if (!button_click_sfx) {
+        UtilityFunctions::printerr("TutorialScene C++: ButtonClickSFX node not found.");
+    }
 
     if (!slide_image || !back_button || !next_button || !skip_button || !start_button) {
         UtilityFunctions::printerr("TutorialScene C++: Missing nodes.");
@@ -64,6 +75,11 @@ void TutorialScene::_ready() {
 
     update_slide();
 }
+void TutorialScene::play_button_click_sfx() {
+    if (button_click_sfx) {
+        button_click_sfx->play();
+    }
+}
 
 void TutorialScene::update_slide() {
     slide_image->set_texture(slides[current_slide]);
@@ -80,6 +96,7 @@ void TutorialScene::update_slide() {
 }
 
 void TutorialScene::_on_next_pressed() {
+    play_button_click_sfx();
     if (current_slide < slides.size() - 1) {
         current_slide++;
         update_slide();
@@ -89,6 +106,7 @@ void TutorialScene::_on_next_pressed() {
 }
 
 void TutorialScene::_on_back_pressed() {
+    play_button_click_sfx();
     if (current_slide > 0) {
         current_slide--;
         update_slide();
@@ -96,16 +114,26 @@ void TutorialScene::_on_back_pressed() {
 }
 
 void TutorialScene::_on_skip_pressed() {
+    play_button_click_sfx();
     current_slide = slides.size() - 1;
     update_slide();
 }
 
 void TutorialScene::_on_start_pressed() {
+    play_button_click_sfx();
     start_game();
 }
 
 void TutorialScene::start_game() {
-    get_tree()->change_scene_to_file("res://scenes/game_loading_screen.tscn");
+    pending_scene_path = "res://scenes/game_loading_screen.tscn";
+
+    Ref<SceneTreeTimer> timer = get_tree()->create_timer(0.2);
+    timer->connect("timeout", Callable(this, "_on_start_delay_timeout"));
+}
+void TutorialScene::_on_start_delay_timeout() {
+    if (pending_scene_path.is_empty()) return;
+
+    get_tree()->change_scene_to_file(pending_scene_path);
 }
 
 }

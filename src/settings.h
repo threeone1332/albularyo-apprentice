@@ -6,6 +6,7 @@
 #include <godot_cpp/classes/node.hpp>
 #include <godot_cpp/classes/control.hpp>
 #include <godot_cpp/classes/base_button.hpp>
+#include <godot_cpp/classes/audio_stream_player.hpp>
 
 namespace godot {
 
@@ -21,12 +22,14 @@ private:
     BaseButton *check_button = nullptr;
     BaseButton *x_button = nullptr;
     BaseButton *click_blocker = nullptr;
+    AudioStreamPlayer *button_click_sfx = nullptr;
 
     // State Tracking Flags: 0 = None, 1 = Main Menu, 2 = Hard Wipe & Restart
     int pending_action_type = 0;
 
     void set_paused(bool p_state);
     void try_bind_settings_button(Node *current_scene);
+    void play_button_click_sfx();
 
 protected:
     static void _bind_methods();

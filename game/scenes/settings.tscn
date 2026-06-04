@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bn6pmtusc04ft" path="res://assets/ui/Settings Panel/play button.png" id="5_gis3k"]
 [ext_resource type="Texture2D" uid="uid://hnu7ebm0ee21" path="res://assets/ui/Main Menu/HOVEREDSprite sheet for Basic Pack.png" id="6_01roj"]
 [ext_resource type="Texture2D" uid="uid://1cmnnk42vtsl" path="res://assets/ui/Settings Panel/replay button.png" id="6_83j8s"]
+[ext_resource type="AudioStream" path="res://assets/Sounds/(Button Click) emilianodleon-select-button-ui-395763.mp3" id="8_gjs24"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_es4n0"]
 
@@ -149,6 +150,10 @@ text = "Music  Volume"
 [node name="MusicSlider" type="HSlider" parent="Panel/MarginContainer/VBoxContainer/SliderPaddingContainer/MusicRow" unique_id=261541260]
 layout_mode = 2
 size_flags_horizontal = 3
+min_value = 0.0
+max_value = 1.0
+step = 0.001
+value = 0.5
 
 [node name="SFXRow" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/SliderPaddingContainer" unique_id=814327434]
 layout_mode = 2
@@ -164,6 +169,10 @@ text = "SFX  Volume"
 [node name="SFXSlider" type="HSlider" parent="Panel/MarginContainer/VBoxContainer/SliderPaddingContainer/SFXRow" unique_id=1923113974]
 layout_mode = 2
 size_flags_horizontal = 3
+min_value = 0.0
+max_value = 1.0
+step = 0.001
+value = 0.5
 
 [node name="ButtonContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=2060305829]
 layout_mode = 2
@@ -308,6 +317,11 @@ focus_mode = 0
 texture_normal = SubResource("AtlasTexture_wqwn7")
 texture_pressed = SubResource("AtlasTexture_7kvyq")
 stretch_mode = 5
+
+[node name="ButtonClickSFX" type="AudioStreamPlayer" parent="." unique_id=1038024450]
+stream = ExtResource("8_gjs24")
+volume_db = -6.0
+bus = &"SFX"
 
 [connection signal="value_changed" from="Panel/MarginContainer/VBoxContainer/SliderPaddingContainer/MusicRow/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="Panel/MarginContainer/VBoxContainer/SliderPaddingContainer/SFXRow/SFXSlider" to="." method="_on_sfx_slider_value_changed"]

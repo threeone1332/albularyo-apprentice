@@ -4,6 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://b7ges5wf4h1ds" path="res://assets/ui/Tutorial Screen/NEXT.png" id="2_yf4vk"]
 [ext_resource type="Texture2D" uid="uid://cbsjkhcpq3m8p" path="res://assets/ui/Tutorial Screen/skip.png" id="3_tbeqj"]
 [ext_resource type="Texture2D" uid="uid://376yhvk231vu" path="res://assets/ui/Tutorial Screen/start.png" id="4_yf4vk"]
+[ext_resource type="AudioStream" uid="uid://d3to6keo34emd" path="res://assets/Sounds/(Tutorial Screen and TechTree) denis-pavlov-music-jazz-bossa-nova-cooking-show-music-312826.mp3" id="5_k7w8g"]
+[ext_resource type="AudioStream" uid="uid://dcgyi0yljsajj" path="res://assets/Sounds/(Button Click) emilianodleon-select-button-ui-395763.mp3" id="6_ki3mu"]
 
 [node name="TutorialScene" type="TutorialScene" unique_id=2003565696]
 anchors_preset = 15
@@ -59,3 +61,14 @@ offset_bottom = 1034.0
 texture_normal = ExtResource("4_yf4vk")
 ignore_texture_size = true
 stretch_mode = 0
+
+[node name="TutorialMusicPlayer" type="AudioStreamPlayer" parent="." unique_id=712718846]
+stream = ExtResource("5_k7w8g")
+volume_db = -12.0
+autoplay = true
+bus = &"Music"
+
+[node name="ButtonClickSFX" type="AudioStreamPlayer" parent="." unique_id=1029255754]
+stream = ExtResource("6_ki3mu")
+volume_db = -6.0
+bus = &"SFX"

@@ -2,6 +2,7 @@
 #include <godot_cpp/classes/file_access.hpp>
 #include <godot_cpp/classes/json.hpp>
 #include <godot_cpp/variant/utility_functions.hpp>
+#include <godot_cpp/classes/window.hpp>
 
 namespace godot {
 
@@ -31,7 +32,11 @@ MainScreen::MainScreen() {
     phase_timer = 0.0;
     sell_timer = 0.0;
     feedback_id = 0;
-    gain_id = 0;
+    gain_id = 0;\
+    //added for SFX
+    button_click_sfx = nullptr;
+    money_sfx = nullptr;
+    pending_scene_path = "";
 }
 
 MainScreen::~MainScreen() {}
@@ -42,10 +47,13 @@ void MainScreen::_bind_methods() {
     ClassDB::bind_method(D_METHOD("_on_mixing_pressed"), &MainScreen::_on_mixing_pressed);
     ClassDB::bind_method(D_METHOD("_on_tech_tree_pressed"), &MainScreen::_on_tech_tree_pressed);
     ClassDB::bind_method(D_METHOD("_save_game_to_disk"), &MainScreen::_save_game_to_disk);
+    ClassDB::bind_method(D_METHOD("_on_scene_change_delay_timeout"), &MainScreen::_on_scene_change_delay_timeout);
 }
 
 void MainScreen::_ready() {
     if (Engine::get_singleton()->is_editor_hint()) return;
+
+    ensure_main_game_music();
 
     // 1. Establish custom texture coordinate indexing positions
     potion_icon_regions.push_back(Rect2(20, 20, 200, 200));   // Lunas ng Sigla
@@ -85,6 +93,22 @@ void MainScreen::_ready() {
     // FIX: Safely bind structural nodes matching your updated Scene Tree hierarchy
     autosave_panel = Object::cast_to<PanelContainer>(get_node_or_null("AutosaveNotification/PanelContainer"));
     autosave_label = Object::cast_to<Label>(get_node_or_null("AutosaveNotification/PanelContainer/HBoxContainer/AutosaveLabel"));
+
+    button_click_sfx = Object::cast_to<AudioStreamPlayer>(
+        get_node_or_null("ButtonClickSFX")
+    );
+
+    money_sfx = Object::cast_to<AudioStreamPlayer>(
+        get_node_or_null("MoneySFX")
+    );
+
+    if (!button_click_sfx) {
+        UtilityFunctions::printerr("MainScreen C++: ButtonClickSFX node not found.");
+    }
+
+    if (!money_sfx) {
+        UtilityFunctions::printerr("MainScreen C++: MoneySFX node not found.");
+    }
 
     // 4. Fallback validations to track down specific runtime issues
     if (!game_state) {
@@ -146,6 +170,8 @@ void MainScreen::_attempt_sale_tick() {
     } else {
         bool sold = game_state->call("attempt_sale");
         if (sold) {
+            play_money_sfx();
+
             int gained = game_state->call("get_price");
             _show_sale_feedback("SOLD!", true);
             _show_gold_gain(gained);
@@ -219,12 +245,16 @@ void MainScreen::_save_game_to_disk() {
 }
 
 void MainScreen::_on_decrease_pressed() {
+    play_button_click_sfx();
+
     int current_price = game_state->call("get_price");
     game_state->call("set_price", current_price - 1);
     _update_ui();
 }
 
 void MainScreen::_on_increase_pressed() {
+    play_button_click_sfx();
+
     int current_price = game_state->call("get_price");
     game_state->call("set_price", current_price + 1);
     _update_ui();
@@ -319,11 +349,65 @@ void MainScreen::_show_gold_loss(int amount) {
 }
 
 void MainScreen::_on_mixing_pressed() {
-    get_tree()->change_scene_to_file("res://scenes/mixing_screen.tscn");
+    play_button_click_sfx();
+
+    pending_scene_path = "res://scenes/mixing_screen.tscn";
+
+    Ref<SceneTreeTimer> timer = get_tree()->create_timer(0.15);
+    timer->connect("timeout", Callable(this, "_on_scene_change_delay_timeout"));
 }
 
 void MainScreen::_on_tech_tree_pressed() {
-    get_tree()->change_scene_to_file("res://scenes/tech_tree.tscn");
+    play_button_click_sfx();
+
+    pending_scene_path = "res://scenes/tech_tree.tscn";
+
+    Ref<SceneTreeTimer> timer = get_tree()->create_timer(0.15);
+    timer->connect("timeout", Callable(this, "_on_scene_change_delay_timeout"));
+}
+
+void MainScreen::play_button_click_sfx() {
+    if (button_click_sfx) {
+        button_click_sfx->play();
+    }
+}
+
+void MainScreen::play_money_sfx() {
+    if (money_sfx) {
+        money_sfx->play();
+    }
+}
+
+void MainScreen::ensure_main_game_music() {
+    AudioStreamPlayer *main_music = Object::cast_to<AudioStreamPlayer>(
+        get_node_or_null("/root/MainGameMusic")
+    );
+
+    if (!main_music) {
+        main_music = memnew(AudioStreamPlayer);
+        main_music->set_name("MainGameMusic");
+
+        Ref<AudioStream> music_stream = ResourceLoader::get_singleton()->load(
+            "res://assets/Sounds/(Main Screen) Lobby-Time-trimmed.wav"
+        );
+
+        main_music->set_stream(music_stream);
+        main_music->set_bus("Music");
+        main_music->set_volume_db(-12.0);
+        main_music->set_process_mode(Node::PROCESS_MODE_ALWAYS);
+
+        get_tree()->get_root()->add_child(main_music);
+    }
+
+    if (!main_music->is_playing()) {
+        main_music->play();
+    }
+}
+
+void MainScreen::_on_scene_change_delay_timeout() {
+    if (pending_scene_path.is_empty()) return;
+
+    get_tree()->change_scene_to_file(pending_scene_path);
 }
 
 } // namespace godot

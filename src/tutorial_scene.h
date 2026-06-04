@@ -6,6 +6,8 @@
 #include <godot_cpp/classes/texture_button.hpp>
 #include <godot_cpp/classes/texture2d.hpp>
 #include <godot_cpp/templates/vector.hpp>
+#include <godot_cpp/classes/audio_stream_player.hpp>
+#include <godot_cpp/classes/scene_tree_timer.hpp>
 
 namespace godot {
 
@@ -18,9 +20,12 @@ private:
     TextureButton *next_button;
     TextureButton *skip_button;
     TextureButton *start_button;
+    AudioStreamPlayer *button_click_sfx;
+    String pending_scene_path;
 
     Vector<Ref<Texture2D>> slides;
     int current_slide;
+    void play_button_click_sfx();
 
 protected:
     static void _bind_methods();
@@ -39,6 +44,7 @@ public:
 
 
     void start_game();
+    void _on_start_delay_timeout();
 };
 
 }

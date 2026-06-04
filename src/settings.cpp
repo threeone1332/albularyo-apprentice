@@ -9,12 +9,15 @@
 #include <godot_cpp/classes/base_button.hpp>
 #include <godot_cpp/variant/utility_functions.hpp>
 
+#include <algorithm>
+
 using namespace godot;
 
 Settings::Settings() {
     is_paused = false;
     bound_scene = nullptr;
     pending_action_type = 0;
+    button_click_sfx = nullptr;
 }
 
 Settings::~Settings() {}
@@ -47,6 +50,11 @@ void Settings::_ready() {
     click_blocker = cast_to<BaseButton>(get_node_or_null("ConfirmationPanel/ClickBlocker"));
     check_button = cast_to<BaseButton>(get_node_or_null("ConfirmationPanel/BackgroundRect/MarginContainer/VBoxContainer/ButtonContainer/CheckButton"));
     x_button = cast_to<BaseButton>(get_node_or_null("ConfirmationPanel/BackgroundRect/MarginContainer/VBoxContainer/ButtonContainer/XButton"));
+    button_click_sfx = Object::cast_to<AudioStreamPlayer>(get_node_or_null("ButtonClickSFX"));
+
+    if (!button_click_sfx) {
+        UtilityFunctions::printerr("Settings C++: ButtonClickSFX node not found.");
+    }
 
     // Hook internal call nodes safely
     if (check_button && !check_button->is_connected("pressed", Callable(this, "_on_confirm_yes_pressed"))) {
@@ -89,6 +97,7 @@ void Settings::try_bind_settings_button(Node *current_scene) {
 }
 
 void Settings::open_settings_menu() {
+    play_button_click_sfx();
     set_paused(true);
 }
 
@@ -116,12 +125,14 @@ void Settings::set_paused(bool p_state) {
 }
 
 void Settings::_on_resume_pressed() {
+    play_button_click_sfx();
     set_paused(false);
 }
 
 // --- REDIRECT TO CONFIRMATION PROMPTS OVERLAY ---
 
 void Settings::_on_main_menu_pressed() {
+    play_button_click_sfx();
     pending_action_type = 1;
     if (confirmation_panel) {
         confirmation_panel->set_visible(true);
@@ -132,6 +143,7 @@ void Settings::_on_main_menu_pressed() {
 }
 
 void Settings::_on_restart_pressed() {
+    play_button_click_sfx();
     pending_action_type = 2;
     if (confirmation_panel) {
         confirmation_panel->set_visible(true);
@@ -144,6 +156,7 @@ void Settings::_on_restart_pressed() {
 // --- MODAL DIALOG USER CHOICES EXECUTORS ---
 
 void Settings::_on_confirm_no_pressed() {
+    play_button_click_sfx();
     pending_action_type = 0;
     if (confirmation_panel) {
         confirmation_panel->set_visible(false);
@@ -151,6 +164,8 @@ void Settings::_on_confirm_no_pressed() {
 }
 
 void Settings::_on_confirm_yes_pressed() {
+    play_button_click_sfx();
+
     if (confirmation_panel) {
         confirmation_panel->set_visible(false);
     }
@@ -159,6 +174,17 @@ void Settings::_on_confirm_yes_pressed() {
         // Option 1: Main Menu Return
         set_paused(false);
         bound_scene = nullptr;
+
+        // Stop the persistent main/mixing-screen music before returning to the main menu.
+        AudioStreamPlayer *main_music = Object::cast_to<AudioStreamPlayer>(
+            get_node_or_null("/root/MainGameMusic")
+        );
+
+        if (main_music) {
+            main_music->stop();
+            main_music->queue_free();
+        }
+
         get_tree()->change_scene_to_file("res://scenes/main_menu.tscn");
     }
     else if (pending_action_type == 2) {
@@ -195,11 +221,15 @@ void Settings::_on_music_slider_value_changed(double value) {
     AudioServer *server = AudioServer::get_singleton();
     int bus_idx = server->get_bus_index("Music");
     if (bus_idx != -1) {
-        if (value <= 0.005) {
+        // Sliders should send 0.0 to 1.0, but this also handles old 0 to 100 sliders.
+        double linear_volume = value > 1.0 ? value / 100.0 : value;
+        linear_volume = std::clamp(linear_volume, 0.0, 1.0);
+
+        if (linear_volume <= 0.005) {
             server->set_bus_mute(bus_idx, true);
         } else {
             server->set_bus_mute(bus_idx, false);
-            server->set_bus_volume_db(bus_idx, UtilityFunctions::linear_to_db(value));
+            server->set_bus_volume_db(bus_idx, UtilityFunctions::linear_to_db(linear_volume));
         }
     }
 }
@@ -208,11 +238,21 @@ void Settings::_on_sfx_slider_value_changed(double value) {
     AudioServer *server = AudioServer::get_singleton();
     int bus_idx = server->get_bus_index("SFX");
     if (bus_idx != -1) {
-        if (value <= 0.005) {
+        // Sliders should send 0.0 to 1.0, but this also handles old 0 to 100 sliders.
+        double linear_volume = value > 1.0 ? value / 100.0 : value;
+        linear_volume = std::clamp(linear_volume, 0.0, 1.0);
+
+        if (linear_volume <= 0.005) {
             server->set_bus_mute(bus_idx, true);
         } else {
             server->set_bus_mute(bus_idx, false);
-            server->set_bus_volume_db(bus_idx, UtilityFunctions::linear_to_db(value));
+            server->set_bus_volume_db(bus_idx, UtilityFunctions::linear_to_db(linear_volume));
         }
+    }
+}
+
+void Settings::play_button_click_sfx() {
+    if (button_click_sfx) {
+        button_click_sfx->play();
     }
 }
