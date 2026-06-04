@@ -3,7 +3,7 @@
 [ext_resource type="VideoStream" uid="uid://teluxe7t5x5q" path="res://assets/ui/Main Menu/Main Menu Scene BG.ogv" id="1_tbmy8"]
 [ext_resource type="Texture2D" uid="uid://cgojjx8fa48vu" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/UI Big Play Button.png" id="2_7vrkn"]
 [ext_resource type="FontFile" uid="uid://clux6cekpic0m" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="2_jix8l"]
-[ext_resource type="AudioStream" uid="uid://wq27hlyujjumpn" path="res://assets/Sounds/emilianodleon-select-button-ui-395763.mp3" id="4_jk1qb"]
+[ext_resource type="AudioStream" uid="uid://wq27hlyujjpn" path="res://assets/Sounds/emilianodleon-select-button-ui-395763.mp3" id="4_jk1qb"]
 [ext_resource type="Texture2D" uid="uid://b0k6o3anq4iwo" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Setting menu.png" id="5_8ln24"]
 [ext_resource type="Texture2D" uid="uid://dm22iehvy7g21" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="6_rtw2f"]
 [ext_resource type="Texture2D" uid="uid://p1d47f1jprsx" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/UI Settings Buttons.png" id="7_oa1go"]
@@ -162,7 +162,6 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_jix8l")
 text = "QUIT"
 
 [node name="Panel" type="Panel" parent="." unique_id=600317187]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

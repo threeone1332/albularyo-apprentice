@@ -1,5 +1,4 @@
 #include "main_menu.h"
-
 #include "Gamestate.h"
 
 #include <godot_cpp/classes/engine.hpp>
@@ -10,6 +9,7 @@
 #include <godot_cpp/classes/project_settings.hpp>
 #include <godot_cpp/classes/scene_tree.hpp>
 #include <godot_cpp/classes/timer.hpp>
+#include <godot_cpp/classes/audio_server.hpp>
 #include <godot_cpp/core/memory.hpp>
 #include <godot_cpp/variant/node_path.hpp>
 #include <godot_cpp/variant/string_name.hpp>
@@ -73,12 +73,55 @@ void MainMenu::_ready() {
     sfx_slider = safe_get<HSlider>(this, "Panel/SliderPaddingContainer/VBoxContainer/SFXRow/SFXSlider");
 
     click_outside_detector = safe_get<Button>(this, "Panel/ClickOutsideDetector");
+
+    // FIXED PATH via image_5a3527.png: Re-added the layout MarginContainer tier
     exit_button = safe_get<Button>(this, "Panel/MarginContainer/NinePatchRect/exit_settings");
 
     button_click_sfx = safe_get<AudioStreamPlayer>(this, "ButtonClickSFX");
 
     if (panel) panel->set_visible(false);
 
+    // --- FIX MOUSE FILTER PASS-THROUGHS BASED ON SCENE TREE ---
+    if (panel) {
+        panel->set_mouse_filter(MOUSE_FILTER_IGNORE);
+    }
+
+    // Ensure the container branch passes down mouse events to exit_settings
+    if (safe_get<Control>(this, "Panel/MarginContainer")) {
+        safe_get<Control>(this, "Panel/MarginContainer")->set_mouse_filter(MOUSE_FILTER_PASS);
+    }
+    if (safe_get<Control>(this, "Panel/MarginContainer/NinePatchRect")) {
+        safe_get<Control>(this, "Panel/MarginContainer/NinePatchRect")->set_mouse_filter(MOUSE_FILTER_PASS);
+    }
+
+    if (safe_get<Control>(this, "Panel/SliderPaddingContainer")) {
+        safe_get<Control>(this, "Panel/SliderPaddingContainer")->set_mouse_filter(MOUSE_FILTER_IGNORE);
+        safe_get<Control>(this, "Panel/SliderPaddingContainer/VBoxContainer")->set_mouse_filter(MOUSE_FILTER_IGNORE);
+        safe_get<Control>(this, "Panel/SliderPaddingContainer/VBoxContainer/MusicRow")->set_mouse_filter(MOUSE_FILTER_IGNORE);
+        safe_get<Control>(this, "Panel/SliderPaddingContainer/VBoxContainer/SFXRow")->set_mouse_filter(MOUSE_FILTER_IGNORE);
+    }
+
+    // --- CONFIGURE ATTRIBUTES FOR STABLE DECIMAL SCALING (0.0 - 1.0) ---
+    if (music_slider) {
+        music_slider->set_mouse_filter(MOUSE_FILTER_STOP);
+        music_slider->set_min(0.0);
+        music_slider->set_max(1.0);
+        music_slider->set_step(0.001);
+        music_slider->set_value(0.5);
+    }
+
+    if (sfx_slider) {
+        sfx_slider->set_mouse_filter(MOUSE_FILTER_STOP);
+        sfx_slider->set_min(0.0);
+        sfx_slider->set_max(1.0);
+        sfx_slider->set_step(0.001);
+        sfx_slider->set_value(0.5);
+    }
+
+    if (click_outside_detector) click_outside_detector->set_mouse_filter(MOUSE_FILTER_STOP);
+    if (exit_button) exit_button->set_mouse_filter(MOUSE_FILTER_STOP);
+
+    // --- SIGNAL CONNECTIONS ---
     const StringName pressed_signal("pressed");
     safe_connect(start_button, pressed_signal, callable_mp(this, &MainMenu::_on_start_button_pressed));
     safe_connect(setting_button, pressed_signal, callable_mp(this, &MainMenu::_on_settings_pressed));
@@ -105,7 +148,6 @@ void MainMenu::_ready() {
 void MainMenu::_on_start_button_pressed() {
     play_button_click_sfx();
     pending_scene_path = "res://scenes/intro_cutscene.tscn";
-
     start_one_shot_timer(0.35, callable_mp(this, &MainMenu::_on_start_scene_delay_timeout));
 }
 
@@ -113,23 +155,18 @@ void MainMenu::_on_continue_pressed() {
     UtilityFunctions::print("[MAIN MENU] Continue pressed.");
     play_button_click_sfx();
 
-    UtilityFunctions::print("[MAIN MENU] Loading save before scene switch...");
     if (!load_game()) {
         UtilityFunctions::printerr("[MAIN MENU] Continue aborted because save loading failed.");
         return;
     }
 
-    UtilityFunctions::print("[MAIN MENU] Save load finished. Scheduling game loading screen.");
-
     pending_scene_path = "res://scenes/game_loading_screen.tscn";
-
     start_one_shot_timer(0.35, callable_mp(this, &MainMenu::_on_start_scene_delay_timeout));
 }
 
 void MainMenu::_on_new_game_pressed() {
     play_button_click_sfx();
 
-    // 1. Physically drop the JSON file from disk using safe GDExtension directory references
     if (FileAccess::file_exists(SAVE_PATH)) {
         Ref<DirAccess> dir = DirAccess::open("user://");
         if (dir.is_valid()) {
@@ -138,16 +175,12 @@ void MainMenu::_on_new_game_pressed() {
         }
     }
 
-    // 2. Clear out running values from the autoload tracker node instance back to core defaults
     GameState *global = Object::cast_to<GameState>(get_node_or_null(NodePath("/root/GlobalGameState")));
     if (global) {
         global->reset_state();
         UtilityFunctions::print("[MAIN MENU] GlobalGameState singletons normalized.");
-    } else {
-        UtilityFunctions::printerr("[MAIN MENU] Fallback failed: GlobalGameState runtime structure is unavailable.");
     }
 
-    // 3. Kickoff intro scene sequencing configuration
     pending_scene_path = "res://scenes/intro_cutscene.tscn";
     start_one_shot_timer(0.35, callable_mp(this, &MainMenu::_on_start_scene_delay_timeout));
 }
@@ -173,20 +206,36 @@ void MainMenu::_on_quit_pressed() {
 }
 
 void MainMenu::_on_music_slider_value_changed(double value) {
-    int bus_idx = AudioServer::get_singleton()->get_bus_index("Music");
+    AudioServer *audio_server = AudioServer::get_singleton();
+    if (!audio_server) return;
+
+    int bus_idx = audio_server->get_bus_index("Music");
     if (bus_idx != -1) {
-        float db = UtilityFunctions::linear_to_db(value);
-        AudioServer::get_singleton()->set_bus_volume_db(bus_idx, db);
+        if (value <= 0.005) {
+            audio_server->set_bus_mute(bus_idx, true);
+        } else {
+            audio_server->set_bus_mute(bus_idx, false);
+            float db = UtilityFunctions::linear_to_db(value);
+            audio_server->set_bus_volume_db(bus_idx, db);
+        }
     } else {
         UtilityFunctions::print("Music Bus not found yet. Current Slider Value: ", value);
     }
 }
 
 void MainMenu::_on_sfx_slider_value_changed(double value) {
-    int bus_idx = AudioServer::get_singleton()->get_bus_index("SFX");
+    AudioServer *audio_server = AudioServer::get_singleton();
+    if (!audio_server) return;
+
+    int bus_idx = audio_server->get_bus_index("SFX");
     if (bus_idx != -1) {
-        float db = UtilityFunctions::linear_to_db(value);
-        AudioServer::get_singleton()->set_bus_volume_db(bus_idx, db);
+        if (value <= 0.005) {
+            audio_server->set_bus_mute(bus_idx, true);
+        } else {
+            audio_server->set_bus_mute(bus_idx, false);
+            float db = UtilityFunctions::linear_to_db(value);
+            audio_server->set_bus_volume_db(bus_idx, db);
+        }
     } else {
         UtilityFunctions::print("SFX Bus not found yet. Current Slider Value: ", value);
     }
@@ -199,7 +248,6 @@ void MainMenu::start_one_shot_timer(double delay_seconds, const Callable &timeou
     add_child(timer);
 
     const StringName timeout_signal("timeout");
-    // Bind the timer pointer into the callback so we can clear it upon arrival
     Callable bound_callback = timeout_callback.bind(timer);
     timer->connect(timeout_signal, bound_callback, Object::CONNECT_ONE_SHOT);
     timer->start();
@@ -211,63 +259,28 @@ bool MainMenu::load_game() {
         resolved_path = ProjectSettings::get_singleton()->globalize_path(SAVE_PATH);
     }
 
-    UtilityFunctions::print("[MAIN MENU] Save path: ", SAVE_PATH);
-    UtilityFunctions::print("[MAIN MENU] Resolved save path: ", resolved_path);
-
-    if (!FileAccess::file_exists(SAVE_PATH)) {
-        UtilityFunctions::printerr("[MAIN MENU] Save file does not exist.");
-        return false;
-    }
-
-    UtilityFunctions::print("[MAIN MENU] Save file exists. Opening for read...");
+    if (!FileAccess::file_exists(SAVE_PATH)) return false;
 
     Ref<FileAccess> file = FileAccess::open(SAVE_PATH, FileAccess::READ);
-    if (file.is_null()) {
-        UtilityFunctions::printerr("[MAIN MENU] Failed to open save file. Open error: ", FileAccess::get_open_error());
-        return false;
-    }
-
-    UtilityFunctions::print("[MAIN MENU] Save file opened.");
+    if (file.is_null()) return false;
 
     String content = file->get_as_text();
     file->close();
 
-    UtilityFunctions::print("[MAIN MENU] Save file bytes/chars read: ", content.length());
-
-    if (content.strip_edges().is_empty()) {
-        UtilityFunctions::printerr("[MAIN MENU] Save file is empty.");
-        return false;
-    }
+    if (content.strip_edges().is_empty()) return false;
 
     Ref<JSON> json;
     json.instantiate();
 
-    UtilityFunctions::print("[MAIN MENU] Parsing save JSON...");
-    Error parse_error = json->parse(content);
-    if (parse_error != OK) {
-        UtilityFunctions::printerr("[MAIN MENU] Save JSON parse failed. Error: ", json->get_error_message(), " line: ", json->get_error_line());
-        return false;
-    }
-
-    UtilityFunctions::print("[MAIN MENU] Save JSON parsed.");
+    if (json->parse(content) != OK) return false;
 
     Variant data = json->get_data();
-    if (data.get_type() != Variant::DICTIONARY) {
-        UtilityFunctions::printerr("[MAIN MENU] Save JSON root is not a Dictionary. Variant type: ", data.get_type());
-        return false;
-    }
-
-    UtilityFunctions::print("[MAIN MENU] Save JSON root is Dictionary.");
+    if (data.get_type() != Variant::DICTIONARY) return false;
 
     GameState *global = Object::cast_to<GameState>(get_node_or_null(NodePath("/root/GlobalGameState")));
-    if (!global) {
-        UtilityFunctions::printerr("MainMenu C++: GlobalGameState autoload not found.");
-        return false;
-    }
+    if (!global) return false;
 
-    UtilityFunctions::print("[MAIN MENU] Applying save data to GlobalGameState...");
     global->load_save_data(data);
-    UtilityFunctions::print("[MAIN MENU] GlobalGameState loaded successfully.");
     return true;
 }
 
@@ -276,12 +289,10 @@ void MainMenu::play_button_click_sfx() {
 }
 
 void MainMenu::_on_start_scene_delay_timeout(Variant timer_node) {
-    // Safely delete the caller Timer object to clean memory footprint traces
     Timer *timer = Object::cast_to<Timer>(timer_node);
     if (timer) {
         timer->queue_free();
     }
-
     if (pending_scene_path.is_empty()) return;
     if (get_tree()) get_tree()->change_scene_to_file(pending_scene_path);
 }
@@ -291,7 +302,6 @@ void MainMenu::_on_quit_delay_timeout(Variant timer_node) {
     if (timer) {
         timer->queue_free();
     }
-
     if (get_tree()) get_tree()->quit();
 }
 
