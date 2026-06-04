@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dy2oe7qvji5l7"
+path="res://.godot/imported/(Tutorial Screen & Tech Tree) denis-pavlov-music-jazz-bossa-nova-cooking-show-music-312826.mp3-5c503b90a921dca209775740884e6374.mp3str"
+
+[deps]
+
+source_file="res://assets/Sounds/(Tutorial Screen & Tech Tree) denis-pavlov-music-jazz-bossa-nova-cooking-show-music-312826.mp3"
+dest_files=["res://.godot/imported/(Tutorial Screen & Tech Tree) denis-pavlov-music-jazz-bossa-nova-cooking-show-music-312826.mp3-5c503b90a921dca209775740884e6374.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

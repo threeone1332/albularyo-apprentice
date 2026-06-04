@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ctjppe5ika7g0"
+path="res://.godot/imported/(Loading Screen) denielcz-loading-dips-scary-437831.mp3-d3967b4e0955aa7230209e4e45b39ba6.mp3str"
+
+[deps]
+
+source_file="res://assets/Sounds/(Loading Screen) denielcz-loading-dips-scary-437831.mp3"
+dest_files=["res://.godot/imported/(Loading Screen) denielcz-loading-dips-scary-437831.mp3-d3967b4e0955aa7230209e4e45b39ba6.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
