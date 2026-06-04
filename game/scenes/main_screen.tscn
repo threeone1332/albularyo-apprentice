@@ -1,25 +1,26 @@
 [gd_scene format=3 uid="uid://bec5mps3luj7r"]
 
-[ext_resource type="Texture2D" uid="uid://bw6kilrc7jm1k" path="res://assets/ui/Main Screen/main_screen_background.png" id="1_c7dat"]
-[ext_resource type="Texture2D" uid="uid://dyp52dntr1dr4" path="res://assets/ui/Main Screen/morning_icon.png" id="2_c7dat"]
-[ext_resource type="Texture2D" uid="uid://ry3ei4osqvmb" path="res://assets/ui/Main Screen/noon_icon.png" id="3_3qgpa"]
-[ext_resource type="FontFile" uid="uid://b3w8qw1vuyjm1" path="res://assets/fonts/FontsFree-Net-Art-nuvo.ttf" id="3_7a4el"]
-[ext_resource type="Texture2D" uid="uid://bpawle5i4j1so" path="res://assets/ui/Main Screen/night_icon.png" id="4_3qgpa"]
-[ext_resource type="Texture2D" uid="uid://cdnea6io2pb43" path="res://assets/ui/Main Screen/money_icon.png" id="5_ihpp7"]
-[ext_resource type="Texture2D" uid="uid://dm22iehvy7g21" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="5_sjiej"]
-[ext_resource type="FontFile" uid="uid://kioijc5gmbl1" path="res://assets/fonts/Maragsâ-Display.otf" id="7_3qgpa"]
-[ext_resource type="Texture2D" uid="uid://45r7lj80g6c6" path="res://assets/ui/Main Screen/techtree_buttontexture.png" id="8_ihpp7"]
-[ext_resource type="Texture2D" uid="uid://baxyfwd03vltq" path="res://assets/ui/Main Screen/techtree_buttontexture_darker.png" id="9_6lq5t"]
-[ext_resource type="Texture2D" uid="uid://bkq8plccjiiqe" path="res://assets/ui/Main Screen/mixing_buttontexture.png" id="10_c7dat"]
-[ext_resource type="Texture2D" uid="uid://cct04ev6i8ubw" path="res://assets/ui/Main Screen/mixing_buttontexture_darker.png" id="11_21wo0"]
-[ext_resource type="Texture2D" uid="uid://b0k6o3anq4iwo" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Setting menu.png" id="12_cxp7d"]
-[ext_resource type="FontFile" uid="uid://clux6cekpic0m" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="13_3qsiq"]
-[ext_resource type="Texture2D" uid="uid://cgojjx8fa48vu" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/UI Big Play Button.png" id="14_7087c"]
-[ext_resource type="Texture2D" uid="uid://s818x6sucqov" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/emojis-free/emoji style ui/Inventory_Blocks_Spritesheet.png" id="15_do8p6"]
-[ext_resource type="Texture2D" uid="uid://cr4juofku7b1f" path="res://assets/ui/Mixing Screen/potion_sprite_sheet.png" id="16_c7dat"]
-[ext_resource type="Texture2D" uid="uid://cakesrmx2b8qr" path="res://assets/ui/Main Screen/desk.png" id="17_30ndx"]
+[ext_resource type="Texture2D" uid="uid://b40eekfg5n8l1" path="res://assets/ui/Main Screen/main_screen_background.png" id="1_c7dat"]
+[ext_resource type="Texture2D" uid="uid://ctciectnovvoy" path="res://assets/ui/Main Screen/morning_icon.png" id="2_c7dat"]
+[ext_resource type="Texture2D" uid="uid://ds67smkef3k7g" path="res://assets/ui/Main Screen/noon_icon.png" id="3_3qgpa"]
+[ext_resource type="FontFile" uid="uid://dypmd8h0gs5da" path="res://assets/fonts/FontsFree-Net-Art-nuvo.ttf" id="3_7a4el"]
+[ext_resource type="Texture2D" uid="uid://b0natdgn2wges" path="res://assets/ui/Main Screen/night_icon.png" id="4_3qgpa"]
+[ext_resource type="Texture2D" uid="uid://chd4fq1x35at0" path="res://assets/ui/Main Screen/money_icon.png" id="5_ihpp7"]
+[ext_resource type="Texture2D" uid="uid://bvib5w8emuue5" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="5_sjiej"]
+[ext_resource type="FontFile" uid="uid://bvvktptotfio3" path="res://assets/fonts/Maragsâ-Display.otf" id="7_3qgpa"]
+[ext_resource type="Texture2D" uid="uid://be2e5g2nq4jx1" path="res://assets/ui/Main Screen/techtree_buttontexture.png" id="8_ihpp7"]
+[ext_resource type="Texture2D" uid="uid://dmvs61rps8v24" path="res://assets/ui/Main Screen/techtree_buttontexture_darker.png" id="9_6lq5t"]
+[ext_resource type="Texture2D" uid="uid://bl0qrbdjvo8i1" path="res://assets/ui/Main Screen/mixing_buttontexture.png" id="10_c7dat"]
+[ext_resource type="Texture2D" uid="uid://boh72nlxcwtd3" path="res://assets/ui/Main Screen/mixing_buttontexture_darker.png" id="11_21wo0"]
+[ext_resource type="Texture2D" uid="uid://dkjkorsaag42k" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Setting menu.png" id="12_cxp7d"]
+[ext_resource type="FontFile" uid="uid://bh5e6m7dcmnm5" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="13_3qsiq"]
+[ext_resource type="Texture2D" uid="uid://c3u45uu6homm" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/UI Big Play Button.png" id="14_7087c"]
+[ext_resource type="Texture2D" uid="uid://crut7x228lq3c" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/emojis-free/emoji style ui/Inventory_Blocks_Spritesheet.png" id="15_do8p6"]
+[ext_resource type="Texture2D" uid="uid://dcahebo78kl4i" path="res://assets/ui/Mixing Screen/potion_sprite_sheet.png" id="16_c7dat"]
+[ext_resource type="Texture2D" uid="uid://dux8pqaw4ayqm" path="res://assets/ui/Main Screen/desk.png" id="17_30ndx"]
 [ext_resource type="AudioStream" uid="uid://dcgyi0yljsajj" path="res://assets/Sounds/(Button Click) emilianodleon-select-button-ui-395763.mp3" id="19_3qgpa"]
 [ext_resource type="AudioStream" uid="uid://bt1bqk7rfsnf3" path="res://assets/Sounds/(Money Sound) freesound_crunchpixstudio-combine-special-394482.mp3" id="20_ihpp7"]
+[ext_resource type="AudioStream" uid="uid://clgjvxaupqaj5" path="res://assets/Sounds/(Game Completed) mori_sound-fx-game-winner-497166.mp3" id="21_ihpp7"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c7dat"]
 texture = ExtResource("8_ihpp7")
@@ -623,3 +624,8 @@ layout_mode = 2
 texture_normal = SubResource("AtlasTexture_ihpp7")
 texture_pressed = SubResource("AtlasTexture_6lq5t")
 stretch_mode = 5
+
+[node name="VictorySFX" type="AudioStreamPlayer" parent="." unique_id=96573381]
+stream = ExtResource("21_ihpp7")
+volume_db = -6.0
+bus = &"SFX"

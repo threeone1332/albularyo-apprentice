@@ -57,6 +57,8 @@ private:
     void play_button_click_sfx();
     void play_insufficient_sfx();
     void stop_main_game_music();
+    void update_upgrade_visuals();
+    void set_upgrade_button_gray(String button_name, bool unlocked);
 
 protected:
     static void _bind_methods();

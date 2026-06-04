@@ -5,6 +5,7 @@
 #include <godot_cpp/classes/canvas_layer.hpp>
 #include <godot_cpp/classes/property_tweener.hpp>
 #include <godot_cpp/variant/utility_functions.hpp>
+#include <godot_cpp/classes/audio_stream.hpp>
 #include <ctime> // Fixed: Added for fallback initialization seeding
 
 namespace godot {
@@ -29,6 +30,7 @@ MainScreen::MainScreen() {
     potion_icon = nullptr;
     button_click_sfx = nullptr;
     money_sfx = nullptr;
+    victory_sfx = nullptr;
     autosave_panel = nullptr;
     autosave_label = nullptr;
     autosave_id = 0;
@@ -106,7 +108,13 @@ void MainScreen::_ready() {
 
     button_click_sfx = Object::cast_to<AudioStreamPlayer>(get_node_or_null("ButtonClickSFX"));
     money_sfx = Object::cast_to<AudioStreamPlayer>(get_node_or_null("MoneySFX"));
+    victory_sfx = Object::cast_to<AudioStreamPlayer>(
+        get_node_or_null("VictorySFX")
+    );
 
+    if (!victory_sfx) {
+        UtilityFunctions::printerr("MainScreen C++: VictorySFX node not found.");
+    }
     victory_overlay = Object::cast_to<CanvasLayer>(get_node_or_null("VictoryOverlay"));
     if (victory_overlay) {
         score_summary = get_node<Label>("VictoryOverlay/CenterContainer/PanelLayout/VBoxContainer/ScoreSummary");
@@ -229,6 +237,7 @@ void MainScreen::_check_victory_condition() {
 
     if (unlocked_count >= 5 && current_gold >= 1000) {
         is_victory_triggered = true;
+        play_victory_sfx();
 
         if (score_summary) {
             score_summary->set_text("YOUR MASTER IS PROUD. YOU HAVE MASTERED THE ELEMENTS, GATHERED THE SECRETS, AND FILLED THE TREASURY.");
@@ -432,8 +441,45 @@ void MainScreen::_on_tech_tree_pressed() {
     get_tree()->change_scene_to_file("res://scenes/tech_tree.tscn");
 }
 
-void MainScreen::ensure_main_game_music() {}
-void MainScreen::play_button_click_sfx() { if (button_click_sfx) button_click_sfx->play(); }
-void MainScreen::play_money_sfx() { if (money_sfx) money_sfx->play(); }
+void MainScreen::ensure_main_game_music() {
+    AudioStreamPlayer *main_music = Object::cast_to<AudioStreamPlayer>(
+        get_node_or_null("/root/MainGameMusic")
+    );
 
+    // If the shared music player does not exist yet, create it.
+    if (!main_music) {
+        main_music = memnew(AudioStreamPlayer);
+        main_music->set_name("MainGameMusic");
+
+        Ref<AudioStream> music_stream = ResourceLoader::get_singleton()->load(
+            "res://assets/Sounds/(Main Screen) Lobby-Time(chosic.com).mp3"
+        );
+
+        main_music->set_stream(music_stream);
+        main_music->set_bus("Music");
+        main_music->set_volume_db(-12.0);
+        main_music->set_process_mode(Node::PROCESS_MODE_ALWAYS);
+
+        get_tree()->get_root()->add_child(main_music);
+    }
+
+    // If it exists but is stopped, play it again.
+    if (!main_music->is_playing()) {
+        main_music->play();
+    }
+}
+
+void MainScreen::play_button_click_sfx() { 
+    if (button_click_sfx) button_click_sfx->play(); 
+}
+
+void MainScreen::play_money_sfx() { 
+    if (money_sfx) money_sfx->play(); 
+}
+
+void MainScreen::play_victory_sfx() {
+    if (victory_sfx) {
+        victory_sfx->play();
+    }
+}
 } // namespace godot

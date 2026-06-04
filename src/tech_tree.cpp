@@ -44,6 +44,7 @@ void TechTree::_ready() {
     unlock_sfx = Object::cast_to<AudioStreamPlayer>(get_node_or_null("UnlockSFX"));
     button_click_sfx = Object::cast_to<AudioStreamPlayer>(get_node_or_null("ButtonClickSFX"));
     insufficient_sfx = Object::cast_to<AudioStreamPlayer>(get_node_or_null("InsufficientSFX"));
+    update_upgrade_visuals();
 
     if (!insufficient_sfx) {
         UtilityFunctions::printerr("TechTree C++: InsufficientSFX node not found.");
@@ -243,6 +244,7 @@ void TechTree::buy_upgrade(String upgrade_id) {
     // Subtract gold and apply the upgrade effect in GameState.
     game_state->set_gold(game_state->get_gold() - cost);
     game_state->apply_tech_unlock(upgrade_id);
+    update_upgrade_visuals();
     play_unlock_sfx();
 
     update_money_label();
@@ -291,6 +293,35 @@ void TechTree::update_money_label() {
     } else {
         money_label->set_text("--");
     }
+}
+void TechTree::set_upgrade_button_gray(String button_name, bool unlocked) {
+    TextureButton *button = Object::cast_to<TextureButton>(
+        get_node_or_null(NodePath(button_name))
+    );
+
+    if (!button) {
+        return;
+    }
+
+    if (unlocked) {
+        // Makes the unlocked upgrade look gray.
+        button->set_modulate(Color(0.45, 0.45, 0.45, 1.0));
+    } else {
+        // Keeps locked/unbought upgrades in their normal color.
+        button->set_modulate(Color(1.0, 1.0, 1.0, 1.0));
+    }
+}
+
+void TechTree::update_upgrade_visuals() {
+    if (!game_state) {
+        return;
+    }
+
+    set_upgrade_button_gray("cat", game_state->is_unlocked("cat_companion"));
+    set_upgrade_button_gray("bat", game_state->is_unlocked("bat_companion"));
+    set_upgrade_button_gray("crow", game_state->is_unlocked("murder_of_crows"));
+    set_upgrade_button_gray("sparkle", game_state->is_unlocked("awaken_anito"));
+    set_upgrade_button_gray("bag", game_state->is_unlocked("hire_adventurers"));
 }
 
 void TechTree::show_exit_confirmation() {

@@ -47,6 +47,7 @@ private:
 
     AudioStreamPlayer* button_click_sfx;
     AudioStreamPlayer* money_sfx;
+    AudioStreamPlayer* victory_sfx;
 
     PanelContainer* autosave_panel;
     Label* autosave_label;
@@ -86,6 +87,7 @@ private:
     void ensure_main_game_music();
     void play_button_click_sfx();
     void play_money_sfx();
+    void play_victory_sfx();
     String _format_time(double total_seconds);
 
 protected:
