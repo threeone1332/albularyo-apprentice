@@ -57,6 +57,8 @@ texture = ExtResource("10_c7dat")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6lq5t"]
 texture = ExtResource("11_21wo0")
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3qgpa"]
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_rjk0d"]
 atlas = ExtResource("5_sjiej")
 region = Rect2(645.054, 67.986, 22.889, 24.043)
@@ -423,6 +425,36 @@ layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxTexture_ihpp7")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_6lq5t")
 theme_override_styles/hover = SubResource("StyleBoxTexture_6lq5t")
+
+[node name="GoalTrackerContainer" type="PanelContainer" parent="MarginContainer/NinePatchRect" unique_id=2136612392]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 135.0
+offset_top = -91.0
+offset_right = 466.0
+offset_bottom = -28.0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_3qgpa")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/NinePatchRect/GoalTrackerContainer" unique_id=2101150980]
+layout_mode = 2
+theme_override_constants/separation = -9
+
+[node name="TechGoalLabel" type="Label" parent="MarginContainer/NinePatchRect/GoalTrackerContainer/VBoxContainer" unique_id=804693325]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.38431373, 0.24313726, 0.24313726, 1)
+theme_override_fonts/font = ExtResource("3_7a4el")
+theme_override_font_sizes/font_size = 32
+text = "Tech Tree Upgrades: 0/5"
+
+[node name="GoldGoalLabel" type="Label" parent="MarginContainer/NinePatchRect/GoalTrackerContainer/VBoxContainer" unique_id=1849144703]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.38431373, 0.24313726, 0.24313726, 1)
+theme_override_fonts/font = ExtResource("3_7a4el")
+theme_override_font_sizes/font_size = 32
+text = "Gold: 108/1000"
 
 [node name="SaleFeedback" type="Label" parent="." unique_id=377151671]
 layout_mode = 1

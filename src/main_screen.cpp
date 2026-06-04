@@ -24,13 +24,21 @@ MainScreen::MainScreen() {
     tech_tree_button = nullptr;
     mixing_button = nullptr;
     potion_icon = nullptr;
-    //sfx
+
+    // Audio system elements
     button_click_sfx = nullptr;
     money_sfx = nullptr;
-    // Initialize your Autosave UI pointers
+
+    // Autosave UI pointers
     autosave_panel = nullptr;
     autosave_label = nullptr;
     autosave_id = 0;
+
+    // Minimalist objective tracking initialization
+    goal_tracker_container = nullptr;
+    tech_goal_label = nullptr;
+    gold_goal_label = nullptr;
+    gold_goal_revealed = false;
 
     phase_timer = 0.0;
     sell_timer = 0.0;
@@ -74,7 +82,6 @@ void MainScreen::_ready() {
 
     // 4. Bind UI Components securely
     money_label = get_node<Label>("MarginContainer/NinePatchRect/MoneyArea/Money/Label");
-
     gain_label = get_node<Label>("MarginContainer/NinePatchRect/MoneyArea/GainSlot/GainLabel");
     sale_feedback = get_node<Label>("SaleFeedback");
 
@@ -97,19 +104,18 @@ void MainScreen::_ready() {
 
     autosave_panel = Object::cast_to<PanelContainer>(get_node_or_null("AutosaveNotification/PanelContainer"));
     autosave_label = Object::cast_to<Label>(get_node_or_null("AutosaveNotification/PanelContainer/HBoxContainer/AutosaveLabel"));
-    
-    button_click_sfx = Object::cast_to<AudioStreamPlayer>(
-        get_node_or_null("ButtonClickSFX")
-    );
 
-    money_sfx = Object::cast_to<AudioStreamPlayer>(
-        get_node_or_null("MoneySFX")
-    );
+    // --- BIND OBJECTIVE TEXT NODE POINTERS ---
+    goal_tracker_container = get_node<MarginContainer>("MarginContainer/NinePatchRect/GoalTrackerContainer");
+    tech_goal_label = get_node<Label>("MarginContainer/NinePatchRect/GoalTrackerContainer/VBoxContainer/TechGoalLabel");
+    gold_goal_label = get_node<Label>("MarginContainer/NinePatchRect/GoalTrackerContainer/VBoxContainer/GoldGoalLabel");
+
+    button_click_sfx = Object::cast_to<AudioStreamPlayer>(get_node_or_null("ButtonClickSFX"));
+    money_sfx = Object::cast_to<AudioStreamPlayer>(get_node_or_null("MoneySFX"));
 
     if (!button_click_sfx) {
         UtilityFunctions::printerr("MainScreen C++: ButtonClickSFX node not found.");
     }
-
     if (!money_sfx) {
         UtilityFunctions::printerr("MainScreen C++: MoneySFX node not found.");
     }
@@ -144,6 +150,12 @@ void MainScreen::_ready() {
     mixing_button->connect("pressed", Callable(this, "_on_mixing_pressed"));
     tech_tree_button->connect("pressed", Callable(this, "_on_tech_tree_pressed"));
     change_button->connect("pressed", Callable(this, "_on_mixing_pressed"));
+
+    // Initial load setup for visibility states
+    if (gold_goal_label) {
+        gold_goal_label->set_modulate(Color(1, 1, 1, 0)); // Hidden text initially
+        gold_goal_label->set_visible(false);
+    }
 
     _update_ui();
     _update_time_icons();
@@ -204,6 +216,27 @@ void MainScreen::_advance_phase_tick() {
     _save_game_to_disk();
 }
 
+void MainScreen::_check_victory_condition() {
+    if (!game_state) return;
+
+    int current_gold = game_state->call("get_gold");
+
+    // Safely check all five internal keys from your tech tree design
+    int unlocked_count = 0;
+    if (game_state->call("is_unlocked", "cat_companion")) unlocked_count++;
+    if (game_state->call("is_unlocked", "bat_companion")) unlocked_count++;
+    if (game_state->call("is_unlocked", "murder_of_crows")) unlocked_count++;
+    if (game_state->call("is_unlocked", "awaken_anito")) unlocked_count++;
+    if (game_state->call("is_unlocked", "hire_adventurers")) unlocked_count++;
+
+    // Both conditions matched completely = Game Win Sequence Triggered
+    if (unlocked_count >= 5 && current_gold >= 1000) {
+        set_process(false); // Disables local game execution updates
+        UtilityFunctions::print("Victory achieved! Proceeding to high-scores registry...");
+        get_tree()->change_scene_to_file("res://scenes/victory_screen.tscn");
+    }
+}
+
 void MainScreen::_save_game_to_disk() {
     if (!game_state) return;
 
@@ -251,7 +284,8 @@ void MainScreen::_on_increase_pressed() {
 void MainScreen::_update_ui() {
     if (!game_state) return;
 
-    money_label->set_text(UtilityFunctions::str(game_state->call("get_gold")));
+    int current_gold = game_state->call("get_gold");
+    money_label->set_text(UtilityFunctions::str(current_gold));
 
     int current_price = game_state->call("get_price");
     price_label->set_text(UtilityFunctions::str(current_price));
@@ -265,17 +299,66 @@ void MainScreen::_update_ui() {
     if (potion_id >= 0 && potion_id < potion_icon_regions.size()) {
         potion_icon->set_region_rect(potion_icon_regions[potion_id]);
     }
+
+    // --- REFRESH TARGET HUD TEXT DATA AND TWEEN PROGRESSIONS ---
+    int unlocked_count = 0;
+    if (game_state->call("is_unlocked", "cat_companion")) unlocked_count++;
+    if (game_state->call("is_unlocked", "bat_companion")) unlocked_count++;
+    if (game_state->call("is_unlocked", "murder_of_crows")) unlocked_count++;
+    if (game_state->call("is_unlocked", "awaken_anito")) unlocked_count++;
+    if (game_state->call("is_unlocked", "hire_adventurers")) unlocked_count++;
+
+    if (tech_goal_label) {
+        tech_goal_label->set_text("Tech Tree Upgrades: " + UtilityFunctions::str(unlocked_count) + "/5");
+
+        // Turn text green upon hitting max tech tier
+        if (unlocked_count >= 5) {
+            tech_goal_label->add_theme_color_override("font_color", Color::html("#6abe30"));
+        } else {
+            tech_goal_label->add_theme_color_override("font_color", Color::html("#ffffff"));
+        }
+    }
+
+    if (gold_goal_label) {
+        gold_goal_label->set_text("Gold: " + UtilityFunctions::str(current_gold) + "/1000");
+
+        if (unlocked_count >= 5) {
+            if (!gold_goal_revealed) {
+                gold_goal_revealed = true;
+                gold_goal_label->set_visible(true);
+
+                // Create a smooth visual fade-in using Godot Tweens
+                Ref<Tween> fade_tween = create_tween();
+                fade_tween->tween_property(gold_goal_label, "modulate:a", 1.0, 1.2)
+                          ->set_trans(Tween::TRANS_SINE)
+                          ->set_ease(Tween::EASE_OUT);
+            }
+
+            // Green highlight when user maintains >= 1k gold balance target
+            if (current_gold >= 1000) {
+                gold_goal_label->add_theme_color_override("font_color", Color::html("#6abe30"));
+            } else {
+                gold_goal_label->add_theme_color_override("font_color", Color::html("#ffffff"));
+            }
+        } else {
+            // Keep completely invisible if tech requirements drop back or are unfulfilled
+            gold_goal_revealed = false;
+            gold_goal_label->set_visible(false);
+            gold_goal_label->set_modulate(Color(1, 1, 1, 0));
+        }
+    }
+
+    // Run end-game metrics assessment checks
+    _check_victory_condition();
 }
 
 void MainScreen::_update_time_icons() {
     String phase = game_state->call("get_current_phase");
 
-    // 1. Handle mini status window indicator icon visibilities
     morning_icon->set_visible(phase == "sun");
     noon_icon->set_visible(phase == "noon");
     night_icon->set_visible(phase == "night");
 
-    // 2. Perform safe asset injection on the master NinePatch backdrop texture sheets
     if (!main_background) return;
 
     if (phase == "sun" && bg_morning.is_valid()) {
@@ -360,6 +443,11 @@ void MainScreen::_on_tech_tree_pressed() {
     get_tree()->change_scene_to_file("res://scenes/tech_tree.tscn");
 }
 
+void MainScreen::ensure_main_game_music() {
+    // TODO: Add your main background music logic here if needed
+    // e.g., if (music_player && !music_player->is_playing()) music_player->play();
+}
+
 void MainScreen::play_button_click_sfx() {
     if (button_click_sfx) {
         button_click_sfx->play();
@@ -369,32 +457,6 @@ void MainScreen::play_button_click_sfx() {
 void MainScreen::play_money_sfx() {
     if (money_sfx) {
         money_sfx->play();
-    }
-}
-
-void MainScreen::ensure_main_game_music() {
-    AudioStreamPlayer *main_music = Object::cast_to<AudioStreamPlayer>(
-        get_node_or_null("/root/MainGameMusic")
-    );
-
-    if (!main_music) {
-        main_music = memnew(AudioStreamPlayer);
-        main_music->set_name("MainGameMusic");
-
-        Ref<AudioStream> music_stream = ResourceLoader::get_singleton()->load(
-            "res://assets/Sounds/(Main Screen) Lobby-Time(chosic.com).mp3"
-        );
-
-        main_music->set_stream(music_stream);
-        main_music->set_bus("Music");
-        main_music->set_volume_db(-12.0);
-        main_music->set_process_mode(Node::PROCESS_MODE_ALWAYS);
-
-        get_tree()->get_root()->add_child(main_music);
-    }
-
-    if (!main_music->is_playing()) {
-        main_music->play();
     }
 }
 

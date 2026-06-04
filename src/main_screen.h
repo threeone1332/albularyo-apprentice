@@ -7,14 +7,15 @@
 #include <godot_cpp/classes/button.hpp>
 #include <godot_cpp/classes/nine_patch_rect.hpp>
 #include <godot_cpp/classes/panel_container.hpp>
+#include <godot_cpp/classes/margin_container.hpp> // Maintained for clean node compilation
 #include <godot_cpp/classes/engine.hpp>
 #include <godot_cpp/classes/scene_tree.hpp>
 #include <godot_cpp/classes/tween.hpp>
 #include <godot_cpp/classes/property_tweener.hpp>
 #include <godot_cpp/classes/interval_tweener.hpp>
 #include <godot_cpp/classes/resource_loader.hpp>
-#include <godot_cpp/classes/audio_stream_player.hpp>
-#include <godot_cpp/classes/audio_stream.hpp>
+#include <godot_cpp/classes/audio_stream_player.hpp> // Audio hooks retained
+#include <godot_cpp/classes/audio_stream.hpp>        // Audio hooks retained
 #include <godot_cpp/classes/texture2d.hpp>
 #include <godot_cpp/templates/vector.hpp>
 
@@ -45,6 +46,8 @@ private:
     Button* tech_tree_button;
     Button* mixing_button;
     NinePatchRect* potion_icon;
+
+    // Audio engine stream setups
     AudioStreamPlayer* button_click_sfx;
     AudioStreamPlayer* money_sfx;
 
@@ -52,6 +55,12 @@ private:
     PanelContainer* autosave_panel;
     Label* autosave_label;
     int autosave_id;
+
+    // --- OBJECTIVE TRACKER MINIMALIST HUD POINTERS ---
+    MarginContainer* goal_tracker_container;
+    Label* tech_goal_label;
+    Label* gold_goal_label;
+    bool gold_goal_revealed; // Prevents tween multi-firing loops
 
     // --- TIME-OF-DAY GRAPHICS RESOURCES ---
     Ref<Texture2D> bg_morning;
@@ -68,8 +77,9 @@ private:
     Vector2 sale_feedback_start_pos;
     Vector2 gain_label_start_pos;
 
-    // Private function signature to match main_screen.cpp
+    // Private helper methods
     void _save_game_to_disk();
+    void _check_victory_condition(); // Maintained tracking checker
     void ensure_main_game_music();
     void play_button_click_sfx();
     void play_money_sfx();
