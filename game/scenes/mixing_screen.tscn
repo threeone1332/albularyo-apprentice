@@ -470,7 +470,7 @@ bus = &"SFX"
 
 [node name="BrewSFX" type="AudioStreamPlayer" parent="." unique_id=2125003125]
 stream = ExtResource("31_e705w")
-volume_db = -6.0
+volume_db = -10.0
 bus = &"SFX"
 
 [editable path="BookBackground/MgaSangkapContainer/LeftPageContent/IngredientsList/IngredientRow"]

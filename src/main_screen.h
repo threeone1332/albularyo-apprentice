@@ -13,6 +13,8 @@
 #include <godot_cpp/classes/property_tweener.hpp>
 #include <godot_cpp/classes/interval_tweener.hpp>
 #include <godot_cpp/classes/resource_loader.hpp>
+#include <godot_cpp/classes/audio_stream_player.hpp>
+#include <godot_cpp/classes/audio_stream.hpp>
 #include <godot_cpp/classes/texture2d.hpp>
 #include <godot_cpp/templates/vector.hpp>
 
@@ -43,6 +45,8 @@ private:
     Button* tech_tree_button;
     Button* mixing_button;
     NinePatchRect* potion_icon;
+    AudioStreamPlayer* button_click_sfx;
+    AudioStreamPlayer* money_sfx;
 
     // --- AUTOSAVE INDICATOR UI DECLARATIONS ---
     PanelContainer* autosave_panel;
@@ -66,6 +70,9 @@ private:
 
     // Private function signature to match main_screen.cpp
     void _save_game_to_disk();
+    void ensure_main_game_music();
+    void play_button_click_sfx();
+    void play_money_sfx();
 
 protected:
     static void _bind_methods();

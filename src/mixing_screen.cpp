@@ -324,7 +324,7 @@ void MixingScreen::ensure_main_game_music() {
         main_music->set_name("MainGameMusic");
 
         Ref<AudioStream> music_stream = ResourceLoader::get_singleton()->load(
-            "res://assets/Sounds/(Main Screen) Lobby-Time-trimmed.wav"
+            "res://assets/Sounds/(Main Screen) Lobby-Time(chosic.com).mp3"
         );
 
         main_music->set_stream(music_stream);

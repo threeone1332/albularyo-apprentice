@@ -8,6 +8,7 @@
 #include <godot_cpp/templates/vector.hpp>
 #include <godot_cpp/classes/audio_stream_player.hpp>
 #include <godot_cpp/classes/scene_tree_timer.hpp>
+#include <godot_cpp/classes/input_event.hpp>
 
 namespace godot {
 
@@ -45,6 +46,7 @@ public:
 
     void start_game();
     void _on_start_delay_timeout();
+    void _unhandled_input(const Ref<InputEvent> &event) override;
 };
 
 }

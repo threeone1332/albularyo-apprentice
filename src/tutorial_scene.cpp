@@ -5,6 +5,9 @@
 #include <godot_cpp/classes/scene_tree.hpp>
 #include <godot_cpp/variant/callable.hpp>
 #include <godot_cpp/variant/utility_functions.hpp>
+#include <godot_cpp/classes/input_event_key.hpp>
+#include <godot_cpp/classes/input_event_key.hpp>
+#include <godot_cpp/classes/viewport.hpp>
 
 namespace godot {
 
@@ -31,6 +34,8 @@ void TutorialScene::_bind_methods() {
 
 void TutorialScene::_ready() {
     if (Engine::get_singleton()->is_editor_hint()) return;
+
+    set_process_unhandled_input(true);
 
     slide_image = get_node<TextureRect>("SlideImage");
     back_button = get_node<TextureButton>("BackButton");
@@ -134,6 +139,23 @@ void TutorialScene::_on_start_delay_timeout() {
     if (pending_scene_path.is_empty()) return;
 
     get_tree()->change_scene_to_file(pending_scene_path);
+}
+void TutorialScene::_unhandled_input(const Ref<InputEvent> &event) {
+    Ref<InputEventKey> key_event = event;
+
+    if (!key_event.is_valid()) return;
+    if (!key_event->is_pressed()) return;
+    if (key_event->is_echo()) return;
+
+    int key = key_event->get_keycode();
+    
+    if (key == KEY_RIGHT || key == KEY_DOWN) {
+        _on_next_pressed();
+        get_viewport()->set_input_as_handled();
+    } else if (key == KEY_LEFT || key == KEY_UP) {
+        _on_back_pressed();
+        get_viewport()->set_input_as_handled();
+    }
 }
 
 }
