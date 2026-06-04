@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c83oh713rp7e2"]
 
 [ext_resource type="Texture2D" uid="uid://o06jvncwvjmq" path="res://assets/ui/Tutorial Screen/PREVV.png" id="1_4yomp"]
+[ext_resource type="Texture2D" uid="uid://casfm05kayvw2" path="res://assets/ui/Tutorial Screen/tutorial_01.png" id="1_8ox5i"]
 [ext_resource type="Texture2D" uid="uid://cg872v4n7q6vs" path="res://assets/ui/Tutorial Screen/prev_text.png" id="2_8ox5i"]
 [ext_resource type="Texture2D" uid="uid://cny57oao1ljxg" path="res://assets/ui/Tutorial Screen/NEXT_.png" id="3_u6jee"]
 [ext_resource type="Texture2D" uid="uid://bgvps455e6ko8" path="res://assets/ui/Tutorial Screen/next_text.png" id="4_gvpdk"]
@@ -25,6 +26,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("1_8ox5i")
 expand_mode = 1
 
 [node name="BackButton" type="TextureButton" parent="." unique_id=1720820519]
