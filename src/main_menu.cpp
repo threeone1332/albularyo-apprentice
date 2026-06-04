@@ -4,6 +4,7 @@
 
 #include <godot_cpp/classes/engine.hpp>
 #include <godot_cpp/classes/file_access.hpp>
+#include <godot_cpp/classes/dir_access.hpp>
 #include <godot_cpp/classes/json.hpp>
 #include <godot_cpp/classes/node.hpp>
 #include <godot_cpp/classes/project_settings.hpp>
@@ -31,8 +32,8 @@ void MainMenu::_bind_methods() {
     ClassDB::bind_method(D_METHOD("_on_music_slider_value_changed", "value"), &MainMenu::_on_music_slider_value_changed);
     ClassDB::bind_method(D_METHOD("_on_sfx_slider_value_changed", "value"), &MainMenu::_on_sfx_slider_value_changed);
 
-    ClassDB::bind_method(D_METHOD("_on_start_scene_delay_timeout"), &MainMenu::_on_start_scene_delay_timeout);
-    ClassDB::bind_method(D_METHOD("_on_quit_delay_timeout"), &MainMenu::_on_quit_delay_timeout);
+    ClassDB::bind_method(D_METHOD("_on_start_scene_delay_timeout", "timer_node"), &MainMenu::_on_start_scene_delay_timeout);
+    ClassDB::bind_method(D_METHOD("_on_quit_delay_timeout", "timer_node"), &MainMenu::_on_quit_delay_timeout);
 }
 
 template <class T>
@@ -127,8 +128,27 @@ void MainMenu::_on_continue_pressed() {
 
 void MainMenu::_on_new_game_pressed() {
     play_button_click_sfx();
-    pending_scene_path = "res://scenes/intro_cutscene.tscn";
 
+    // 1. Physically drop the JSON file from disk using safe GDExtension directory references
+    if (FileAccess::file_exists(SAVE_PATH)) {
+        Ref<DirAccess> dir = DirAccess::open("user://");
+        if (dir.is_valid()) {
+            dir->remove("savegame.json");
+            UtilityFunctions::print("[MAIN MENU] Old persistence profile successfully removed from device storage.");
+        }
+    }
+
+    // 2. Clear out running values from the autoload tracker node instance back to core defaults
+    GameState *global = Object::cast_to<GameState>(get_node_or_null(NodePath("/root/GlobalGameState")));
+    if (global) {
+        global->reset_state();
+        UtilityFunctions::print("[MAIN MENU] GlobalGameState singletons normalized.");
+    } else {
+        UtilityFunctions::printerr("[MAIN MENU] Fallback failed: GlobalGameState runtime structure is unavailable.");
+    }
+
+    // 3. Kickoff intro scene sequencing configuration
+    pending_scene_path = "res://scenes/intro_cutscene.tscn";
     start_one_shot_timer(0.35, callable_mp(this, &MainMenu::_on_start_scene_delay_timeout));
 }
 
@@ -179,7 +199,9 @@ void MainMenu::start_one_shot_timer(double delay_seconds, const Callable &timeou
     add_child(timer);
 
     const StringName timeout_signal("timeout");
-    timer->connect(timeout_signal, timeout_callback, Object::CONNECT_ONE_SHOT);
+    // Bind the timer pointer into the callback so we can clear it upon arrival
+    Callable bound_callback = timeout_callback.bind(timer);
+    timer->connect(timeout_signal, bound_callback, Object::CONNECT_ONE_SHOT);
     timer->start();
 }
 
@@ -253,15 +275,24 @@ void MainMenu::play_button_click_sfx() {
     if (button_click_sfx) button_click_sfx->play();
 }
 
-void MainMenu::_on_start_scene_delay_timeout() {
+void MainMenu::_on_start_scene_delay_timeout(Variant timer_node) {
+    // Safely delete the caller Timer object to clean memory footprint traces
+    Timer *timer = Object::cast_to<Timer>(timer_node);
+    if (timer) {
+        timer->queue_free();
+    }
+
     if (pending_scene_path.is_empty()) return;
     if (get_tree()) get_tree()->change_scene_to_file(pending_scene_path);
 }
 
-void MainMenu::_on_quit_delay_timeout() {
+void MainMenu::_on_quit_delay_timeout(Variant timer_node) {
+    Timer *timer = Object::cast_to<Timer>(timer_node);
+    if (timer) {
+        timer->queue_free();
+    }
+
     if (get_tree()) get_tree()->quit();
 }
 
-}
-
-//some random change js to update the commit
+} // namespace godot

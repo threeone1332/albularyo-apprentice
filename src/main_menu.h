@@ -63,8 +63,8 @@ public:
     void _on_music_slider_value_changed(double value);
     void _on_sfx_slider_value_changed(double value);
 
-    void _on_start_scene_delay_timeout();
-    void _on_quit_delay_timeout();
+    void _on_start_scene_delay_timeout(Variant timer_node);
+    void _on_quit_delay_timeout(Variant timer_node);
 
     void start_one_shot_timer(double delay_seconds, const Callable &timeout_callback);
     void play_button_click_sfx();

@@ -35,6 +35,29 @@ GameState::GameState() :
     potion_demands[6] = {"LUNAS NG DIWA", 45, 55, 80};
 }
 
+// --- NEW STATE RESET LOGIC FOR NEW GAME LOOP ---
+void GameState::reset_state() {
+    gold = 100;
+    current_phase = Phase::SUN;
+    price_slider_value = 10;
+    adventurers_unlocked = false;
+    game_phase = 1;
+    cat_companion = false;
+    bat_companion = false;
+    murder_of_crows = false;
+    awaken_anito = false;
+    hire_adventurers = false;
+    featured_potion_id = 0;
+
+    for (int i = 0; i < 8; i++) {
+        player_inventory[i] = 5; // Resets starting ingredients back to default values
+    }
+
+    for (int i = 0; i < 7; i++) {
+        player_potions[i] = 0; // Wipes out all brewed potion storage queues
+    }
+}
+
 void GameState::_bind_methods() {
     ClassDB::bind_method(D_METHOD("set_gold","amount"), &GameState::set_gold);
     ClassDB::bind_method(D_METHOD("get_gold"), &GameState::get_gold);
@@ -66,12 +89,15 @@ void GameState::_bind_methods() {
     ClassDB::bind_method(D_METHOD("gather_phase_resources"), &GameState::gather_phase_resources);
     ClassDB::bind_method(D_METHOD("has_featured_stock"), &GameState::has_featured_stock);
 
-    // FIX: Binding our new Save/Load methods so your MainMenu script can call them!
+    // Binding the new Save/Load methods so your MainMenu script can call them!
     ClassDB::bind_method(D_METHOD("get_save_data"), &GameState::get_save_data);
     ClassDB::bind_method(D_METHOD("load_save_data", "data"), &GameState::load_save_data);
+
+    // FIX: Exposed reset_state macro binding so Engine scripting contexts can execute it
+    ClassDB::bind_method(D_METHOD("reset_state"), &GameState::reset_state);
 }
 
-// --- NEW SERIALIZATION LOGIC FOR JSON SAVES ---
+// --- SERIALIZATION LOGIC FOR JSON SAVES ---
 
 Dictionary GameState::get_save_data() {
     Dictionary data;
@@ -209,7 +235,7 @@ void GameState::load_save_data(Dictionary data) {
     UtilityFunctions::print("GameState Save Load: Complete.");
 }
 
-// --- REST OF YOUR EXISTING GAME LOGIC FUNCTIONS ---
+// --- CORE GAME SYSTEM MECHANICS TRACKERS ---
 
 void GameState::set_gold(int amount) { gold = amount; }
 int GameState::get_gold() const { return gold; }
@@ -225,6 +251,7 @@ void GameState::advance_phase() {
             break;
         case Phase::NIGHT:
             current_phase = Phase::SUN;
+            break;
             start_new_day();
             break;
     }
