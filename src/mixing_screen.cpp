@@ -3,6 +3,7 @@
 #include <godot_cpp/variant/utility_functions.hpp>
 #include <godot_cpp/variant/node_path.hpp>
 #include "Gamestate.h"
+#include <godot_cpp/classes/window.hpp>
 
 namespace godot {
 
@@ -11,10 +12,14 @@ void MixingScreen::_bind_methods() {
     ClassDB::bind_method(D_METHOD("_on_quantity_changed", "potion_idx", "delta"), &MixingScreen::_on_quantity_changed);
     ClassDB::bind_method(D_METHOD("_on_brew_pressed"), &MixingScreen::_on_brew_pressed);
     ClassDB::bind_method(D_METHOD("_on_feature_potion_pressed", "potion_idx"), &MixingScreen::_on_feature_potion_pressed);
+    ClassDB::bind_method(D_METHOD("_on_scene_change_delay_timeout"), &MixingScreen::_on_scene_change_delay_timeout);
 }
 
 MixingScreen::MixingScreen() {
     game_state = nullptr;
+    button_click_sfx = nullptr;
+    brew_sfx = nullptr;
+    pending_scene_path = "";
 
     for (int i = 0; i < 7; i++) {
         planned_craft_counts[i] = 0;
@@ -79,6 +84,7 @@ void MixingScreen::_ready() {
     game_state = get_node<GameState>(
         NodePath("/root/GlobalGameState")
     );
+    ensure_main_game_music();
 
     if (game_state == nullptr) {
         UtilityFunctions::print("ERROR: GlobalGameState not found.");
@@ -86,6 +92,22 @@ void MixingScreen::_ready() {
 
     cache_ui_references();
     update_ui_displays();
+
+    button_click_sfx = Object::cast_to<AudioStreamPlayer>(
+        get_node_or_null("ButtonClickSFX")
+    );
+
+    brew_sfx = Object::cast_to<AudioStreamPlayer>(
+        get_node_or_null("BrewSFX")
+    );
+
+    if (!button_click_sfx) {
+        UtilityFunctions::printerr("MixingScreen C++: ButtonClickSFX node not found.");
+    }
+
+    if (!brew_sfx) {
+        UtilityFunctions::printerr("MixingScreen C++: BrewSFX node not found.");
+    }
 
     TextureButton* close_btn = Object::cast_to<TextureButton>(find_node_by_name_recursive(this, "CloseButton"));
     if (close_btn) {
@@ -199,6 +221,7 @@ bool MixingScreen::can_increase_craft(int potion_idx) {
 }
 
 void MixingScreen::_on_quantity_changed(int potion_idx, int delta) {
+    play_button_click_sfx();
     UtilityFunctions::print("C++ Click Input Detected! Row Index: ", potion_idx, " | Action: ", delta);
 
     if (delta > 0) {
@@ -232,6 +255,7 @@ void MixingScreen::_on_brew_pressed() {
         planned_craft_counts[p] = 0;
     }
     if (brewed_anything) {
+        play_brew_sfx();
         update_ui_displays();
         UtilityFunctions::print("Alchemy success! GameState inventory updated.");
     } else {
@@ -240,6 +264,8 @@ void MixingScreen::_on_brew_pressed() {
 }
 
 void MixingScreen::_on_close_pressed() {
+    play_button_click_sfx();
+
     SceneTree* tree = get_tree();
 
     if (tree != nullptr) {
@@ -251,6 +277,7 @@ void MixingScreen::_on_close_pressed() {
 }
 
 void MixingScreen::_on_feature_potion_pressed(int potion_idx) {
+    play_button_click_sfx();
 
     UtilityFunctions::print("FEATURE BUTTON CLICKED");
 
@@ -272,6 +299,49 @@ void MixingScreen::_on_feature_potion_pressed(int potion_idx) {
         );
     }
     
+}
+void MixingScreen::play_button_click_sfx() {
+    if (button_click_sfx) {
+        button_click_sfx->play();
+    }
+}
+
+void MixingScreen::play_brew_sfx() {
+    if (brew_sfx) {
+        brew_sfx->play();
+    }
+}
+
+void MixingScreen::ensure_main_game_music() {
+    AudioStreamPlayer *main_music = Object::cast_to<AudioStreamPlayer>(
+        get_node_or_null("/root/MainGameMusic")
+    );
+
+    if (!main_music) {
+        main_music = memnew(AudioStreamPlayer);
+        main_music->set_name("MainGameMusic");
+
+        Ref<AudioStream> music_stream = ResourceLoader::get_singleton()->load(
+            "res://assets/Sounds/(Main Screen) Lobby-Time-trimmed.wav"
+        );
+
+        main_music->set_stream(music_stream);
+        main_music->set_bus("Music");
+        main_music->set_volume_db(-12.0);
+        main_music->set_process_mode(Node::PROCESS_MODE_ALWAYS);
+
+        get_tree()->get_root()->add_child(main_music);
+    }
+
+    if (!main_music->is_playing()) {
+        main_music->play();
+    }
+}
+
+void MixingScreen::_on_scene_change_delay_timeout() {
+    if (pending_scene_path.is_empty()) return;
+
+    get_tree()->change_scene_to_file(pending_scene_path);
 }
 
 }

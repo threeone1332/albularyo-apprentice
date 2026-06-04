@@ -111,7 +111,6 @@ metadata/_edit_use_anchors_ = true
 
 [node name="IntroAmbience" type="AudioStreamPlayer" parent="." unique_id=1153851014]
 stream = ExtResource("4_dw6o5")
-volume_db = -5.0
 autoplay = true
 bus = &"Music"
 

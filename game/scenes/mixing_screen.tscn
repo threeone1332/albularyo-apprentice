@@ -1,34 +1,36 @@
 [gd_scene format=3 uid="uid://dyvex5oma41t8"]
 
-[ext_resource type="Texture2D" uid="uid://cv1mde0o6wcw" path="res://assets/ui/Mixing screen/width_2400.png" id="1_65i4y"]
-[ext_resource type="Texture2D" uid="uid://dgqv7gb1631vy" path="res://assets/ui/Mixing screen/width_1000.png" id="2_01hhd"]
+[ext_resource type="Texture2D" uid="uid://kbi8b2nhx18e" path="res://assets/ui/Mixing screen/width_2400.png" id="1_65i4y"]
+[ext_resource type="Texture2D" uid="uid://dcawpqswgf58x" path="res://assets/ui/Mixing screen/width_1000.png" id="2_01hhd"]
 [ext_resource type="PackedScene" uid="uid://dbjcf5il6gkko" path="res://scenes/potion_row.tscn" id="3_01hhd"]
-[ext_resource type="FontFile" uid="uid://bbg3opv6btx5t" path="res://assets/fonts/Martires Demi Bold.otf" id="3_dp8sl"]
+[ext_resource type="FontFile" uid="uid://c6a0r7ythdhsy" path="res://assets/fonts/Martires Demi Bold.otf" id="3_dp8sl"]
 [ext_resource type="PackedScene" uid="uid://rm6wc6jgl283" path="res://scenes/ingredient_slot.tscn" id="4_x2ra6"]
-[ext_resource type="Texture2D" uid="uid://c4ovculm6uosb" path="res://assets/ui/Mixing screen/width_150 (16).png" id="5_an481"]
-[ext_resource type="Texture2D" uid="uid://7t7h0jmsw52k" path="res://assets/ui/Mixing screen/width_150 (8).png" id="5_kynvl"]
-[ext_resource type="Texture2D" uid="uid://j7lo1a3ktamn" path="res://assets/ui/Mixing screen/width_92.png" id="6_rhges"]
-[ext_resource type="Texture2D" uid="uid://cub1g5en5gycs" path="res://assets/ui/Mixing screen/t (4).png" id="6_xbuny"]
-[ext_resource type="Texture2D" uid="uid://jidiro1cn67g" path="res://assets/ui/Mixing screen/width_150 (11).png" id="7_jc6vc"]
-[ext_resource type="Texture2D" uid="uid://pm78ly6hlnrd" path="res://assets/ui/Mixing screen/width_125.png" id="7_ld62g"]
-[ext_resource type="Texture2D" uid="uid://crbdug44tt7ul" path="res://assets/ui/Mixing screen/t (1).png" id="8_j6i2a"]
-[ext_resource type="Texture2D" uid="uid://dwnj7m3rxkeli" path="res://assets/ui/Mixing screen/width_150 (3).png" id="8_kuy3j"]
-[ext_resource type="Texture2D" uid="uid://qy1ckqqqv4j5" path="res://assets/ui/Mixing screen/width_150 (14).png" id="9_2k0l0"]
-[ext_resource type="Texture2D" uid="uid://bfcterhtrvml2" path="res://assets/ui/Mixing screen/width_150 (7).png" id="9_225xe"]
-[ext_resource type="Texture2D" uid="uid://csculvjt0ub2x" path="res://assets/ui/Mixing screen/width_150 (2).png" id="10_7mmsa"]
-[ext_resource type="Texture2D" uid="uid://d1sgoadqimppj" path="res://assets/ui/Mixing screen/width_150 (15).png" id="10_32tha"]
-[ext_resource type="Texture2D" uid="uid://b3iu6bbx6tfe5" path="res://assets/ui/Mixing screen/width_150 (6).png" id="11_co14c"]
-[ext_resource type="Texture2D" uid="uid://4fshha6qtbuv" path="res://assets/ui/Mixing screen/width_150 (12).png" id="11_mub11"]
-[ext_resource type="Texture2D" uid="uid://lgpr2avww874" path="res://assets/ui/Mixing screen/t (2).png" id="12_5wcj2"]
-[ext_resource type="Texture2D" uid="uid://c8hvvajn0ixd7" path="res://assets/ui/Mixing screen/width_150 (13).png" id="13_wb16t"]
-[ext_resource type="Texture2D" uid="uid://k42ry8m21pjp" path="res://assets/ui/Mixing screen/t (3).png" id="14_uk6m4"]
-[ext_resource type="Texture2D" uid="uid://d0bsttp4txbu6" path="res://assets/ui/Mixing screen/width_150 (17).png" id="15_830r7"]
-[ext_resource type="Texture2D" uid="uid://bekrp6wk1jrw8" path="res://assets/ui/Mixing screen/t (5).png" id="16_x2ra6"]
-[ext_resource type="Texture2D" uid="uid://ccc1x335i2jnj" path="res://assets/ui/Mixing screen/width_800.png" id="25_als00"]
-[ext_resource type="Texture2D" uid="uid://37iymlgbtlj6" path="res://assets/ui/Mixing screen/Pressed State/Close_Button_Pressed.png" id="26_smwwv"]
-[ext_resource type="Texture2D" uid="uid://c0eeh1uqtxnhl" path="res://assets/ui/Mixing screen/Brew_button.png" id="27_s1xb8"]
-[ext_resource type="Texture2D" uid="uid://xn3j7b2crstr" path="res://assets/ui/Mixing screen/Pressed State/Brew_button_Pressed.png" id="28_cjahw"]
-[ext_resource type="Texture2D" uid="uid://dm22iehvy7g21" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="29_twubj"]
+[ext_resource type="Texture2D" uid="uid://cshcsfsc7rvka" path="res://assets/ui/Mixing screen/width_150 (16).png" id="5_an481"]
+[ext_resource type="Texture2D" uid="uid://cooakbppnj0sn" path="res://assets/ui/Mixing screen/width_150 (8).png" id="5_kynvl"]
+[ext_resource type="Texture2D" uid="uid://jux2p0bjkrjt" path="res://assets/ui/Mixing screen/width_92.png" id="6_rhges"]
+[ext_resource type="Texture2D" uid="uid://do7dhjwgr316k" path="res://assets/ui/Mixing screen/t (4).png" id="6_xbuny"]
+[ext_resource type="Texture2D" uid="uid://bvdrluxrf6w4v" path="res://assets/ui/Mixing screen/width_150 (11).png" id="7_jc6vc"]
+[ext_resource type="Texture2D" uid="uid://cus5axknoygul" path="res://assets/ui/Mixing screen/width_125.png" id="7_ld62g"]
+[ext_resource type="Texture2D" uid="uid://w0cj6kgudq6t" path="res://assets/ui/Mixing screen/t (1).png" id="8_j6i2a"]
+[ext_resource type="Texture2D" uid="uid://c72a3uffifb06" path="res://assets/ui/Mixing screen/width_150 (3).png" id="8_kuy3j"]
+[ext_resource type="Texture2D" uid="uid://dghge2r7gronc" path="res://assets/ui/Mixing screen/width_150 (14).png" id="9_2k0l0"]
+[ext_resource type="Texture2D" uid="uid://bvdk3cwtpo8ck" path="res://assets/ui/Mixing screen/width_150 (7).png" id="9_225xe"]
+[ext_resource type="Texture2D" uid="uid://bxcievp8bii3p" path="res://assets/ui/Mixing screen/width_150 (2).png" id="10_7mmsa"]
+[ext_resource type="Texture2D" uid="uid://bt8q5uyaa5m5j" path="res://assets/ui/Mixing screen/width_150 (15).png" id="10_32tha"]
+[ext_resource type="Texture2D" uid="uid://bg0rrvfj33mon" path="res://assets/ui/Mixing screen/width_150 (6).png" id="11_co14c"]
+[ext_resource type="Texture2D" uid="uid://cs2dyvi3spjvy" path="res://assets/ui/Mixing screen/width_150 (12).png" id="11_mub11"]
+[ext_resource type="Texture2D" uid="uid://d2uv07rdxn1h5" path="res://assets/ui/Mixing screen/t (2).png" id="12_5wcj2"]
+[ext_resource type="Texture2D" uid="uid://btlsijq20g7yo" path="res://assets/ui/Mixing screen/width_150 (13).png" id="13_wb16t"]
+[ext_resource type="Texture2D" uid="uid://b16kddybots50" path="res://assets/ui/Mixing screen/t (3).png" id="14_uk6m4"]
+[ext_resource type="Texture2D" uid="uid://bj7tuqc51m3na" path="res://assets/ui/Mixing screen/width_150 (17).png" id="15_830r7"]
+[ext_resource type="Texture2D" uid="uid://de8bqsx13ctqg" path="res://assets/ui/Mixing screen/t (5).png" id="16_x2ra6"]
+[ext_resource type="Texture2D" uid="uid://crisdm4qccpy6" path="res://assets/ui/Mixing screen/width_800.png" id="25_als00"]
+[ext_resource type="Texture2D" uid="uid://baeli41vn78t8" path="res://assets/ui/Mixing screen/Pressed State/Close_Button_Pressed.png" id="26_smwwv"]
+[ext_resource type="Texture2D" uid="uid://x5hmvnbu5847" path="res://assets/ui/Mixing screen/Brew_button.png" id="27_s1xb8"]
+[ext_resource type="Texture2D" uid="uid://ckh2mn2xyho4c" path="res://assets/ui/Mixing screen/Pressed State/Brew_button_Pressed.png" id="28_cjahw"]
+[ext_resource type="Texture2D" uid="uid://bvib5w8emuue5" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="29_twubj"]
+[ext_resource type="AudioStream" uid="uid://dcgyi0yljsajj" path="res://assets/Sounds/(Button Click) emilianodleon-select-button-ui-395763.mp3" id="30_hg6ca"]
+[ext_resource type="AudioStream" uid="uid://bb3lbjhkkva0t" path="res://assets/Sounds/(TechTree Purchase) freesound_crunchpixstudio-purchase-success-384963.mp3" id="31_e705w"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_twubj"]
 atlas = ExtResource("29_twubj")
@@ -460,6 +462,16 @@ texture_normal = SubResource("AtlasTexture_twubj")
 texture_pressed = SubResource("AtlasTexture_ntwlg")
 ignore_texture_size = true
 stretch_mode = 5
+
+[node name="ButtonClickSFX" type="AudioStreamPlayer" parent="." unique_id=1502064098]
+stream = ExtResource("30_hg6ca")
+volume_db = -6.0
+bus = &"SFX"
+
+[node name="BrewSFX" type="AudioStreamPlayer" parent="." unique_id=2125003125]
+stream = ExtResource("31_e705w")
+volume_db = -6.0
+bus = &"SFX"
 
 [editable path="BookBackground/MgaSangkapContainer/LeftPageContent/IngredientsList/IngredientRow"]
 [editable path="BookBackground/MgaSangkapContainer/LeftPageContent/IngredientsList/IngredientRow2"]

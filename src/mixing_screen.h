@@ -6,6 +6,10 @@
 #include <godot_cpp/classes/label.hpp>
 #include <godot_cpp/templates/vector.hpp>
 #include "Gamestate.h"
+#include <godot_cpp/classes/audio_stream_player.hpp>
+#include <godot_cpp/classes/audio_stream.hpp>
+#include <godot_cpp/classes/resource_loader.hpp>
+#include <godot_cpp/classes/scene_tree_timer.hpp>
 
 namespace godot {
 
@@ -35,7 +39,13 @@ private:
     Vector<Label*> ingredient_stock_labels;
     Vector<Label*> potion_stock_labels;
     Vector<Label*> craft_counter_labels;
+    AudioStreamPlayer* button_click_sfx;
+    AudioStreamPlayer* brew_sfx;
+    String pending_scene_path;
 
+    void play_button_click_sfx();
+    void play_brew_sfx();
+    void ensure_main_game_music();
     void initialize_recipes();
     void cache_ui_references();
     void update_ui_displays();
@@ -55,6 +65,7 @@ public:
     void _on_quantity_changed(int potion_idx, int delta);
     void _on_brew_pressed();
     void _on_feature_potion_pressed(int potion_idx);
+    void _on_scene_change_delay_timeout();
 };
 
 }
