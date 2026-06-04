@@ -251,7 +251,6 @@ void GameState::advance_phase() {
             break;
         case Phase::NIGHT:
             current_phase = Phase::SUN;
-            break;
             start_new_day();
             break;
     }
