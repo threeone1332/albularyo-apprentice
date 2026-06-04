@@ -11,6 +11,8 @@
 #include <godot_cpp/classes/texture_rect.hpp>
 #include <godot_cpp/classes/texture_button.hpp>
 #include <godot_cpp/variant/string.hpp>
+#include <godot_cpp/classes/audio_stream_player.hpp>
+#include <godot_cpp/classes/audio_stream_player.hpp>
 
 namespace godot {
 
@@ -28,6 +30,9 @@ private:
     Label* confirm_message = nullptr;
     Button* stay_button = nullptr;
     Button* leave_button = nullptr;
+    AudioStreamPlayer* unlock_sfx = nullptr;
+    AudioStreamPlayer* button_click_sfx = nullptr;
+    AudioStreamPlayer* insufficient_sfx = nullptr;
 
     // Uses your existing autoload: /root/GlobalGameState.
     GameState* game_state = nullptr;
@@ -48,6 +53,10 @@ private:
     void show_exit_confirmation();
     void hide_exit_confirmation();
     void finish_exit_confirmation_typing();
+    void play_unlock_sfx();
+    void play_button_click_sfx();
+    void play_insufficient_sfx();
+    void stop_main_game_music();
 
 protected:
     static void _bind_methods();

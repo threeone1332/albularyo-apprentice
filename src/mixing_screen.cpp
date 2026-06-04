@@ -1,4 +1,5 @@
 #include "mixing_screen.h"
+#include <godot_cpp/classes/engine.hpp>
 #include <godot_cpp/classes/scene_tree.hpp>
 #include <godot_cpp/variant/utility_functions.hpp>
 #include <godot_cpp/variant/node_path.hpp>
@@ -80,6 +81,7 @@ Node* find_node_by_name_recursive(Node* current, const String& target_name) {
 }
 
 void MixingScreen::_ready() {
+    if (Engine::get_singleton()->is_editor_hint()) return;
 
     game_state = get_node<GameState>(
         NodePath("/root/GlobalGameState")

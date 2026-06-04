@@ -26,6 +26,8 @@ void TechTree::_ready() {
     // Prevent gameplay code from running while viewing the scene in the editor.
     if (Engine::get_singleton()->is_editor_hint()) return;
 
+    stop_main_game_music();
+
     // Your project already uses this autoload name.
     game_state = Object::cast_to<GameState>(get_node_or_null("/root/GlobalGameState"));
 
@@ -38,6 +40,21 @@ void TechTree::_ready() {
     confirm_message = Object::cast_to<Label>(get_node_or_null("ExitConfirmOverlay/ConfirmMessage"));
     stay_button = Object::cast_to<Button>(get_node_or_null("ExitConfirmOverlay/StayButton"));
     leave_button = Object::cast_to<Button>(get_node_or_null("ExitConfirmOverlay/LeaveButton"));
+
+    unlock_sfx = Object::cast_to<AudioStreamPlayer>(get_node_or_null("UnlockSFX"));
+    button_click_sfx = Object::cast_to<AudioStreamPlayer>(get_node_or_null("ButtonClickSFX"));
+    insufficient_sfx = Object::cast_to<AudioStreamPlayer>(get_node_or_null("InsufficientSFX"));
+
+    if (!insufficient_sfx) {
+        UtilityFunctions::printerr("TechTree C++: InsufficientSFX node not found.");
+    }
+    if (!unlock_sfx) {
+        UtilityFunctions::printerr("TechTree C++: UnlockSFX node not found.");
+    }
+
+    if (!button_click_sfx) {
+        UtilityFunctions::printerr("TechTree C++: ButtonClickSFX node not found.");
+    }
 
     if (!game_state) {
         UtilityFunctions::printerr("TechTree C++: GlobalGameState autoload not found.");
@@ -129,14 +146,17 @@ void TechTree::_process(double delta) {
 }
 
 void TechTree::_on_exit_pressed() {
+    play_button_click_sfx();
     show_exit_confirmation();
 }
 
 void TechTree::_on_stay_pressed() {
+    play_button_click_sfx();
     hide_exit_confirmation();
 }
 
 void TechTree::_on_leave_pressed() {
+    play_button_click_sfx();
     // Return to the main game screen.
     SceneTree* tree = get_tree();
 
@@ -197,6 +217,7 @@ String TechTree::get_upgrade_name(String upgrade_id) const {
 }
 
 void TechTree::buy_upgrade(String upgrade_id) {
+    
     if (!game_state) {
         show_message("GlobalGameState not found.");
         return;
@@ -207,12 +228,14 @@ void TechTree::buy_upgrade(String upgrade_id) {
 
     // Prevent buying the same upgrade twice.
     if (game_state->is_unlocked(upgrade_id)) {
+        play_button_click_sfx();
         show_message(upgrade_name + " is already unlocked.");
         return;
     }
 
     // Check if the player has enough gold.
     if (game_state->get_gold() < cost) {
+        play_insufficient_sfx();
         show_message(String("Cannot purchase ") + upgrade_name + ".");
         return;
     }
@@ -220,6 +243,7 @@ void TechTree::buy_upgrade(String upgrade_id) {
     // Subtract gold and apply the upgrade effect in GameState.
     game_state->set_gold(game_state->get_gold() - cost);
     game_state->apply_tech_unlock(upgrade_id);
+    play_unlock_sfx();
 
     update_money_label();
     show_message(upgrade_name + " unlocked.");
@@ -275,26 +299,26 @@ void TechTree::show_exit_confirmation() {
     exit_confirm_overlay->set_visible(true);
     exit_confirm_overlay->move_to_front();
 
-    title_visible_chars = 0;
-    message_visible_chars = 0;
+    title_visible_chars = confirm_title_text.length();
+    message_visible_chars = confirm_message_text.length();
     typewriter_timer = 0.0;
     bat_animation_time = 0.0;
-    typing_confirm_text = true;
+    typing_confirm_text = false;
 
     if (confirm_title) {
-        confirm_title->set_text("");
+        confirm_title->set_text(confirm_title_text);
     }
 
     if (confirm_message) {
-        confirm_message->set_text("");
+        confirm_message->set_text(confirm_message_text);
     }
 
     if (stay_button) {
-        stay_button->set_visible(false);
+        stay_button->set_visible(true);
     }
 
     if (leave_button) {
-        leave_button->set_visible(false);
+        leave_button->set_visible(true);
     }
 }
 
@@ -320,6 +344,34 @@ void TechTree::finish_exit_confirmation_typing() {
 
     if (leave_button) {
         leave_button->set_visible(true);
+    }
+}
+void TechTree::play_unlock_sfx() {
+    if (unlock_sfx) {
+        unlock_sfx->play();
+    }
+}
+
+void TechTree::play_button_click_sfx() {
+    if (button_click_sfx) {
+        button_click_sfx->play();
+    }
+}
+
+void TechTree::play_insufficient_sfx() {
+    if (insufficient_sfx) {
+        insufficient_sfx->play();
+    }
+}
+
+void TechTree::stop_main_game_music() {
+    AudioStreamPlayer *main_music = Object::cast_to<AudioStreamPlayer>(
+        get_node_or_null("/root/MainGameMusic")
+    );
+
+    if (main_music) {
+        main_music->stop();
+        main_music->queue_free();
     }
 }
 
