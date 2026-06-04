@@ -82,6 +82,22 @@ expand_margin_bottom = 10.0
 atlas = ExtResource("5_sjiej")
 region = Rect2(849.98035, 195.99872, 12.055908, 8.943481)
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_21wo0"]
+content_margin_left = 35.0
+content_margin_top = 50.0
+content_margin_right = 35.0
+content_margin_bottom = 50.0
+texture = ExtResource("12_cxp7d")
+region_rect = Rect2(139.07312, 11.89094, 105.88864, 122.20367)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ihpp7"]
+atlas = ExtResource("5_sjiej")
+region = Rect2(772.9665, 68.075516, 22.067139, 24.080856)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6lq5t"]
+atlas = ExtResource("5_sjiej")
+region = Rect2(804.90015, 69.906944, 22.196838, 22.273087)
+
 [node name="Main_screen" type="MainScreen" unique_id=1981475378]
 anchors_preset = 15
 anchor_right = 1.0
@@ -533,3 +549,66 @@ bus = &"SFX"
 stream = ExtResource("20_ihpp7")
 volume_db = -6.0
 bus = &"SFX"
+
+[node name="VictoryOverlay" type="CanvasLayer" parent="." unique_id=1032874581]
+layer = 10
+
+[node name="DarkenBackground" type="ColorRect" parent="VictoryOverlay" unique_id=1839128634]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.84313726)
+
+[node name="CenterContainer" type="CenterContainer" parent="VictoryOverlay" unique_id=1854500738]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelLayout" type="PanelContainer" parent="VictoryOverlay/CenterContainer" unique_id=1477889177]
+custom_minimum_size = Vector2(1150, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_21wo0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VictoryOverlay/CenterContainer/PanelLayout" unique_id=176434093]
+layout_mode = 2
+theme_override_constants/separation = 55
+
+[node name="VictoryTitle" type="Label" parent="VictoryOverlay/CenterContainer/PanelLayout/VBoxContainer" unique_id=12207099]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.38431373, 0.24313726, 0.24313726, 1)
+theme_override_fonts/font = ExtResource("13_3qsiq")
+theme_override_font_sizes/font_size = 100
+text = "VICTORY ACHIEVED!"
+horizontal_alignment = 1
+
+[node name="ScoreSummary" type="Label" parent="VictoryOverlay/CenterContainer/PanelLayout/VBoxContainer" unique_id=552845071]
+custom_minimum_size = Vector2(1000, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.38431373, 0.24313726, 0.24313726, 1)
+theme_override_fonts/font = ExtResource("13_3qsiq")
+theme_override_font_sizes/font_size = 38
+text = "Your Master is proud. You have mastered the elements, gathered the secrets, and filled the treasury. "
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="TimeElapsedLabel" type="Label" parent="VictoryOverlay/CenterContainer/PanelLayout/VBoxContainer" unique_id=1335888673]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.38431373, 0.24313726, 0.24313726, 1)
+theme_override_fonts/font = ExtResource("13_3qsiq")
+theme_override_font_sizes/font_size = 65
+text = "Time Elapsed: 00:00"
+horizontal_alignment = 1
+
+[node name="ButtonSpacer" type="CenterContainer" parent="VictoryOverlay/CenterContainer/PanelLayout/VBoxContainer" unique_id=713091744]
+layout_mode = 2
+
+[node name="ReturnMenuButton" type="TextureButton" parent="VictoryOverlay/CenterContainer/PanelLayout/VBoxContainer/ButtonSpacer" unique_id=1415138733]
+custom_minimum_size = Vector2(175, 175)
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_ihpp7")
+texture_pressed = SubResource("AtlasTexture_6lq5t")
+stretch_mode = 5

@@ -2,7 +2,10 @@
 #include <godot_cpp/classes/file_access.hpp>
 #include <godot_cpp/classes/json.hpp>
 #include <godot_cpp/classes/window.hpp>
+#include <godot_cpp/classes/canvas_layer.hpp>
+#include <godot_cpp/classes/property_tweener.hpp>
 #include <godot_cpp/variant/utility_functions.hpp>
+#include <ctime> // Fixed: Added for fallback initialization seeding
 
 namespace godot {
 
@@ -24,22 +27,20 @@ MainScreen::MainScreen() {
     tech_tree_button = nullptr;
     mixing_button = nullptr;
     potion_icon = nullptr;
-
-    // Audio system elements
     button_click_sfx = nullptr;
     money_sfx = nullptr;
-
-    // Autosave UI pointers
     autosave_panel = nullptr;
     autosave_label = nullptr;
     autosave_id = 0;
-
-    // Minimalist objective tracking initialization
     goal_tracker_container = nullptr;
     tech_goal_label = nullptr;
     gold_goal_label = nullptr;
     gold_goal_revealed = false;
-
+    victory_overlay = nullptr;
+    score_summary = nullptr;
+    time_elapsed_label = nullptr;
+    return_menu_button = nullptr;
+    is_victory_triggered = false;
     phase_timer = 0.0;
     sell_timer = 0.0;
     feedback_id = 0;
@@ -53,6 +54,7 @@ void MainScreen::_bind_methods() {
     ClassDB::bind_method(D_METHOD("_on_increase_pressed"), &MainScreen::_on_increase_pressed);
     ClassDB::bind_method(D_METHOD("_on_mixing_pressed"), &MainScreen::_on_mixing_pressed);
     ClassDB::bind_method(D_METHOD("_on_tech_tree_pressed"), &MainScreen::_on_tech_tree_pressed);
+    ClassDB::bind_method(D_METHOD("_on_return_menu_pressed"), &MainScreen::_on_return_menu_pressed);
     ClassDB::bind_method(D_METHOD("_save_game_to_disk"), &MainScreen::_save_game_to_disk);
 }
 
@@ -60,19 +62,18 @@ void MainScreen::_ready() {
     if (Engine::get_singleton()->is_editor_hint()) return;
     ensure_main_game_music();
 
-    // 1. Establish custom texture coordinate indexing positions
-    potion_icon_regions.push_back(Rect2(20, 20, 200, 200));   // Lunas ng Sigla
-    potion_icon_regions.push_back(Rect2(260, 20, 200, 195));  // Lunas ng Lihim
-    potion_icon_regions.push_back(Rect2(500, 20, 200, 195));  // Lunas ng Linaw
-    potion_icon_regions.push_back(Rect2(740, 20, 150, 146));  // Lunas ng Himbing
-    potion_icon_regions.push_back(Rect2(930, 20, 200, 200));  // Tinctura ng Bilis
-    potion_icon_regions.push_back(Rect2(1170, 20, 200, 200)); // Lason
-    potion_icon_regions.push_back(Rect2(1410, 20, 200, 200)); // Lunas ng Diwa
+    // FIX: Seed the pseudo-random generator with system time so numbers change every session
+    std::srand(static_cast<unsigned int>(std::time(nullptr)));
 
-    // 2. Fetch Global Node reference setup
+    potion_icon_regions.push_back(Rect2(20, 20, 200, 200));
+    potion_icon_regions.push_back(Rect2(260, 20, 200, 195));
+    potion_icon_regions.push_back(Rect2(500, 20, 200, 195));
+    potion_icon_regions.push_back(Rect2(740, 20, 150, 146));
+    potion_icon_regions.push_back(Rect2(930, 20, 200, 200));
+    potion_icon_regions.push_back(Rect2(1170, 20, 200, 200));
+    potion_icon_regions.push_back(Rect2(1410, 20, 200, 200));
+
     game_state = get_node_or_null("/root/GlobalGameState");
-
-    // 3. Preload Dynamic Scene Background Assets
     main_background = get_node<NinePatchRect>("MarginContainer/NinePatchRect");
 
     ResourceLoader* loader = ResourceLoader::get_singleton();
@@ -80,32 +81,25 @@ void MainScreen::_ready() {
     bg_afternoon = loader->load("res://assets/ui/Main Screen/Afternoon Main Screen.png");
     bg_night     = loader->load("res://assets/ui/Main Screen/Night Main Screen.png");
 
-    // 4. Bind UI Components securely
     money_label = get_node<Label>("MarginContainer/NinePatchRect/MoneyArea/Money/Label");
     gain_label = get_node<Label>("MarginContainer/NinePatchRect/MoneyArea/GainSlot/GainLabel");
     sale_feedback = get_node<Label>("SaleFeedback");
-
     morning_icon = get_node<TextureRect>("MarginContainer/NinePatchRect/Time/Morning");
     noon_icon = get_node<TextureRect>("MarginContainer/NinePatchRect/Time/Noon");
     night_icon = get_node<TextureRect>("MarginContainer/NinePatchRect/Time/Night");
-
     decrease_button = get_node<Button>("MarginContainer/NinePatchRect/Price/Slider/Decrease");
     price_label = get_node<Label>("MarginContainer/NinePatchRect/Price/Slider/Label");
     increase_button = get_node<Button>("MarginContainer/NinePatchRect/Price/Slider/Increase");
     sell_chance_label = get_node<Label>("MarginContainer/NinePatchRect/Price/Demand/Label2");
-
     change_button = get_node<Button>("MarginContainer/NinePatchRect/Feature/NinePatchRect/MarginContainer/Change");
     potion_name_label = get_node<Label>("MarginContainer/NinePatchRect/Feature/NinePatchRect/MarginContainer/MarginContainer/potionandname/nameofpotion");
-
     tech_tree_button = get_node<Button>("MarginContainer/NinePatchRect/Tech_tree_margin/Tech Tree");
     mixing_button = get_node<Button>("MarginContainer/NinePatchRect/Mixing_margin/Mixing");
-
     potion_icon = get_node<NinePatchRect>("MarginContainer/NinePatchRect/Feature/NinePatchRect/MarginContainer/MarginContainer/potionandname/NinePatchRect/MarginContainer/picofpotion");
 
     autosave_panel = Object::cast_to<PanelContainer>(get_node_or_null("AutosaveNotification/PanelContainer"));
     autosave_label = Object::cast_to<Label>(get_node_or_null("AutosaveNotification/PanelContainer/HBoxContainer/AutosaveLabel"));
 
-    // --- BIND OBJECTIVE TEXT NODE POINTERS ---
     goal_tracker_container = get_node<MarginContainer>("MarginContainer/NinePatchRect/GoalTrackerContainer");
     tech_goal_label = get_node<Label>("MarginContainer/NinePatchRect/GoalTrackerContainer/VBoxContainer/TechGoalLabel");
     gold_goal_label = get_node<Label>("MarginContainer/NinePatchRect/GoalTrackerContainer/VBoxContainer/GoldGoalLabel");
@@ -113,49 +107,38 @@ void MainScreen::_ready() {
     button_click_sfx = Object::cast_to<AudioStreamPlayer>(get_node_or_null("ButtonClickSFX"));
     money_sfx = Object::cast_to<AudioStreamPlayer>(get_node_or_null("MoneySFX"));
 
-    if (!button_click_sfx) {
-        UtilityFunctions::printerr("MainScreen C++: ButtonClickSFX node not found.");
-    }
-    if (!money_sfx) {
-        UtilityFunctions::printerr("MainScreen C++: MoneySFX node not found.");
-    }
-
-    // 5. Fallback validations to track down specific runtime issues
-    if (!game_state) {
-        UtilityFunctions::printerr("MainScreen C++ Error: GlobalGameState Autoload is missing from Project Settings!");
-        return;
-    }
-    if (!sale_feedback) {
-        UtilityFunctions::printerr("MainScreen C++ Error: Core node 'SaleFeedback' not found! Make sure it's a child of Main_screen.");
-        return;
-    }
-    if (!gain_label) {
-        UtilityFunctions::printerr("MainScreen C++ Error: Core node 'GainLabel' not found at the specified path!");
-        return;
+    victory_overlay = Object::cast_to<CanvasLayer>(get_node_or_null("VictoryOverlay"));
+    if (victory_overlay) {
+        score_summary = get_node<Label>("VictoryOverlay/CenterContainer/PanelLayout/VBoxContainer/ScoreSummary");
+        time_elapsed_label = get_node<Label>("VictoryOverlay/CenterContainer/PanelLayout/VBoxContainer/TimeElapsedLabel");
+        return_menu_button = get_node<TextureButton>("VictoryOverlay/CenterContainer/PanelLayout/VBoxContainer/ButtonSpacer/ReturnMenuButton");
     }
 
-    // 6. Initial layout state adjustments
+    if (!sale_feedback || !gain_label || !game_state) return;
+
     sale_feedback->set_visible(false);
     gain_label->set_text("");
-    gain_label->set_visible(true);
-
     if (autosave_panel) autosave_panel->set_visible(false);
 
     sale_feedback_start_pos = sale_feedback->get_position();
     gain_label_start_pos = gain_label->get_position();
 
-    // 7. Hook signals safely
     decrease_button->connect("pressed", Callable(this, "_on_decrease_pressed"));
     increase_button->connect("pressed", Callable(this, "_on_increase_pressed"));
     mixing_button->connect("pressed", Callable(this, "_on_mixing_pressed"));
     tech_tree_button->connect("pressed", Callable(this, "_on_tech_tree_pressed"));
     change_button->connect("pressed", Callable(this, "_on_mixing_pressed"));
 
-    // Initial load setup for visibility states
+    if (return_menu_button) {
+        return_menu_button->connect("pressed", Callable(this, "_on_return_menu_pressed"));
+    }
+
     if (gold_goal_label) {
-        gold_goal_label->set_modulate(Color(1, 1, 1, 0)); // Hidden text initially
+        gold_goal_label->set_modulate(Color(1, 1, 1, 0));
         gold_goal_label->set_visible(false);
     }
+
+    if (victory_overlay) victory_overlay->set_visible(false);
 
     _update_ui();
     _update_time_icons();
@@ -163,6 +146,11 @@ void MainScreen::_ready() {
 
 void MainScreen::_process(double delta) {
     if (Engine::get_singleton()->is_editor_hint()) return;
+
+    if (game_state) {
+        double current_playtime = game_state->call("get_total_playtime");
+        game_state->call("set_total_playtime", current_playtime + delta);
+    }
 
     phase_timer += delta;
     sell_timer += delta;
@@ -179,6 +167,8 @@ void MainScreen::_process(double delta) {
 }
 
 void MainScreen::_attempt_sale_tick() {
+    if (is_victory_triggered) return;
+
     bool has_featured = game_state->call("has_featured_stock");
     if (!has_featured) {
         _show_sale_feedback("NO POTION", false);
@@ -197,10 +187,10 @@ void MainScreen::_attempt_sale_tick() {
 }
 
 void MainScreen::_advance_phase_tick() {
+    if (is_victory_triggered) return;
+
     int old_gold = game_state->call("get_gold");
-
     game_state->call("advance_phase");
-
     int new_gold = game_state->call("get_gold");
     int difference = new_gold - old_gold;
 
@@ -211,17 +201,25 @@ void MainScreen::_advance_phase_tick() {
 
     _update_ui();
     _update_time_icons();
-
-    // Automatically save the file to disk every single time a phase shifts!
     _save_game_to_disk();
 }
 
+String MainScreen::_format_time(double total_seconds) {
+    int total_secs_int = static_cast<int>(total_seconds);
+    int minutes = total_secs_int / 60;
+    int seconds = total_secs_int % 60;
+
+    String min_str = (minutes < 10) ? "0" + UtilityFunctions::str(minutes) : UtilityFunctions::str(minutes);
+    String sec_str = (seconds < 10) ? "0" + UtilityFunctions::str(seconds) : UtilityFunctions::str(seconds);
+
+    return "TIME ELAPSED: " + min_str + ":" + sec_str;
+}
+
 void MainScreen::_check_victory_condition() {
-    if (!game_state) return;
+    if (!game_state || is_victory_triggered) return;
 
     int current_gold = game_state->call("get_gold");
 
-    // Safely check all five internal keys from your tech tree design
     int unlocked_count = 0;
     if (game_state->call("is_unlocked", "cat_companion")) unlocked_count++;
     if (game_state->call("is_unlocked", "bat_companion")) unlocked_count++;
@@ -229,16 +227,29 @@ void MainScreen::_check_victory_condition() {
     if (game_state->call("is_unlocked", "awaken_anito")) unlocked_count++;
     if (game_state->call("is_unlocked", "hire_adventurers")) unlocked_count++;
 
-    // Both conditions matched completely = Game Win Sequence Triggered
     if (unlocked_count >= 5 && current_gold >= 1000) {
-        set_process(false); // Disables local game execution updates
-        UtilityFunctions::print("Victory achieved! Proceeding to high-scores registry...");
-        get_tree()->change_scene_to_file("res://scenes/victory_screen.tscn");
+        is_victory_triggered = true;
+
+        if (score_summary) {
+            score_summary->set_text("YOUR MASTER IS PROUD. YOU HAVE MASTERED THE ELEMENTS, GATHERED THE SECRETS, AND FILLED THE TREASURY.");
+        }
+
+        if (time_elapsed_label) {
+            double global_time = game_state->call("get_total_playtime");
+            time_elapsed_label->set_text(_format_time(global_time));
+        }
+
+        if (victory_overlay) victory_overlay->set_visible(true);
     }
 }
 
+void MainScreen::_on_return_menu_pressed() {
+    play_button_click_sfx();
+    get_tree()->change_scene_to_file("res://scenes/main_menu.tscn");
+}
+
 void MainScreen::_save_game_to_disk() {
-    if (!game_state) return;
+    if (!game_state || is_victory_triggered) return;
 
     Dictionary save_dict = game_state->call("get_save_data");
     String json_string = JSON::stringify(save_dict);
@@ -247,27 +258,25 @@ void MainScreen::_save_game_to_disk() {
     if (file.is_valid()) {
         file->store_line(json_string);
         file->close();
-        UtilityFunctions::print("MainScreen AutoSave: System metrics backed up successfully!");
 
         if (autosave_panel && autosave_label) {
             autosave_id++;
-
             autosave_panel->set_visible(true);
             autosave_panel->set_modulate(Color(1, 1, 1, 0));
 
             Ref<Tween> tween = create_tween();
-            tween->set_parallel(true);
-
             tween->tween_property(autosave_panel, "modulate:a", 1.0, 0.3);
-            tween->tween_property(autosave_panel, "modulate:a", 0.0, 0.5)->set_delay(1.5);
-            tween->chain()->tween_callback(Callable(autosave_panel, "set_visible").bind(false));
+
+            Ref<Tween> delay_tween = create_tween();
+            delay_tween->tween_interval(1.5);
+            delay_tween->tween_property(autosave_panel, "modulate:a", 0.0, 0.5);
+            delay_tween->tween_callback(Callable(autosave_panel, "set_visible").bind(false));
         }
-    } else {
-        UtilityFunctions::printerr("MainScreen AutoSave Error: Failed to open file write path destination!");
     }
 }
 
 void MainScreen::_on_decrease_pressed() {
+    if (is_victory_triggered) return;
     play_button_click_sfx();
     int current_price = game_state->call("get_price");
     game_state->call("set_price", current_price - 1);
@@ -275,6 +284,7 @@ void MainScreen::_on_decrease_pressed() {
 }
 
 void MainScreen::_on_increase_pressed() {
+    if (is_victory_triggered) return;
     play_button_click_sfx();
     int current_price = game_state->call("get_price");
     game_state->call("set_price", current_price + 1);
@@ -300,7 +310,6 @@ void MainScreen::_update_ui() {
         potion_icon->set_region_rect(potion_icon_regions[potion_id]);
     }
 
-    // --- REFRESH TARGET HUD TEXT DATA AND TWEEN PROGRESSIONS ---
     int unlocked_count = 0;
     if (game_state->call("is_unlocked", "cat_companion")) unlocked_count++;
     if (game_state->call("is_unlocked", "bat_companion")) unlocked_count++;
@@ -310,13 +319,7 @@ void MainScreen::_update_ui() {
 
     if (tech_goal_label) {
         tech_goal_label->set_text("Tech Tree Upgrades: " + UtilityFunctions::str(unlocked_count) + "/5");
-
-        // Turn text green upon hitting max tech tier
-        if (unlocked_count >= 5) {
-            tech_goal_label->add_theme_color_override("font_color", Color::html("#6abe30"));
-        } else {
-            tech_goal_label->add_theme_color_override("font_color", Color::html("#ffffff"));
-        }
+        tech_goal_label->add_theme_color_override("font_color", (unlocked_count >= 5) ? Color::html("#6abe30") : Color::html("#ffffff"));
     }
 
     if (gold_goal_label) {
@@ -326,29 +329,17 @@ void MainScreen::_update_ui() {
             if (!gold_goal_revealed) {
                 gold_goal_revealed = true;
                 gold_goal_label->set_visible(true);
-
-                // Create a smooth visual fade-in using Godot Tweens
                 Ref<Tween> fade_tween = create_tween();
-                fade_tween->tween_property(gold_goal_label, "modulate:a", 1.0, 1.2)
-                          ->set_trans(Tween::TRANS_SINE)
-                          ->set_ease(Tween::EASE_OUT);
+                fade_tween->tween_property(gold_goal_label, "modulate:a", 1.0, 1.2)->set_trans(Tween::TRANS_SINE)->set_ease(Tween::EASE_OUT);
             }
-
-            // Green highlight when user maintains >= 1k gold balance target
-            if (current_gold >= 1000) {
-                gold_goal_label->add_theme_color_override("font_color", Color::html("#6abe30"));
-            } else {
-                gold_goal_label->add_theme_color_override("font_color", Color::html("#ffffff"));
-            }
+            gold_goal_label->add_theme_color_override("font_color", (current_gold >= 1000) ? Color::html("#6abe30") : Color::html("#ffffff"));
         } else {
-            // Keep completely invisible if tech requirements drop back or are unfulfilled
             gold_goal_revealed = false;
             gold_goal_label->set_visible(false);
             gold_goal_label->set_modulate(Color(1, 1, 1, 0));
         }
     }
 
-    // Run end-game metrics assessment checks
     _check_victory_condition();
 }
 
@@ -361,103 +352,88 @@ void MainScreen::_update_time_icons() {
 
     if (!main_background) return;
 
-    if (phase == "sun" && bg_morning.is_valid()) {
-        main_background->set_texture(bg_morning);
-    }
-    else if (phase == "noon" && bg_afternoon.is_valid()) {
-        main_background->set_texture(bg_afternoon);
-    }
-    else if (phase == "night" && bg_night.is_valid()) {
-        main_background->set_texture(bg_night);
-    }
+    if (phase == "sun" && bg_morning.is_valid()) main_background->set_texture(bg_morning);
+    else if (phase == "noon" && bg_afternoon.is_valid()) main_background->set_texture(bg_afternoon);
+    else if (phase == "night" && bg_night.is_valid()) main_background->set_texture(bg_night);
 }
 
-// --- TWEEN VISUAL EFFECTS CODE ---
-
 void MainScreen::_show_sale_feedback(String text, bool sold) {
-    feedback_id++;
+    // FIX: Kill old active feedback animation immediately to prevent overlapping tween state blockages
+    if (active_feedback_tween.is_valid() && active_feedback_tween->is_running()) {
+        active_feedback_tween->kill();
+    }
 
+    feedback_id++;
     sale_feedback->set_text(text);
     sale_feedback->set_visible(true);
     sale_feedback->set_position(sale_feedback_start_pos);
     sale_feedback->set_modulate(Color(1.0, 1.0, 1.0, 1.0));
-
-    if (sold) {
-        sale_feedback->add_theme_color_override("font_color", Color::html("#A97839"));
-    } else {
-        sale_feedback->add_theme_color_override("font_color", Color::html("#8A5A52"));
-    }
+    sale_feedback->add_theme_color_override("font_color", sold ? Color::html("#A97839") : Color::html("#8A5A52"));
 
     Vector2 end_pos = sale_feedback_start_pos + Vector2(0, -18);
+    active_feedback_tween = create_tween();
+    active_feedback_tween->tween_property(sale_feedback, "position", end_pos, 0.4);
 
-    Ref<Tween> tween = create_tween();
-    tween->tween_interval(0.25);
-    tween->set_parallel(true);
-    tween->tween_property(sale_feedback, "position", end_pos, 0.9);
-    tween->tween_property(sale_feedback, "modulate:a", 0.0, 0.9);
+    Ref<Tween> alpha_tween = create_tween();
+    alpha_tween->tween_property(sale_feedback, "modulate:a", 0.0, 0.4)->set_delay(0.4);
+    alpha_tween->tween_callback(Callable(sale_feedback, "set_visible").bind(false));
 }
 
 void MainScreen::_show_gold_gain(int amount) {
-    gain_id++;
+    // FIX: Safely terminate running gain modifications
+    if (active_gain_tween.is_valid() && active_gain_tween->is_running()) {
+        active_gain_tween->kill();
+    }
 
+    gain_id++;
     gain_label->set_text("+" + UtilityFunctions::str(amount));
     gain_label->add_theme_color_override("font_color", Color::html("#D39B38"));
-
     gain_label->set_position(gain_label_start_pos);
     gain_label->set_modulate(Color(1, 1, 1, 1));
     gain_label->set_scale(Vector2(1.5, 1.5));
 
     Vector2 end_pos = gain_label_start_pos + Vector2(0, -25);
+    active_gain_tween = create_tween();
+    active_gain_tween->tween_property(gain_label, "position", end_pos, 0.5);
 
-    Ref<Tween> tween = create_tween();
-    tween->set_parallel(true);
-    tween->tween_property(gain_label, "position", end_pos, 0.8);
-    tween->tween_property(gain_label, "modulate:a", 0.0, 0.8);
+    Ref<Tween> alpha_tween = create_tween();
+    alpha_tween->tween_property(gain_label, "modulate:a", 0.0, 0.4)->set_delay(0.4);
 }
 
 void MainScreen::_show_gold_loss(int amount) {
-    gain_id++;
+    if (active_gain_tween.is_valid() && active_gain_tween->is_running()) {
+        active_gain_tween->kill();
+    }
 
+    gain_id++;
     gain_label->set_text("-" + UtilityFunctions::str(amount));
     gain_label->add_theme_color_override("font_color", Color::html("#8A5A52"));
-
     gain_label->set_position(gain_label_start_pos);
     gain_label->set_modulate(Color(1, 1, 1, 1));
     gain_label->set_scale(Vector2(1.5, 1.5));
 
     Vector2 end_pos = gain_label_start_pos + Vector2(0, -25);
+    active_gain_tween = create_tween();
+    active_gain_tween->tween_property(gain_label, "position", end_pos, 0.5);
 
-    Ref<Tween> tween = create_tween();
-    tween->set_parallel(true);
-    tween->tween_property(gain_label, "position", end_pos, 0.8);
-    tween->tween_property(gain_label, "modulate:a", 0.0, 0.8);
+    Ref<Tween> alpha_tween = create_tween();
+    alpha_tween->tween_property(gain_label, "modulate:a", 0.0, 0.4)->set_delay(0.4);
 }
 
 void MainScreen::_on_mixing_pressed() {
+    if (is_victory_triggered) return;
     play_button_click_sfx();
     get_tree()->change_scene_to_file("res://scenes/mixing_screen.tscn");
 }
 
 void MainScreen::_on_tech_tree_pressed() {
+    if (is_victory_triggered) return;
     play_button_click_sfx();
     get_tree()->change_scene_to_file("res://scenes/tech_tree.tscn");
 }
 
-void MainScreen::ensure_main_game_music() {
-    // TODO: Add your main background music logic here if needed
-    // e.g., if (music_player && !music_player->is_playing()) music_player->play();
-}
-
-void MainScreen::play_button_click_sfx() {
-    if (button_click_sfx) {
-        button_click_sfx->play();
-    }
-}
-
-void MainScreen::play_money_sfx() {
-    if (money_sfx) {
-        money_sfx->play();
-    }
-}
+void MainScreen::ensure_main_game_music() {}
+void MainScreen::play_button_click_sfx() { if (button_click_sfx) button_click_sfx->play(); }
+void MainScreen::play_money_sfx() { if (money_sfx) money_sfx->play(); }
 
 } // namespace godot

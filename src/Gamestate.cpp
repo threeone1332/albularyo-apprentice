@@ -16,7 +16,8 @@ GameState::GameState() :
     murder_of_crows(false),
     awaken_anito(false),
     hire_adventurers(false),
-    featured_potion_id(0)
+    featured_potion_id(0),
+    total_playtime(0.0)
 {
     for (int i = 0; i < 8; i++) {
         player_inventory[i] = 5;
@@ -35,7 +36,6 @@ GameState::GameState() :
     potion_demands[6] = {"LUNAS NG DIWA", 45, 55, 80};
 }
 
-// --- NEW STATE RESET LOGIC FOR NEW GAME LOOP ---
 void GameState::reset_state() {
     gold = 100;
     current_phase = Phase::SUN;
@@ -48,13 +48,14 @@ void GameState::reset_state() {
     awaken_anito = false;
     hire_adventurers = false;
     featured_potion_id = 0;
+    total_playtime = 0.0;
 
     for (int i = 0; i < 8; i++) {
-        player_inventory[i] = 5; // Resets starting ingredients back to default values
+        player_inventory[i] = 5;
     }
 
     for (int i = 0; i < 7; i++) {
-        player_potions[i] = 0; // Wipes out all brewed potion storage queues
+        player_potions[i] = 0;
     }
 }
 
@@ -89,27 +90,23 @@ void GameState::_bind_methods() {
     ClassDB::bind_method(D_METHOD("gather_phase_resources"), &GameState::gather_phase_resources);
     ClassDB::bind_method(D_METHOD("has_featured_stock"), &GameState::has_featured_stock);
 
-    // Binding the new Save/Load methods so your MainMenu script can call them!
+    ClassDB::bind_method(D_METHOD("get_total_playtime"), &GameState::get_total_playtime);
+    ClassDB::bind_method(D_METHOD("set_total_playtime", "time"), &GameState::set_total_playtime);
+
     ClassDB::bind_method(D_METHOD("get_save_data"), &GameState::get_save_data);
     ClassDB::bind_method(D_METHOD("load_save_data", "data"), &GameState::load_save_data);
-
-    // FIX: Exposed reset_state macro binding so Engine scripting contexts can execute it
     ClassDB::bind_method(D_METHOD("reset_state"), &GameState::reset_state);
 }
 
-// --- SERIALIZATION LOGIC FOR JSON SAVES ---
-
 Dictionary GameState::get_save_data() {
     Dictionary data;
-
-    // Core metrics
     data["gold"] = gold;
     data["game_phase"] = game_phase;
     data["price_slider_value"] = price_slider_value;
     data["featured_potion_id"] = featured_potion_id;
     data["current_phase"] = static_cast<int>(current_phase);
+    data["total_playtime"] = total_playtime;
 
-    // Tech Upgrades
     data["adventurers_unlocked"] = adventurers_unlocked;
     data["cat_companion"] = cat_companion;
     data["bat_companion"] = bat_companion;
@@ -117,17 +114,12 @@ Dictionary GameState::get_save_data() {
     data["awaken_anito"] = awaken_anito;
     data["hire_adventurers"] = hire_adventurers;
 
-    // Arrays packaging (Inventory & Potions Stock)
     Array inv_arr;
-    for (int i = 0; i < 8; i++) {
-        inv_arr.append(player_inventory[i]);
-    }
+    for (int i = 0; i < 8; i++) { inv_arr.append(player_inventory[i]); }
     data["player_inventory"] = inv_arr;
 
     Array pot_arr;
-    for (int i = 0; i < 7; i++) {
-        pot_arr.append(player_potions[i]);
-    }
+    for (int i = 0; i < 7; i++) { pot_arr.append(player_potions[i]); }
     data["player_potions"] = pot_arr;
 
     return data;
@@ -138,50 +130,27 @@ static bool save_value_is_number(const Variant &value) {
 }
 
 static int save_read_int(const Dictionary &data, const String &key, int fallback) {
-    if (!data.has(key)) {
-        return fallback;
-    }
-
+    if (!data.has(key)) return fallback;
     Variant value = data[key];
-    if (!save_value_is_number(value)) {
-        UtilityFunctions::printerr("GameState Save Load: Key has non-numeric value: ", key);
-        return fallback;
-    }
-
+    if (!save_value_is_number(value)) return fallback;
     return static_cast<int>(value);
 }
 
 static float save_read_float(const Dictionary &data, const String &key, float fallback) {
-    if (!data.has(key)) {
-        return fallback;
-    }
-
+    if (!data.has(key)) return fallback;
     Variant value = data[key];
-    if (!save_value_is_number(value)) {
-        UtilityFunctions::printerr("GameState Save Load: Key has non-numeric value: ", key);
-        return fallback;
-    }
-
+    if (!save_value_is_number(value)) return fallback;
     return static_cast<float>(value);
 }
 
 static bool save_read_bool(const Dictionary &data, const String &key, bool fallback) {
-    if (!data.has(key)) {
-        return fallback;
-    }
-
+    if (!data.has(key)) return fallback;
     Variant value = data[key];
-    if (value.get_type() != Variant::BOOL) {
-        UtilityFunctions::printerr("GameState Save Load: Key has non-bool value: ", key);
-        return fallback;
-    }
-
+    if (value.get_type() != Variant::BOOL) return fallback;
     return static_cast<bool>(value);
 }
 
 void GameState::load_save_data(Dictionary data) {
-    UtilityFunctions::print("GameState Save Load: Applying dictionary...");
-
     gold = std::max(0, save_read_int(data, "gold", gold));
     game_phase = std::max(1, save_read_int(data, "game_phase", game_phase));
     price_slider_value = std::max(1.0f, save_read_float(data, "price_slider_value", price_slider_value));
@@ -192,7 +161,10 @@ void GameState::load_save_data(Dictionary data) {
         current_phase = static_cast<Phase>(phase_id);
     }
 
-    // Load Tech Upgrades State
+    if (data.has("total_playtime")) {
+        total_playtime = std::max(0.0, static_cast<double>(save_read_float(data, "total_playtime", total_playtime)));
+    }
+
     adventurers_unlocked = save_read_bool(data, "adventurers_unlocked", adventurers_unlocked);
     cat_companion = save_read_bool(data, "cat_companion", cat_companion);
     bat_companion = save_read_bool(data, "bat_companion", bat_companion);
@@ -200,59 +172,43 @@ void GameState::load_save_data(Dictionary data) {
     awaken_anito = save_read_bool(data, "awaken_anito", awaken_anito);
     hire_adventurers = save_read_bool(data, "hire_adventurers", hire_adventurers);
 
-    // Unpack Player Raw Ingredients Arrays safely
     if (data.has("player_inventory")) {
         Variant inv_value = data["player_inventory"];
         if (inv_value.get_type() == Variant::ARRAY) {
             Array inv_arr = inv_value;
             for (int i = 0; i < 8 && i < inv_arr.size(); i++) {
-                Variant item = inv_arr[i];
-                if (save_value_is_number(item)) {
-                    player_inventory[i] = std::max(0, static_cast<int>(item));
+                if (save_value_is_number(inv_arr[i])) {
+                    player_inventory[i] = std::max(0, static_cast<int>(inv_arr[i]));
                 }
             }
-        } else {
-            UtilityFunctions::printerr("GameState Save Load: player_inventory is not an Array.");
         }
     }
 
-    // Unpack Processed Potion Stocks Arrays safely
     if (data.has("player_potions")) {
         Variant pot_value = data["player_potions"];
         if (pot_value.get_type() == Variant::ARRAY) {
             Array pot_arr = pot_value;
             for (int i = 0; i < 7 && i < pot_arr.size(); i++) {
-                Variant item = pot_arr[i];
-                if (save_value_is_number(item)) {
-                    player_potions[i] = std::max(0, static_cast<int>(item));
+                if (save_value_is_number(pot_arr[i])) {
+                    player_potions[i] = std::max(0, static_cast<int>(pot_arr[i]));
                 }
             }
-        } else {
-            UtilityFunctions::printerr("GameState Save Load: player_potions is not an Array.");
         }
     }
-
-    UtilityFunctions::print("GameState Save Load: Complete.");
 }
-
-// --- CORE GAME SYSTEM MECHANICS TRACKERS ---
 
 void GameState::set_gold(int amount) { gold = amount; }
 int GameState::get_gold() const { return gold; }
 void GameState::add_gold(int amount) { gold += amount; }
 
+double GameState::get_total_playtime() const { return total_playtime; }
+void GameState::set_total_playtime(double time) { total_playtime = std::max(0.0, time); }
+
 void GameState::advance_phase() {
     switch (current_phase) {
-        case Phase::SUN:
-            current_phase = Phase::NOON;
-            break;
-        case Phase::NOON:
-            current_phase = Phase::NIGHT;
-            break;
-        case Phase::NIGHT:
-            current_phase = Phase::SUN;
-            start_new_day();
-            break;
+        case Phase::SUN:   current_phase = Phase::NOON; break;
+        case Phase::NOON:  current_phase = Phase::NIGHT; break;
+        case Phase::NIGHT: current_phase = Phase::SUN; start_new_day(); break;
     }
     gather_phase_resources();
     check_phase_progression();
@@ -268,11 +224,7 @@ String GameState::get_current_phase() const {
 }
 
 int GameState::get_game_phase() const { return game_phase; }
-
-void GameState::set_price(float p) {
-    price_slider_value = std::max(1.0f, p);
-}
-
+void GameState::set_price(float p) { price_slider_value = std::max(1.0f, p); }
 float GameState::get_price() const { return price_slider_value; }
 
 float GameState::get_demand_modifier() const {
@@ -291,9 +243,7 @@ float GameState::calculate_sell_chance(float demand, float price) const {
 }
 
 bool GameState::attempt_sale() {
-    if (player_potions[featured_potion_id] <= 0) {
-        return false;
-    }
+    if (player_potions[featured_potion_id] <= 0) return false;
     float demand = get_current_potion_demand();
     float chance = calculate_sell_chance(demand, price_slider_value);
     float roll = static_cast<float>(rand()) / RAND_MAX;
@@ -306,15 +256,11 @@ bool GameState::attempt_sale() {
 }
 
 void GameState::apply_tech_unlock(String unlock_name) {
-    if (unlock_name == "cat_companion") {
-        cat_companion = true;
-    } else if (unlock_name == "bat_companion") {
-        bat_companion = true;
-    } else if (unlock_name == "murder_of_crows") {
-        murder_of_crows = true;
-    } else if (unlock_name == "awaken_anito") {
-        awaken_anito = true;
-    } else if (unlock_name == "hire_adventurers") {
+    if (unlock_name == "cat_companion") cat_companion = true;
+    else if (unlock_name == "bat_companion") bat_companion = true;
+    else if (unlock_name == "murder_of_crows") murder_of_crows = true;
+    else if (unlock_name == "awaken_anito") awaken_anito = true;
+    else if (unlock_name == "hire_adventurers") {
         hire_adventurers = true;
         adventurers_unlocked = true;
     }
@@ -333,9 +279,9 @@ bool GameState::get_adventurers_unlocked() const { return adventurers_unlocked; 
 void GameState::unlock_adventurers() { adventurers_unlocked = true; }
 
 void GameState::check_phase_progression() {
-    if      (game_phase == 1 && gold >= 100)        game_phase = 2;
-    else if (game_phase == 2 && gold >= 200)        game_phase = 3;
-    else if (game_phase == 3 && adventurers_unlocked)       game_phase = 4;
+    if      (game_phase == 1 && gold >= 100)              game_phase = 2;
+    else if (game_phase == 2 && gold >= 200)              game_phase = 3;
+    else if (game_phase == 3 && adventurers_unlocked)     game_phase = 4;
     else if (game_phase == 4 && is_unlocked("awaken_anito")) game_phase = 5;
 }
 
@@ -343,13 +289,11 @@ bool GameState::check_win_condition() const { return gold >= 5000; }
 
 int GameState::get_current_potion_demand() const {
     const PotionDemand& potion = potion_demands[featured_potion_id];
-
     switch (current_phase) {
-        case Phase::SUN: return potion.morning_demand;
-        case Phase::NOON: return potion.noon_demand;
+        case Phase::SUN:   return potion.morning_demand;
+        case Phase::NOON:  return potion.noon_demand;
         case Phase::NIGHT: return potion.night_demand;
     }
-
     return potion.morning_demand;
 }
 
@@ -360,31 +304,19 @@ int GameState::get_sell_chance_percent() const {
 }
 
 void GameState::set_featured_potion_id(int id) {
-    if (id >= 0 && id < 7) {
-        featured_potion_id = id;
-    }
+    if (id >= 0 && id < 7) featured_potion_id = id;
 }
 
-int GameState::get_featured_potion_id() const {
-    return featured_potion_id;
-}
-
-String GameState::get_featured_potion_name() const {
-    return potion_demands[featured_potion_id].name;
-}
+int GameState::get_featured_potion_id() const { return featured_potion_id; }
+String GameState::get_featured_potion_name() const { return potion_demands[featured_potion_id].name; }
 
 int GameState::get_ingredient_count(int id) const {
-    if (id < 0 || id >= 8) {
-        UtilityFunctions::printerr("GameState Error: Out of bounds ingredient ID requested: ", id);
-        return 0;
-    }
+    if (id < 0 || id >= 8) return 0;
     return player_inventory[id];
 }
 
 void GameState::set_ingredient_count(int id, int amount) {
-    if (id >= 0 && id < 8) {
-        player_inventory[id] = std::max(0, amount);
-    }
+    if (id >= 0 && id < 8) player_inventory[id] = std::max(0, amount);
 }
 
 void GameState::add_ingredient(int id, int amount) {
@@ -393,17 +325,12 @@ void GameState::add_ingredient(int id, int amount) {
 }
 
 int GameState::get_potion_count(int id) const {
-    if (id < 0 || id >= 7) {
-        UtilityFunctions::printerr("GameState Error: Out of bounds potion ID requested: ", id);
-        return 0;
-    }
+    if (id < 0 || id >= 7) return 0;
     return player_potions[id];
 }
 
 void GameState::set_potion_count(int id, int amount) {
-    if (id >= 0 && id < 7) {
-        player_potions[id] = std::max(0, amount);
-    }
+    if (id >= 0 && id < 7) player_potions[id] = std::max(0, amount);
 }
 
 void GameState::add_potion(int id, int amount) {
@@ -412,19 +339,17 @@ void GameState::add_potion(int id, int amount) {
 }
 
 void GameState::start_new_day() {
-    add_ingredient(0, bat_companion ? 3 : 2); // BULAKLAK NG SIGLA
-    add_ingredient(2, bat_companion ? 3 : 2); // BULAKLAK NG HIMBING
-    add_ingredient(4, 2);                     // KABUTE
-    add_ingredient(6, cat_companion ? 3 : 1); // PARUPARO
+    add_ingredient(0, bat_companion ? 3 : 2);
+    add_ingredient(2, bat_companion ? 3 : 2);
+    add_ingredient(4, 2);
+    add_ingredient(6, cat_companion ? 3 : 1);
 
     if (adventurers_unlocked) {
         int delivery = hire_adventurers ? 2 : 1;
-
-        add_ingredient(1, delivery); // HIBLA NG DIWA
-        add_ingredient(3, delivery); // BUTIL NG ARAW
-        add_ingredient(5, delivery); // PUSO NG DILIM
-        add_ingredient(7, delivery); // BIYAK NG TALA
-
+        add_ingredient(1, delivery);
+        add_ingredient(3, delivery);
+        add_ingredient(5, delivery);
+        add_ingredient(7, delivery);
         gold = std::max(0, gold - (hire_adventurers ? 40 : 25));
     }
 }
@@ -432,37 +357,28 @@ void GameState::start_new_day() {
 void GameState::gather_phase_resources() {
     switch (current_phase) {
         case Phase::SUN:
-            add_ingredient(0, 1 + rand() % 2); // BULAKLAK NG SIGLA
-            add_ingredient(2, rand() % 2);     // BULAKLAK NG HIMBING
+            add_ingredient(0, 1 + rand() % 2);
+            add_ingredient(2, rand() % 2);
             break;
-
         case Phase::NOON:
-            add_ingredient(4, 1 + rand() % 2); // KABUTE
-            add_ingredient(6, 1 + rand() % 2); // PARUPARO
-
-            if (cat_companion) {
-                add_ingredient(6, 1); // extra PARUPARO
-            }
+            add_ingredient(4, 1 + rand() % 2);
+            add_ingredient(6, 1 + rand() % 2);
+            if (cat_companion) add_ingredient(6, 1);
             break;
-
         case Phase::NIGHT:
-            add_ingredient(2, 1); // BULAKLAK NG HIMBING
-
+            add_ingredient(2, 1);
             if (bat_companion) {
-                add_ingredient(0, 1); // extra BULAKLAK NG SIGLA
-                add_ingredient(2, 1); // extra BULAKLAK NG HIMBING
+                add_ingredient(0, 1);
+                add_ingredient(2, 1);
             }
-
             if (adventurers_unlocked) {
-                if ((rand() % 100) < 20) add_ingredient(1, 1); // HIBLA NG DIWA
-                if ((rand() % 100) < 15) add_ingredient(3, 1); // BUTIL NG ARAW
-                if ((rand() % 100) < 15) add_ingredient(5, 1); // PUSO NG DILIM
-                if ((rand() % 100) < 10) add_ingredient(7, 1); // BIYAK NG TALA
+                if ((rand() % 100) < 20) add_ingredient(1, 1);
+                if ((rand() % 100) < 15) add_ingredient(3, 1);
+                if ((rand() % 100) < 15) add_ingredient(5, 1);
+                if ((rand() % 100) < 10) add_ingredient(7, 1);
             }
             break;
     }
 }
 
-bool GameState::has_featured_stock() const {
-    return player_potions[featured_potion_id] > 0;
-}
+bool GameState::has_featured_stock() const { return player_potions[featured_potion_id] > 0; }
