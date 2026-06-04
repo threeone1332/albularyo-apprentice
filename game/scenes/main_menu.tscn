@@ -1,11 +1,12 @@
 [gd_scene format=3 uid="uid://cjbnjt4newjg8"]
 
 [ext_resource type="VideoStream" uid="uid://teluxe7t5x5q" path="res://assets/ui/Main Menu/Main Menu Scene BG.ogv" id="1_tbmy8"]
-[ext_resource type="Texture2D" uid="uid://c3u45uu6homm" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/UI Big Play Button.png" id="2_7vrkn"]
-[ext_resource type="FontFile" uid="uid://bh5e6m7dcmnm5" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="2_jix8l"]
-[ext_resource type="Texture2D" uid="uid://dkjkorsaag42k" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Setting menu.png" id="5_8ln24"]
-[ext_resource type="Texture2D" uid="uid://bvib5w8emuue5" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="6_rtw2f"]
-[ext_resource type="Texture2D" uid="uid://bculb6w6t58wd" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/UI Settings Buttons.png" id="7_oa1go"]
+[ext_resource type="Texture2D" uid="uid://cgojjx8fa48vu" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/UI Big Play Button.png" id="2_7vrkn"]
+[ext_resource type="FontFile" uid="uid://clux6cekpic0m" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="2_jix8l"]
+[ext_resource type="AudioStream" uid="uid://wq27hlyujjpn" path="res://assets/Sounds/emilianodleon-select-button-ui-395763.mp3" id="4_jk1qb"]
+[ext_resource type="Texture2D" uid="uid://b0k6o3anq4iwo" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Setting menu.png" id="5_8ln24"]
+[ext_resource type="Texture2D" uid="uid://dm22iehvy7g21" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="6_rtw2f"]
+[ext_resource type="Texture2D" uid="uid://p1d47f1jprsx" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/UI Settings Buttons.png" id="7_oa1go"]
 [ext_resource type="Texture2D" uid="uid://hnu7ebm0ee21" path="res://assets/ui/Main Menu/HOVEREDSprite sheet for Basic Pack.png" id="8_tbmy8"]
 [ext_resource type="AudioStream" uid="uid://5cdmn4q7alxs" path="res://assets/Sounds/BGM.mp3" id="9_jk1qb"]
 
@@ -54,7 +55,7 @@ stream = ExtResource("1_tbmy8")
 autoplay = true
 loop = true
 
-[node name="MainButtons" type="VBoxContainer" parent="MarginContainer2/BG" unique_id=618780877]
+[node name="NoSaveButtons" type="VBoxContainer" parent="MarginContainer2/BG" unique_id=618780877]
 custom_minimum_size = Vector2(0, 400)
 layout_mode = 1
 anchors_preset = -1
@@ -68,7 +69,7 @@ offset_bottom = 0.39990234
 scale = Vector2(1.1, 1.1)
 theme_override_constants/separation = 11
 
-[node name="Start" type="Button" parent="MarginContainer2/BG/MainButtons" unique_id=1565870523]
+[node name="Start" type="Button" parent="MarginContainer2/BG/NoSaveButtons" unique_id=1565870523]
 custom_minimum_size = Vector2(50, 100)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.627451, 0.41568628, 0.37254903, 1)
@@ -79,7 +80,7 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_jix8l")
 theme_override_styles/hover = SubResource("StyleBoxTexture_jix8l")
 text = "START"
 
-[node name="Setting" type="Button" parent="MarginContainer2/BG/MainButtons" unique_id=2016645536]
+[node name="Setting" type="Button" parent="MarginContainer2/BG/NoSaveButtons" unique_id=2016645536]
 custom_minimum_size = Vector2(50, 100)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.6269185, 0.4171387, 0.3713367, 1)
@@ -90,7 +91,66 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_jix8l")
 theme_override_styles/hover = SubResource("StyleBoxTexture_jix8l")
 text = "SETTINGS"
 
-[node name="Quit" type="Button" parent="MarginContainer2/BG/MainButtons" unique_id=1749523108]
+[node name="Quit" type="Button" parent="MarginContainer2/BG/NoSaveButtons" unique_id=1749523108]
+custom_minimum_size = Vector2(50, 100)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6269185, 0.4171387, 0.3713367, 1)
+theme_override_fonts/font = ExtResource("2_jix8l")
+theme_override_font_sizes/font_size = 55
+theme_override_styles/normal = SubResource("StyleBoxTexture_fu7sn")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_jix8l")
+theme_override_styles/hover = SubResource("StyleBoxTexture_jix8l")
+text = "QUIT"
+
+[node name="HasSaveButtons" type="VBoxContainer" parent="MarginContainer2/BG" unique_id=1635748665]
+visible = false
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.186
+anchor_top = 0.5
+anchor_right = 0.342
+anchor_bottom = 0.87000006
+offset_left = -72.69501
+offset_right = -72.21619
+offset_bottom = 0.39990234
+scale = Vector2(1.1, 1.1)
+theme_override_constants/separation = 11
+
+[node name="Continue" type="Button" parent="MarginContainer2/BG/HasSaveButtons" unique_id=943247455]
+custom_minimum_size = Vector2(50, 100)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.627451, 0.41568628, 0.37254903, 1)
+theme_override_fonts/font = ExtResource("2_jix8l")
+theme_override_font_sizes/font_size = 55
+theme_override_styles/normal = SubResource("StyleBoxTexture_fu7sn")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_jix8l")
+theme_override_styles/hover = SubResource("StyleBoxTexture_jix8l")
+text = "CONTINUE"
+
+[node name="NewGame" type="Button" parent="MarginContainer2/BG/HasSaveButtons" unique_id=1692887137]
+custom_minimum_size = Vector2(50, 100)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.627451, 0.41568628, 0.37254903, 1)
+theme_override_fonts/font = ExtResource("2_jix8l")
+theme_override_font_sizes/font_size = 55
+theme_override_styles/normal = SubResource("StyleBoxTexture_fu7sn")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_jix8l")
+theme_override_styles/hover = SubResource("StyleBoxTexture_jix8l")
+text = "NEW GAME"
+
+[node name="Setting2" type="Button" parent="MarginContainer2/BG/HasSaveButtons" unique_id=686711138]
+custom_minimum_size = Vector2(50, 100)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6269185, 0.4171387, 0.3713367, 1)
+theme_override_fonts/font = ExtResource("2_jix8l")
+theme_override_font_sizes/font_size = 55
+theme_override_styles/normal = SubResource("StyleBoxTexture_fu7sn")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_jix8l")
+theme_override_styles/hover = SubResource("StyleBoxTexture_jix8l")
+text = "SETTINGS"
+
+[node name="Quit2" type="Button" parent="MarginContainer2/BG/HasSaveButtons" unique_id=733261753]
 custom_minimum_size = Vector2(50, 100)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.6269185, 0.4171387, 0.3713367, 1)
@@ -102,7 +162,6 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_jix8l")
 text = "QUIT"
 
 [node name="Panel" type="Panel" parent="." unique_id=600317187]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -221,8 +280,9 @@ region_rect = Rect2(11, 8, 58, 16)
 [node name="MenuMusicPlayer" type="AudioStreamPlayer" parent="." unique_id=1872148351]
 stream = ExtResource("9_jk1qb")
 autoplay = true
+bus = &"Music"
 
-[connection signal="pressed" from="MarginContainer2/BG/MainButtons/Start" to="." method="_on_start_button_pressed"]
-[connection signal="pressed" from="MarginContainer2/BG/MainButtons/Setting" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="MarginContainer2/BG/MainButtons/Quit" to="." method="_on_quit_pressed"]
-[connection signal="pressed" from="Panel/MarginContainer/NinePatchRect/exit_settings" to="." method="_on_exit_settings_pressed"]
+[node name="ButtonClickSFX" type="AudioStreamPlayer" parent="." unique_id=1200438304]
+stream = ExtResource("4_jk1qb")
+volume_db = 5.0
+bus = &"SFX"

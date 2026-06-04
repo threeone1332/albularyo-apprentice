@@ -2,7 +2,7 @@
 #include <godot_cpp/classes/scene_tree.hpp>
 #include <godot_cpp/variant/utility_functions.hpp>
 #include <godot_cpp/variant/node_path.hpp>
-#include "GameState.h"
+#include "Gamestate.h"
 
 namespace godot {
 

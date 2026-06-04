@@ -1,4 +1,6 @@
 #include "main_screen.h"
+#include <godot_cpp/classes/file_access.hpp>
+#include <godot_cpp/classes/json.hpp>
 #include <godot_cpp/variant/utility_functions.hpp>
 
 namespace godot {
@@ -21,6 +23,11 @@ MainScreen::MainScreen() {
     mixing_button = nullptr;
     potion_icon = nullptr;
 
+    // Initialize your Autosave UI pointers
+    autosave_panel = nullptr; // Updated to match PanelContainer control logic
+    autosave_label = nullptr;
+    autosave_id = 0;
+
     phase_timer = 0.0;
     sell_timer = 0.0;
     feedback_id = 0;
@@ -34,6 +41,7 @@ void MainScreen::_bind_methods() {
     ClassDB::bind_method(D_METHOD("_on_increase_pressed"), &MainScreen::_on_increase_pressed);
     ClassDB::bind_method(D_METHOD("_on_mixing_pressed"), &MainScreen::_on_mixing_pressed);
     ClassDB::bind_method(D_METHOD("_on_tech_tree_pressed"), &MainScreen::_on_tech_tree_pressed);
+    ClassDB::bind_method(D_METHOD("_save_game_to_disk"), &MainScreen::_save_game_to_disk);
 }
 
 void MainScreen::_ready() {
@@ -54,7 +62,6 @@ void MainScreen::_ready() {
     // 3. Bind UI Components securely
     money_label = get_node<Label>("MarginContainer/NinePatchRect/MoneyArea/Money/Label");
 
-    // FIX: Fixed structural path mapping to include GainSlot
     gain_label = get_node<Label>("MarginContainer/NinePatchRect/MoneyArea/GainSlot/GainLabel");
     sale_feedback = get_node<Label>("SaleFeedback");
 
@@ -75,7 +82,11 @@ void MainScreen::_ready() {
 
     potion_icon = get_node<NinePatchRect>("MarginContainer/NinePatchRect/Feature/NinePatchRect/MarginContainer/MarginContainer/potionandname/NinePatchRect/MarginContainer/picofpotion");
 
-    // 4. FIX: Detailed, verbose fallback validations to track down specific runtime issues
+    // FIX: Safely bind structural nodes matching your updated Scene Tree hierarchy
+    autosave_panel = Object::cast_to<PanelContainer>(get_node_or_null("AutosaveNotification/PanelContainer"));
+    autosave_label = Object::cast_to<Label>(get_node_or_null("AutosaveNotification/PanelContainer/HBoxContainer/AutosaveLabel"));
+
+    // 4. Fallback validations to track down specific runtime issues
     if (!game_state) {
         UtilityFunctions::printerr("MainScreen C++ Error: GlobalGameState Autoload is missing from Project Settings!");
         return;
@@ -93,6 +104,9 @@ void MainScreen::_ready() {
     sale_feedback->set_visible(false);
     gain_label->set_text("");
     gain_label->set_visible(true);
+
+    // Completely turn off the entire background container block by default on booth up
+    if (autosave_panel) autosave_panel->set_visible(false);
 
     sale_feedback_start_pos = sale_feedback->get_position();
     gain_label_start_pos = gain_label->get_position();
@@ -157,6 +171,51 @@ void MainScreen::_advance_phase_tick() {
 
     _update_ui();
     _update_time_icons();
+
+    // Automatically save the file to disk every single time a phase shifts!
+    _save_game_to_disk();
+}
+
+void MainScreen::_save_game_to_disk() {
+    if (!game_state) return;
+
+    // 1. Fetch current data package payload from GameState
+    Dictionary save_dict = game_state->call("get_save_data");
+
+    // 2. Parse payload dictionary directly into clear text JSON formatting line
+    String json_string = JSON::stringify(save_dict);
+
+    // 3. Store text payload safely within the device user folder
+    Ref<FileAccess> file = FileAccess::open("user://savegame.json", FileAccess::WRITE);
+    if (file.is_valid()) {
+        file->store_line(json_string);
+        file->close();
+        UtilityFunctions::print("MainScreen AutoSave: System metrics backed up successfully!");
+
+        // --- UPDATED: SMOOTH FADE-IN AND FADE-OUT POPUP EFFECT ON PARENT PANEL ---
+        if (autosave_panel && autosave_label) {
+            autosave_id++; // Increment unique token to prevent text-fade collisions
+
+            // 1. Make the panel structurally visible but completely transparent
+            autosave_panel->set_visible(true);
+            autosave_panel->set_modulate(Color(1, 1, 1, 0));
+
+            // 2. Initialize a parallel tween configuration
+            Ref<Tween> tween = create_tween();
+            tween->set_parallel(true);
+
+            // Phase A: Fade In (From 0.0 alpha to 1.0 alpha over 0.3 seconds)
+            tween->tween_property(autosave_panel, "modulate:a", 1.0, 0.3);
+
+            // Phase B: Fade Out (Drop alpha back down to 0.0 over 0.5 seconds, starting after a 1.5s delay)
+            tween->tween_property(autosave_panel, "modulate:a", 0.0, 0.5)->set_delay(1.5);
+
+            // Phase C: Clean Up Visibility Flags using robust Type-Checked String Callables
+            tween->chain()->tween_callback(Callable(autosave_panel, "set_visible").bind(false));
+        }
+    } else {
+        UtilityFunctions::printerr("MainScreen AutoSave Error: Failed to open file write path destination!");
+    }
 }
 
 void MainScreen::_on_decrease_pressed() {
@@ -267,4 +326,4 @@ void MainScreen::_on_tech_tree_pressed() {
     get_tree()->change_scene_to_file("res://scenes/tech_tree.tscn");
 }
 
-} //
+} // namespace godot

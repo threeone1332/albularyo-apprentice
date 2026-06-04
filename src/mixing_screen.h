@@ -5,7 +5,7 @@
 #include <godot_cpp/classes/texture_button.hpp>
 #include <godot_cpp/classes/label.hpp>
 #include <godot_cpp/templates/vector.hpp>
-#include "GameState.h"
+#include "Gamestate.h"
 
 namespace godot {
 

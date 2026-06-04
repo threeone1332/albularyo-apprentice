@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://c83oh713rp7e2"]
+
+[ext_resource type="Texture2D" uid="uid://bhdvfwomeot27" path="res://assets/ui/Tutorial Screen/PREV.png" id="1_urufc"]
+[ext_resource type="Texture2D" uid="uid://b7ges5wf4h1ds" path="res://assets/ui/Tutorial Screen/NEXT.png" id="2_yf4vk"]
+[ext_resource type="Texture2D" uid="uid://cbsjkhcpq3m8p" path="res://assets/ui/Tutorial Screen/skip.png" id="3_tbeqj"]
+[ext_resource type="Texture2D" uid="uid://376yhvk231vu" path="res://assets/ui/Tutorial Screen/start.png" id="4_yf4vk"]
+
+[node name="TutorialScene" type="TutorialScene" unique_id=2003565696]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SlideImage" type="TextureRect" parent="." unique_id=1633731964]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="BackButton" type="TextureButton" parent="." unique_id=1720820519]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 465.0
+offset_right = 103.0
+offset_bottom = 546.0
+texture_normal = ExtResource("1_urufc")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="NextButton" type="TextureButton" parent="." unique_id=1802729235]
+layout_mode = 0
+offset_left = 1819.0
+offset_top = 465.0
+offset_right = 1922.0
+offset_bottom = 550.0
+texture_normal = ExtResource("2_yf4vk")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="SkipButton" type="TextureButton" parent="." unique_id=727762088]
+layout_mode = 0
+offset_left = 1596.0
+offset_top = 942.0
+offset_right = 1893.0
+offset_bottom = 1038.0
+texture_normal = ExtResource("3_tbeqj")
+stretch_mode = 0
+
+[node name="StartButton" type="TextureButton" parent="." unique_id=20730361]
+layout_mode = 0
+offset_left = 1608.0
+offset_top = 947.0
+offset_right = 1884.0
+offset_bottom = 1034.0
+texture_normal = ExtResource("4_yf4vk")
+ignore_texture_size = true
+stretch_mode = 0

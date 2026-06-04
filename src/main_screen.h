@@ -6,6 +6,7 @@
 #include <godot_cpp/classes/texture_rect.hpp>
 #include <godot_cpp/classes/button.hpp>
 #include <godot_cpp/classes/nine_patch_rect.hpp>
+#include <godot_cpp/classes/panel_container.hpp>
 #include <godot_cpp/classes/engine.hpp>
 #include <godot_cpp/classes/scene_tree.hpp>
 #include <godot_cpp/classes/tween.hpp>
@@ -40,6 +41,12 @@ private:
     Button* mixing_button;
     NinePatchRect* potion_icon;
 
+    // --- AUTOSAVE INDICATOR UI DECLARATIONS ---
+    PanelContainer* autosave_panel; // Changed from TextureRect* to PanelContainer*
+    Label* autosave_label;
+    int autosave_id;
+    // ------------------------------------------
+
     // Local loop state tracker mechanics
     double phase_timer;
     double sell_timer;
@@ -49,6 +56,9 @@ private:
     Vector<Rect2> potion_icon_regions;
     Vector2 sale_feedback_start_pos;
     Vector2 gain_label_start_pos;
+
+    // Private function signature to match main_screen.cpp
+    void _save_game_to_disk();
 
 protected:
     static void _bind_methods();

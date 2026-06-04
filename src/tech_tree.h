@@ -1,7 +1,7 @@
 #ifndef TECH_TREE_H
 #define TECH_TREE_H
 
-#include "GameState.h"
+#include "Gamestate.h"
 
 #include <godot_cpp/classes/control.hpp>
 #include <godot_cpp/classes/engine.hpp>
