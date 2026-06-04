@@ -2,12 +2,12 @@
 #include <godot_cpp/classes/file_access.hpp>
 #include <godot_cpp/classes/json.hpp>
 #include <godot_cpp/variant/utility_functions.hpp>
-#include <godot_cpp/classes/window.hpp>
 
 namespace godot {
 
 MainScreen::MainScreen() {
     game_state = nullptr;
+    main_background = nullptr;
     money_label = nullptr;
     gain_label = nullptr;
     sale_feedback = nullptr;
@@ -25,18 +25,14 @@ MainScreen::MainScreen() {
     potion_icon = nullptr;
 
     // Initialize your Autosave UI pointers
-    autosave_panel = nullptr; // Updated to match PanelContainer control logic
+    autosave_panel = nullptr;
     autosave_label = nullptr;
     autosave_id = 0;
 
     phase_timer = 0.0;
     sell_timer = 0.0;
     feedback_id = 0;
-    gain_id = 0;\
-    //added for SFX
-    button_click_sfx = nullptr;
-    money_sfx = nullptr;
-    pending_scene_path = "";
+    gain_id = 0;
 }
 
 MainScreen::~MainScreen() {}
@@ -47,13 +43,10 @@ void MainScreen::_bind_methods() {
     ClassDB::bind_method(D_METHOD("_on_mixing_pressed"), &MainScreen::_on_mixing_pressed);
     ClassDB::bind_method(D_METHOD("_on_tech_tree_pressed"), &MainScreen::_on_tech_tree_pressed);
     ClassDB::bind_method(D_METHOD("_save_game_to_disk"), &MainScreen::_save_game_to_disk);
-    ClassDB::bind_method(D_METHOD("_on_scene_change_delay_timeout"), &MainScreen::_on_scene_change_delay_timeout);
 }
 
 void MainScreen::_ready() {
     if (Engine::get_singleton()->is_editor_hint()) return;
-
-    ensure_main_game_music();
 
     // 1. Establish custom texture coordinate indexing positions
     potion_icon_regions.push_back(Rect2(20, 20, 200, 200));   // Lunas ng Sigla
@@ -67,7 +60,15 @@ void MainScreen::_ready() {
     // 2. Fetch Global Node reference setup
     game_state = get_node_or_null("/root/GlobalGameState");
 
-    // 3. Bind UI Components securely
+    // 3. Preload Dynamic Scene Background Assets
+    main_background = get_node<NinePatchRect>("MarginContainer/NinePatchRect");
+
+    ResourceLoader* loader = ResourceLoader::get_singleton();
+    bg_morning   = loader->load("res://assets/ui/Main Screen/Morning Main Screen.png");
+    bg_afternoon = loader->load("res://assets/ui/Main Screen/Afternoon Main Screen.png");
+    bg_night     = loader->load("res://assets/ui/Main Screen/Night Main Screen.png");
+
+    // 4. Bind UI Components securely
     money_label = get_node<Label>("MarginContainer/NinePatchRect/MoneyArea/Money/Label");
 
     gain_label = get_node<Label>("MarginContainer/NinePatchRect/MoneyArea/GainSlot/GainLabel");
@@ -90,27 +91,10 @@ void MainScreen::_ready() {
 
     potion_icon = get_node<NinePatchRect>("MarginContainer/NinePatchRect/Feature/NinePatchRect/MarginContainer/MarginContainer/potionandname/NinePatchRect/MarginContainer/picofpotion");
 
-    // FIX: Safely bind structural nodes matching your updated Scene Tree hierarchy
     autosave_panel = Object::cast_to<PanelContainer>(get_node_or_null("AutosaveNotification/PanelContainer"));
     autosave_label = Object::cast_to<Label>(get_node_or_null("AutosaveNotification/PanelContainer/HBoxContainer/AutosaveLabel"));
 
-    button_click_sfx = Object::cast_to<AudioStreamPlayer>(
-        get_node_or_null("ButtonClickSFX")
-    );
-
-    money_sfx = Object::cast_to<AudioStreamPlayer>(
-        get_node_or_null("MoneySFX")
-    );
-
-    if (!button_click_sfx) {
-        UtilityFunctions::printerr("MainScreen C++: ButtonClickSFX node not found.");
-    }
-
-    if (!money_sfx) {
-        UtilityFunctions::printerr("MainScreen C++: MoneySFX node not found.");
-    }
-
-    // 4. Fallback validations to track down specific runtime issues
+    // 5. Fallback validations to track down specific runtime issues
     if (!game_state) {
         UtilityFunctions::printerr("MainScreen C++ Error: GlobalGameState Autoload is missing from Project Settings!");
         return;
@@ -124,18 +108,17 @@ void MainScreen::_ready() {
         return;
     }
 
-    // 5. Initial layout state adjustments
+    // 6. Initial layout state adjustments
     sale_feedback->set_visible(false);
     gain_label->set_text("");
     gain_label->set_visible(true);
 
-    // Completely turn off the entire background container block by default on booth up
     if (autosave_panel) autosave_panel->set_visible(false);
 
     sale_feedback_start_pos = sale_feedback->get_position();
     gain_label_start_pos = gain_label->get_position();
 
-    // 6. Hook signals safely
+    // 7. Hook signals safely
     decrease_button->connect("pressed", Callable(this, "_on_decrease_pressed"));
     increase_button->connect("pressed", Callable(this, "_on_increase_pressed"));
     mixing_button->connect("pressed", Callable(this, "_on_mixing_pressed"));
@@ -170,8 +153,6 @@ void MainScreen::_attempt_sale_tick() {
     } else {
         bool sold = game_state->call("attempt_sale");
         if (sold) {
-            play_money_sfx();
-
             int gained = game_state->call("get_price");
             _show_sale_feedback("SOLD!", true);
             _show_gold_gain(gained);
@@ -205,38 +186,26 @@ void MainScreen::_advance_phase_tick() {
 void MainScreen::_save_game_to_disk() {
     if (!game_state) return;
 
-    // 1. Fetch current data package payload from GameState
     Dictionary save_dict = game_state->call("get_save_data");
-
-    // 2. Parse payload dictionary directly into clear text JSON formatting line
     String json_string = JSON::stringify(save_dict);
 
-    // 3. Store text payload safely within the device user folder
     Ref<FileAccess> file = FileAccess::open("user://savegame.json", FileAccess::WRITE);
     if (file.is_valid()) {
         file->store_line(json_string);
         file->close();
         UtilityFunctions::print("MainScreen AutoSave: System metrics backed up successfully!");
 
-        // --- UPDATED: SMOOTH FADE-IN AND FADE-OUT POPUP EFFECT ON PARENT PANEL ---
         if (autosave_panel && autosave_label) {
-            autosave_id++; // Increment unique token to prevent text-fade collisions
+            autosave_id++;
 
-            // 1. Make the panel structurally visible but completely transparent
             autosave_panel->set_visible(true);
             autosave_panel->set_modulate(Color(1, 1, 1, 0));
 
-            // 2. Initialize a parallel tween configuration
             Ref<Tween> tween = create_tween();
             tween->set_parallel(true);
 
-            // Phase A: Fade In (From 0.0 alpha to 1.0 alpha over 0.3 seconds)
             tween->tween_property(autosave_panel, "modulate:a", 1.0, 0.3);
-
-            // Phase B: Fade Out (Drop alpha back down to 0.0 over 0.5 seconds, starting after a 1.5s delay)
             tween->tween_property(autosave_panel, "modulate:a", 0.0, 0.5)->set_delay(1.5);
-
-            // Phase C: Clean Up Visibility Flags using robust Type-Checked String Callables
             tween->chain()->tween_callback(Callable(autosave_panel, "set_visible").bind(false));
         }
     } else {
@@ -245,16 +214,12 @@ void MainScreen::_save_game_to_disk() {
 }
 
 void MainScreen::_on_decrease_pressed() {
-    play_button_click_sfx();
-
     int current_price = game_state->call("get_price");
     game_state->call("set_price", current_price - 1);
     _update_ui();
 }
 
 void MainScreen::_on_increase_pressed() {
-    play_button_click_sfx();
-
     int current_price = game_state->call("get_price");
     game_state->call("set_price", current_price + 1);
     _update_ui();
@@ -282,9 +247,23 @@ void MainScreen::_update_ui() {
 void MainScreen::_update_time_icons() {
     String phase = game_state->call("get_current_phase");
 
+    // 1. Handle mini status window indicator icon visibilities
     morning_icon->set_visible(phase == "sun");
     noon_icon->set_visible(phase == "noon");
     night_icon->set_visible(phase == "night");
+
+    // 2. Perform safe asset injection on the master NinePatch backdrop texture sheets
+    if (!main_background) return;
+
+    if (phase == "sun" && bg_morning.is_valid()) {
+        main_background->set_texture(bg_morning);
+    }
+    else if (phase == "noon" && bg_afternoon.is_valid()) {
+        main_background->set_texture(bg_afternoon);
+    }
+    else if (phase == "night" && bg_night.is_valid()) {
+        main_background->set_texture(bg_night);
+    }
 }
 
 // --- TWEEN VISUAL EFFECTS CODE ---
@@ -349,65 +328,11 @@ void MainScreen::_show_gold_loss(int amount) {
 }
 
 void MainScreen::_on_mixing_pressed() {
-    play_button_click_sfx();
-
-    pending_scene_path = "res://scenes/mixing_screen.tscn";
-
-    Ref<SceneTreeTimer> timer = get_tree()->create_timer(0.15);
-    timer->connect("timeout", Callable(this, "_on_scene_change_delay_timeout"));
+    get_tree()->change_scene_to_file("res://scenes/mixing_screen.tscn");
 }
 
 void MainScreen::_on_tech_tree_pressed() {
-    play_button_click_sfx();
-
-    pending_scene_path = "res://scenes/tech_tree.tscn";
-
-    Ref<SceneTreeTimer> timer = get_tree()->create_timer(0.15);
-    timer->connect("timeout", Callable(this, "_on_scene_change_delay_timeout"));
-}
-
-void MainScreen::play_button_click_sfx() {
-    if (button_click_sfx) {
-        button_click_sfx->play();
-    }
-}
-
-void MainScreen::play_money_sfx() {
-    if (money_sfx) {
-        money_sfx->play();
-    }
-}
-
-void MainScreen::ensure_main_game_music() {
-    AudioStreamPlayer *main_music = Object::cast_to<AudioStreamPlayer>(
-        get_node_or_null("/root/MainGameMusic")
-    );
-
-    if (!main_music) {
-        main_music = memnew(AudioStreamPlayer);
-        main_music->set_name("MainGameMusic");
-
-        Ref<AudioStream> music_stream = ResourceLoader::get_singleton()->load(
-            "res://assets/Sounds/(Main Screen) Lobby-Time-trimmed.wav"
-        );
-
-        main_music->set_stream(music_stream);
-        main_music->set_bus("Music");
-        main_music->set_volume_db(-12.0);
-        main_music->set_process_mode(Node::PROCESS_MODE_ALWAYS);
-
-        get_tree()->get_root()->add_child(main_music);
-    }
-
-    if (!main_music->is_playing()) {
-        main_music->play();
-    }
-}
-
-void MainScreen::_on_scene_change_delay_timeout() {
-    if (pending_scene_path.is_empty()) return;
-
-    get_tree()->change_scene_to_file(pending_scene_path);
+    get_tree()->change_scene_to_file("res://scenes/tech_tree.tscn");
 }
 
 } // namespace godot

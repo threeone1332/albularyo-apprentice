@@ -12,11 +12,9 @@
 #include <godot_cpp/classes/tween.hpp>
 #include <godot_cpp/classes/property_tweener.hpp>
 #include <godot_cpp/classes/interval_tweener.hpp>
-#include <godot_cpp/templates/vector.hpp>
-#include <godot_cpp/classes/audio_stream_player.hpp>
 #include <godot_cpp/classes/resource_loader.hpp>
-#include <godot_cpp/classes/audio_stream.hpp>
-#include <godot_cpp/classes/scene_tree_timer.hpp>
+#include <godot_cpp/classes/texture2d.hpp>
+#include <godot_cpp/templates/vector.hpp>
 
 namespace godot {
 
@@ -29,6 +27,7 @@ private:
 
     // Node pointers
     Node* game_state;
+    NinePatchRect* main_background; // Dynamic background pointer
     Label* money_label;
     Label* gain_label;
     Label* sale_feedback;
@@ -46,10 +45,14 @@ private:
     NinePatchRect* potion_icon;
 
     // --- AUTOSAVE INDICATOR UI DECLARATIONS ---
-    PanelContainer* autosave_panel; // Changed from TextureRect* to PanelContainer*
+    PanelContainer* autosave_panel;
     Label* autosave_label;
     int autosave_id;
-    // ------------------------------------------
+
+    // --- TIME-OF-DAY GRAPHICS RESOURCES ---
+    Ref<Texture2D> bg_morning;
+    Ref<Texture2D> bg_afternoon;
+    Ref<Texture2D> bg_night;
 
     // Local loop state tracker mechanics
     double phase_timer;
@@ -63,15 +66,6 @@ private:
 
     // Private function signature to match main_screen.cpp
     void _save_game_to_disk();
-
-    //for SFX 
-    AudioStreamPlayer* button_click_sfx;
-    AudioStreamPlayer* money_sfx;
-    String pending_scene_path;
-
-    void play_button_click_sfx();
-    void play_money_sfx();
-    void ensure_main_game_music();
 
 protected:
     static void _bind_methods();
@@ -99,7 +93,6 @@ public:
     void _show_sale_feedback(String text, bool sold);
     void _show_gold_gain(int amount);
     void _show_gold_loss(int amount);
-    void _on_scene_change_delay_timeout();
 };
 
 } // namespace godot
