@@ -1,4 +1,6 @@
 #include "main_screen.h"
+#include <godot_cpp/classes/file_access.hpp>
+#include <godot_cpp/classes/json.hpp>
 #include <godot_cpp/variant/utility_functions.hpp>
 
 namespace godot {
@@ -34,6 +36,7 @@ void MainScreen::_bind_methods() {
     ClassDB::bind_method(D_METHOD("_on_increase_pressed"), &MainScreen::_on_increase_pressed);
     ClassDB::bind_method(D_METHOD("_on_mixing_pressed"), &MainScreen::_on_mixing_pressed);
     ClassDB::bind_method(D_METHOD("_on_tech_tree_pressed"), &MainScreen::_on_tech_tree_pressed);
+    ClassDB::bind_method(D_METHOD("_save_game_to_disk"), &MainScreen::_save_game_to_disk);
 }
 
 void MainScreen::_ready() {
@@ -157,6 +160,29 @@ void MainScreen::_advance_phase_tick() {
 
     _update_ui();
     _update_time_icons();
+
+    // FIX: Automatically save the file to disk every single time a phase shifts!
+    _save_game_to_disk();
+}
+
+void MainScreen::_save_game_to_disk() {
+    if (!game_state) return;
+
+    // 1. Fetch current data package payload from GameState
+    Dictionary save_dict = game_state->call("get_save_data");
+
+    // 2. Parse payload dictionary directly into clear text JSON formatting line
+    String json_string = JSON::stringify(save_dict);
+
+    // 3. Store text payload safely within the device user folder
+    Ref<FileAccess> file = FileAccess::open("user://savegame.json", FileAccess::WRITE);
+    if (file.is_valid()) {
+        file->store_line(json_string);
+        file->close();
+        UtilityFunctions::print("MainScreen AutoSave: System metrics backed up successfully!");
+    } else {
+        UtilityFunctions::printerr("MainScreen AutoSave Error: Failed to open file write path destination!");
+    }
 }
 
 void MainScreen::_on_decrease_pressed() {
@@ -267,4 +293,4 @@ void MainScreen::_on_tech_tree_pressed() {
     get_tree()->change_scene_to_file("res://scenes/tech_tree.tscn");
 }
 
-} //
+} // namespace godot

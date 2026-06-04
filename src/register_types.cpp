@@ -1,5 +1,5 @@
 #include "register_types.h"
-#include "GameState.h"
+#include "Gamestate.h"
 #include "Potion.h"
 #include "Ingredient.h"
 #include "loading_screen.h"

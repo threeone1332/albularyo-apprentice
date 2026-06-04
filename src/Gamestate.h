@@ -1,9 +1,9 @@
 #pragma once
 #include <godot_cpp/classes/node.hpp>
 #include "Potion.h"
- 
+
 using namespace godot;
- 
+
 enum class Phase { SUN, NOON, NIGHT };
 
 struct PotionDemand {
@@ -12,10 +12,10 @@ struct PotionDemand {
     int noon_demand;
     int night_demand;
 };
- 
+
 class GameState : public Node {
     GDCLASS(GameState, Node)
- 
+
 private:
     int gold;
     Phase current_phase;
@@ -37,13 +37,13 @@ private:
 
 protected:
     static void _bind_methods();
- 
+
 public:
     GameState();
 
         //money
 
-    void set_gold(int amount);    
+    void set_gold(int amount);
     int get_gold() const;
     void add_gold(int amount);
 
@@ -53,7 +53,7 @@ public:
     int get_game_phase() const;
 
         // price
-    void set_price(float p);      
+    void set_price(float p);
     float get_price() const;
 
         //demand
@@ -61,7 +61,7 @@ public:
     int get_sell_chance_percent() const;
     bool attempt_sale();
     bool has_featured_stock() const;
-    
+
         //featured
     void set_featured_potion_id(int id);
     int get_featured_potion_id() const;
@@ -86,4 +86,7 @@ public:
     void add_potion(int id, int amount);
     void start_new_day();
     void gather_phase_resources();
+
+    Dictionary get_save_data();
+    void load_save_data(Dictionary data);
 };

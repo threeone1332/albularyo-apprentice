@@ -50,6 +50,9 @@ private:
     Vector2 sale_feedback_start_pos;
     Vector2 gain_label_start_pos;
 
+    // FIX: Private function signature added to match main_screen.cpp
+    void _save_game_to_disk();
+
 protected:
     static void _bind_methods();
 
