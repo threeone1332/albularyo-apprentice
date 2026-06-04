@@ -1,11 +1,15 @@
 [gd_scene format=3 uid="uid://c83oh713rp7e2"]
 
-[ext_resource type="Texture2D" uid="uid://bhdvfwomeot27" path="res://assets/ui/Tutorial Screen/PREV.png" id="1_urufc"]
-[ext_resource type="Texture2D" uid="uid://b7ges5wf4h1ds" path="res://assets/ui/Tutorial Screen/NEXT.png" id="2_yf4vk"]
-[ext_resource type="Texture2D" uid="uid://cbsjkhcpq3m8p" path="res://assets/ui/Tutorial Screen/skip.png" id="3_tbeqj"]
-[ext_resource type="Texture2D" uid="uid://376yhvk231vu" path="res://assets/ui/Tutorial Screen/start.png" id="4_yf4vk"]
+[ext_resource type="Texture2D" uid="uid://o06jvncwvjmq" path="res://assets/ui/Tutorial Screen/PREVV.png" id="1_4yomp"]
+[ext_resource type="Texture2D" uid="uid://cg872v4n7q6vs" path="res://assets/ui/Tutorial Screen/prev_text.png" id="2_8ox5i"]
+[ext_resource type="Texture2D" uid="uid://cny57oao1ljxg" path="res://assets/ui/Tutorial Screen/NEXT_.png" id="3_u6jee"]
+[ext_resource type="Texture2D" uid="uid://bgvps455e6ko8" path="res://assets/ui/Tutorial Screen/next_text.png" id="4_gvpdk"]
+[ext_resource type="Texture2D" uid="uid://raidf53sa12s" path="res://assets/ui/Tutorial Screen/SKIPP.png" id="5_fn7ul"]
 [ext_resource type="AudioStream" uid="uid://d3to6keo34emd" path="res://assets/Sounds/(Tutorial Screen and TechTree) denis-pavlov-music-jazz-bossa-nova-cooking-show-music-312826.mp3" id="5_k7w8g"]
 [ext_resource type="AudioStream" uid="uid://dcgyi0yljsajj" path="res://assets/Sounds/(Button Click) emilianodleon-select-button-ui-395763.mp3" id="6_ki3mu"]
+[ext_resource type="Texture2D" uid="uid://e8ajqnk5qa74" path="res://assets/ui/Tutorial Screen/skip_text.png" id="6_ntiyy"]
+[ext_resource type="Texture2D" uid="uid://df6qp60v5krie" path="res://assets/ui/Tutorial Screen/START-2.png" id="7_f4sb6"]
+[ext_resource type="Texture2D" uid="uid://bwlbvcmlidi0k" path="res://assets/ui/Tutorial Screen/start_text.png" id="8_mt5cw"]
 
 [node name="TutorialScene" type="TutorialScene" unique_id=2003565696]
 anchors_preset = 15
@@ -29,7 +33,9 @@ offset_left = 8.0
 offset_top = 465.0
 offset_right = 103.0
 offset_bottom = 546.0
-texture_normal = ExtResource("1_urufc")
+texture_normal = ExtResource("1_4yomp")
+texture_pressed = ExtResource("2_8ox5i")
+texture_hover = ExtResource("2_8ox5i")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -39,7 +45,9 @@ offset_left = 1819.0
 offset_top = 465.0
 offset_right = 1922.0
 offset_bottom = 550.0
-texture_normal = ExtResource("2_yf4vk")
+texture_normal = ExtResource("3_u6jee")
+texture_pressed = ExtResource("4_gvpdk")
+texture_hover = ExtResource("4_gvpdk")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -49,7 +57,9 @@ offset_left = 1596.0
 offset_top = 942.0
 offset_right = 1893.0
 offset_bottom = 1038.0
-texture_normal = ExtResource("3_tbeqj")
+texture_normal = ExtResource("5_fn7ul")
+texture_pressed = ExtResource("6_ntiyy")
+texture_hover = ExtResource("6_ntiyy")
 stretch_mode = 0
 
 [node name="StartButton" type="TextureButton" parent="." unique_id=20730361]
@@ -58,7 +68,9 @@ offset_left = 1608.0
 offset_top = 947.0
 offset_right = 1884.0
 offset_bottom = 1034.0
-texture_normal = ExtResource("4_yf4vk")
+texture_normal = ExtResource("7_f4sb6")
+texture_pressed = ExtResource("8_mt5cw")
+texture_hover = ExtResource("8_mt5cw")
 ignore_texture_size = true
 stretch_mode = 0
 
