@@ -41,6 +41,8 @@ protected:
 public:
     GameState();
 
+    void reset_state();
+
         //money
 
     void set_gold(int amount);

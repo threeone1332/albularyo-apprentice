@@ -63,6 +63,21 @@ region = Rect2(645.054, 67.986, 22.889, 24.043)
 atlas = ExtResource("5_sjiej")
 region = Rect2(677.007, 70.00832, 22.00177, 22.001442)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rjk0d"]
+bg_color = Color(0.38431373, 0.24313726, 0.24313726, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3qgpa"]
+atlas = ExtResource("5_sjiej")
+region = Rect2(849.98035, 195.99872, 12.055908, 8.943481)
+
 [node name="Main_screen" type="MainScreen" unique_id=1981475378]
 anchors_preset = 15
 anchor_right = 1.0
@@ -433,3 +448,43 @@ texture_normal = SubResource("AtlasTexture_rjk0d")
 texture_pressed = SubResource("AtlasTexture_c7dat")
 ignore_texture_size = true
 stretch_mode = 5
+
+[node name="AutosaveNotification" type="MarginContainer" parent="." unique_id=1757468064]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -105.0
+offset_top = -53.0
+offset_right = 105.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="PanelContainer" type="PanelContainer" parent="AutosaveNotification" unique_id=1578744860]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rjk0d")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="AutosaveNotification/PanelContainer" unique_id=1619698780]
+layout_mode = 2
+theme_override_constants/separation = 22
+alignment = 1
+
+[node name="AutosaveIcon" type="TextureRect" parent="AutosaveNotification/PanelContainer/HBoxContainer" unique_id=39506293]
+layout_mode = 2
+texture = SubResource("AtlasTexture_3qgpa")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="AutosaveLabel" type="Label" parent="AutosaveNotification/PanelContainer/HBoxContainer" unique_id=1192016540]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.76862746, 0.6039216, 0.42352942, 1)
+theme_override_fonts/font = ExtResource("13_3qsiq")
+theme_override_font_sizes/font_size = 35
+text = "Game is Autosaving..."
+horizontal_alignment = 1
