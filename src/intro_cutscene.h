@@ -8,6 +8,8 @@
 #include <godot_cpp/classes/engine.hpp>
 #include <godot_cpp/templates/vector.hpp>
 #include <godot_cpp/classes/button.hpp>
+#include <godot_cpp/classes/audio_stream_player.hpp>
+#include <godot_cpp/classes/scene_tree_timer.hpp>
 
 namespace godot {
 
@@ -17,9 +19,22 @@ class IntroCutscene : public Node2D {
 private:
     Label* label;
     AnimationPlayer* animation_player;
+    AudioStreamPlayer* intro_ambience;
+    AudioStreamPlayer* button_click_sfx;
+    Button* skip_button;
 
+    bool fading_out_music;
+    double music_fade_timer;
+    double music_fade_duration;
+    double music_start_volume_db;
+    bool skip_requested;
+
+    String pending_scene_path;
     Vector<String> lines;
     int current_line;
+    void start_music_fade_out();
+    void play_button_click_sfx();
+    void go_to_pending_scene();
 
 protected:
     static void _bind_methods();
@@ -35,6 +50,8 @@ public:
     void _on_animation_player_animation_finished(String anim_name);
     
     void _on_skip_pressed();
+    void _process(double delta) override;
+    void _on_skip_delay_timeout();
 };
 
 } // namespace godot

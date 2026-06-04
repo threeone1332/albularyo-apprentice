@@ -31,3 +31,5 @@ game/.godot/
 
 # Local VS Code configuration profiles
 .vscode/
+
+.vs/
