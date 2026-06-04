@@ -473,15 +473,25 @@ theme_override_font_sizes/font_size = 32
 text = "Gold: 108/1000"
 
 [node name="SaleFeedback" type="Label" parent="." unique_id=377151671]
+clip_contents = true
+custom_minimum_size = Vector2(950, 0)
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.013541667
-anchor_top = 0.4037037
-anchor_right = 0.39322916
-anchor_bottom = 0.6564815
+anchor_left = 0.4348958
+anchor_top = 0.6675926
+anchor_right = 0.81458336
+anchor_bottom = 0.9203704
+offset_left = -54.0
+offset_top = 27.619995
+offset_right = 167.0
+offset_bottom = 27.619995
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.35, 0.35)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("7_3qgpa")
 theme_override_font_sizes/font_size = 200
-metadata/_edit_use_anchors_ = true
+horizontal_alignment = 1
 
 [node name="SettingsButton" type="TextureButton" parent="." unique_id=166778730]
 layout_mode = 1
@@ -552,6 +562,7 @@ bus = &"SFX"
 
 [node name="VictoryOverlay" type="CanvasLayer" parent="." unique_id=1032874581]
 layer = 10
+visible = false
 
 [node name="DarkenBackground" type="ColorRect" parent="VictoryOverlay" unique_id=1839128634]
 anchors_preset = 15

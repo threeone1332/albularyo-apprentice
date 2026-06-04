@@ -368,7 +368,7 @@ void MainScreen::_show_sale_feedback(String text, bool sold) {
     sale_feedback->set_visible(true);
     sale_feedback->set_position(sale_feedback_start_pos);
     sale_feedback->set_modulate(Color(1.0, 1.0, 1.0, 1.0));
-    sale_feedback->add_theme_color_override("font_color", sold ? Color::html("#A97839") : Color::html("#8A5A52"));
+    sale_feedback->add_theme_color_override("font_color", sold ? Color::html("#da8b24") : Color::html("#f0dcb4"));
 
     Vector2 end_pos = sale_feedback_start_pos + Vector2(0, -18);
     active_feedback_tween = create_tween();
