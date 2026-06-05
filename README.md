@@ -5,4 +5,4 @@ The game involves brewing herbal potions, setting prices, managing supply and de
 time, and unlocking forgotten knowledge of rare ingredients. Only one potion is sold at a time, so
 timing is crucial.
 
-Inspired by [‘Lemonade Apocalypse’](https://store.steampowered.com/app/2861560/Lemonade_Apocalypse/) by Juggler Interactive and [‘Potion Craft: Alchemist Simulator’](https://store.steampowered.com/app/1210320/Potion_Craft_Alchemist_Simulator/) by Niceplay Games.
+Inspired by [‘Lemonade Apocalypse’](https://store.steampowered.com/app/2861560/Lemonade_Apocalypse/) by Juggler Interactive.
