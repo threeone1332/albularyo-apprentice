@@ -10,7 +10,9 @@ MIT License — https://github.com/godotengine/godot-cpp
 Created in Canva — used under Canva Content License Agreement
 https://www.canva.com/policies/content-license-agreement/
 
-[comment]: <> (WIP BELOW!!!!)
+Sprout Lands Asset Pack
+by Cup Nooble
+https://cupnooble.itch.io/sprout-lands-asset-pack
 
 ## Fonts
 [Font Name] — SIL Open Font License
