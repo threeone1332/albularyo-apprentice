@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bgvps455e6ko8" path="res://assets/ui/Tutorial Screen/next_text.png" id="4_gvpdk"]
 [ext_resource type="Texture2D" uid="uid://raidf53sa12s" path="res://assets/ui/Tutorial Screen/SKIPP.png" id="5_fn7ul"]
 [ext_resource type="AudioStream" uid="uid://d3to6keo34emd" path="res://assets/Sounds/(Tutorial Screen and TechTree) denis-pavlov-music-jazz-bossa-nova-cooking-show-music-312826.mp3" id="5_k7w8g"]
-[ext_resource type="AudioStream" uid="uid://dcgyi0yljsajj" path="res://assets/Sounds/(Button Click) emilianodleon-select-button-ui-395763.mp3" id="6_ki3mu"]
+[ext_resource type="AudioStream" uid="uid://dcgyi0yljsajj" path="res://assets/Sounds/emilianodleon-select-button-ui-395763.mp3" id="6_ki3mu"]
 [ext_resource type="Texture2D" uid="uid://e8ajqnk5qa74" path="res://assets/ui/Tutorial Screen/skip_text.png" id="6_ntiyy"]
 [ext_resource type="Texture2D" uid="uid://df6qp60v5krie" path="res://assets/ui/Tutorial Screen/START-2.png" id="7_f4sb6"]
 [ext_resource type="Texture2D" uid="uid://bwlbvcmlidi0k" path="res://assets/ui/Tutorial Screen/start_text.png" id="8_mt5cw"]

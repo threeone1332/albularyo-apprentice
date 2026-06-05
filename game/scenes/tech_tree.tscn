@@ -25,7 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://bvib5w8emuue5" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="21_wfr7k"]
 [ext_resource type="AudioStream" uid="uid://d3to6keo34emd" path="res://assets/Sounds/(Tutorial Screen and TechTree) denis-pavlov-music-jazz-bossa-nova-cooking-show-music-312826.mp3" id="24_54sjo"]
 [ext_resource type="AudioStream" uid="uid://bb3lbjhkkva0t" path="res://assets/Sounds/(TechTree Purchase) freesound_crunchpixstudio-purchase-success-384963.mp3" id="25_q8gim"]
-[ext_resource type="AudioStream" uid="uid://dcgyi0yljsajj" path="res://assets/Sounds/(Button Click) emilianodleon-select-button-ui-395763.mp3" id="26_a7qss"]
+[ext_resource type="AudioStream" uid="uid://dcgyi0yljsajj" path="res://assets/Sounds/emilianodleon-select-button-ui-395763.mp3" id="26_a7qss"]
 [ext_resource type="AudioStream" uid="uid://b5jjjnd0hfpea" path="res://assets/Sounds/(Denied Purchase) miraclei-sample_error_fail03_kofi_by_miraclei-360130.mp3" id="27_q8gim"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8w1sl"]

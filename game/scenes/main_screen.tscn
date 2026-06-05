@@ -18,7 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://crut7x228lq3c" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/emojis-free/emoji style ui/Inventory_Blocks_Spritesheet.png" id="15_do8p6"]
 [ext_resource type="Texture2D" uid="uid://dcahebo78kl4i" path="res://assets/ui/Mixing Screen/potion_sprite_sheet.png" id="16_c7dat"]
 [ext_resource type="Texture2D" uid="uid://dux8pqaw4ayqm" path="res://assets/ui/Main Screen/desk.png" id="17_30ndx"]
-[ext_resource type="AudioStream" uid="uid://dcgyi0yljsajj" path="res://assets/Sounds/(Button Click) emilianodleon-select-button-ui-395763.mp3" id="19_3qgpa"]
+[ext_resource type="AudioStream" uid="uid://dcgyi0yljsajj" path="res://assets/Sounds/emilianodleon-select-button-ui-395763.mp3" id="19_3qgpa"]
 [ext_resource type="AudioStream" uid="uid://bt1bqk7rfsnf3" path="res://assets/Sounds/(Money Sound) freesound_crunchpixstudio-combine-special-394482.mp3" id="20_ihpp7"]
 [ext_resource type="AudioStream" uid="uid://clgjvxaupqaj5" path="res://assets/Sounds/(Game Completed) mori_sound-fx-game-winner-497166.mp3" id="21_ihpp7"]
 

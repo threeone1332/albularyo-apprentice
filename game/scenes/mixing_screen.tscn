@@ -29,7 +29,7 @@
 [ext_resource type="Texture2D" uid="uid://x5hmvnbu5847" path="res://assets/ui/Mixing screen/Brew_button.png" id="27_s1xb8"]
 [ext_resource type="Texture2D" uid="uid://ckh2mn2xyho4c" path="res://assets/ui/Mixing screen/Pressed State/Brew_button_Pressed.png" id="28_cjahw"]
 [ext_resource type="Texture2D" uid="uid://bvib5w8emuue5" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/Sprite sheet for Basic Pack.png" id="29_twubj"]
-[ext_resource type="AudioStream" uid="uid://dcgyi0yljsajj" path="res://assets/Sounds/(Button Click) emilianodleon-select-button-ui-395763.mp3" id="30_hg6ca"]
+[ext_resource type="AudioStream" uid="uid://dcgyi0yljsajj" path="res://assets/Sounds/emilianodleon-select-button-ui-395763.mp3" id="30_hg6ca"]
 [ext_resource type="AudioStream" uid="uid://bb3lbjhkkva0t" path="res://assets/Sounds/(TechTree Purchase) freesound_crunchpixstudio-purchase-success-384963.mp3" id="31_e705w"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_twubj"]

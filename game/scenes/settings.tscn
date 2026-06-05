@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bn6pmtusc04ft" path="res://assets/ui/Settings Panel/play button.png" id="5_gis3k"]
 [ext_resource type="Texture2D" uid="uid://hnu7ebm0ee21" path="res://assets/ui/Main Menu/HOVEREDSprite sheet for Basic Pack.png" id="6_01roj"]
 [ext_resource type="Texture2D" uid="uid://1cmnnk42vtsl" path="res://assets/ui/Settings Panel/replay button.png" id="6_83j8s"]
-[ext_resource type="AudioStream" path="res://assets/Sounds/(Button Click) emilianodleon-select-button-ui-395763.mp3" id="8_gjs24"]
+[ext_resource type="AudioStream" path="res://assets/Sounds/emilianodleon-select-button-ui-395763.mp3" id="8_gjs24"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_es4n0"]
 

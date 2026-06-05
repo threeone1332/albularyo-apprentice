@@ -4,7 +4,7 @@
 [ext_resource type="FontFile" uid="uid://bh5e6m7dcmnm5" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="2_3438a"]
 [ext_resource type="Texture2D" uid="uid://c3u45uu6homm" path="res://assets/ui/Sprout Lands - UI Pack - Basic pack/Sprite sheets/UI Big Play Button.png" id="3_wifpd"]
 [ext_resource type="AudioStream" uid="uid://djjwyeh11ppix" path="res://assets/Sounds/(Black Screen) jorisvermeer-intense-horror-game-ambience-418842.mp3" id="4_dw6o5"]
-[ext_resource type="AudioStream" uid="uid://dcgyi0yljsajj" path="res://assets/Sounds/(Button Click) emilianodleon-select-button-ui-395763.mp3" id="5_xeku4"]
+[ext_resource type="AudioStream" uid="uid://dcgyi0yljsajj" path="res://assets/Sounds/emilianodleon-select-button-ui-395763.mp3" id="5_xeku4"]
 
 [sub_resource type="Animation" id="Animation_juow0"]
 length = 0.001
