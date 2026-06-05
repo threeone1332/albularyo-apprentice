@@ -295,9 +295,14 @@ void MainScreen::_on_decrease_pressed() {
 void MainScreen::_on_increase_pressed() {
     if (is_victory_triggered) return;
     play_button_click_sfx();
+
     int current_price = game_state->call("get_price");
-    game_state->call("set_price", current_price + 1);
-    _update_ui();
+
+    // FIX: Only increase the value if it has not reached the upper limit constraint of 100
+    if (current_price < 100) {
+        game_state->call("set_price", current_price + 1);
+        _update_ui();
+    }
 }
 
 void MainScreen::_update_ui() {
@@ -469,12 +474,12 @@ void MainScreen::ensure_main_game_music() {
     }
 }
 
-void MainScreen::play_button_click_sfx() { 
-    if (button_click_sfx) button_click_sfx->play(); 
+void MainScreen::play_button_click_sfx() {
+    if (button_click_sfx) button_click_sfx->play();
 }
 
-void MainScreen::play_money_sfx() { 
-    if (money_sfx) money_sfx->play(); 
+void MainScreen::play_money_sfx() {
+    if (money_sfx) money_sfx->play();
 }
 
 void MainScreen::play_victory_sfx() {
