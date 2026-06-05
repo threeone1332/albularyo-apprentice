@@ -28,6 +28,11 @@ window/size/mode=3
 window/stretch/mode="canvas_items"
 mouse_cursor/custom_image="uid://dhqlc7fgi1q4r"
 
+[editor]
+
+movie_writer/video_quality=1.0
+movie_writer/movie_file="C:/Users/Ralph/Documents/albularyo/albularyo-apprentice/game/recordings/teaser clips.avi"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/copy_all_errors/plugin.cfg")

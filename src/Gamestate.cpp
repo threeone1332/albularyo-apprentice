@@ -6,7 +6,7 @@
 using namespace godot;
 
 GameState::GameState() :
-    gold(100),
+    gold(0),
     current_phase(Phase::SUN),
     price_slider_value(10),
     adventurers_unlocked(false),
@@ -37,7 +37,7 @@ GameState::GameState() :
 }
 
 void GameState::reset_state() {
-    gold = 100;
+    gold = 0;
     current_phase = Phase::SUN;
     price_slider_value = 10;
     adventurers_unlocked = false;
