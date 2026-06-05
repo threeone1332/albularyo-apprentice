@@ -1,22 +1,68 @@
-# Third-Party Licenses
+# Third-Party Assets and Licenses
 
-## Godot Engine
-MIT License — https://godotengine.org
+## Engine and Framework
 
-## godot-cpp
-MIT License — https://github.com/godotengine/godot-cpp
+### Godot Engine
 
-## UI Assets
-Created in Canva — used under Canva Content License Agreement
-https://www.canva.com/policies/content-license-agreement/
+* License: MIT License
+* Website: https://godotengine.org
 
-Sprout Lands Asset Pack
-by Cup Nooble
-https://cupnooble.itch.io/sprout-lands-asset-pack
+### godot-cpp / GDExtension
+
+* License: MIT License
+* Repository: https://github.com/godotengine/godot-cpp
+
+## Visual Assets
+
+### Sprout Lands Asset Pack
+
+* Creator: Cup Nooble
+* Source: https://cupnooble.itch.io/sprout-lands-asset-pack
+* Usage: User Interface elements and sprites
 
 ## Fonts
-[Font Name] — SIL Open Font License
-https://fonts.google.com/
 
-## Audio
-[Track Name] — CC0 Public Domain — OpenGameArt.org
+### Martires
+
+* Creator: John Misael Quiambao
+* Source: https://johnmisael.gumroad.com/l/MartiresFree
+
+### Quiapo
+
+* Creator: Jad Maza
+* Source: https://www.dafont.com/quiapo.font
+
+### Maragsâ Display
+
+* Creator: Jad Maza
+* Source: https://jadmaza.gumroad.com/l/Maragsa
+
+### Art Nuvo Rough Psychedelic Font
+
+* Source: https://pixelsurplus.com/products/art-nuvo-rough-psychedelic-font
+
+## Audio Assets
+
+### Lobby Time
+
+* Composer: Kevin MacLeod
+* Website: https://incompetech.com
+* Source: https://www.chosic.com/free-music/all/
+* License: Creative Commons Attribution 3.0 (CC BY 3.0)
+* License URL: http://creativecommons.org/licenses/by/3.0/
+
+Attribution:
+"Lobby Time" Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 3.0
+
+### Sound Effects and Additional Audio
+
+* Source: Pixabay
+* Website: https://pixabay.com
+* License Summary: https://pixabay.com/service/license-summary/
+
+Audio files obtained from Pixabay are used under the Pixabay Content License.
+
+## Project Notice
+
+Albularyo's Apprentice is an academic project developed using Godot Engine and GDExtension technology. All third-party assets remain the property of their respective creators and are used in accordance with their applicable licenses and terms of use.
